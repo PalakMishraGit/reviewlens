@@ -42,7 +42,7 @@ export const ToastContainer: React.FC<ToastProps> = ({ toasts, onDismiss }) => {
                 <AlertCircle className="h-4 w-4 text-rose-500 shrink-0" />
               )}
               {t.type === 'info' && (
-                <Info className="h-4 w-4 text-indigo-400 shrink-0" />
+                <Info className="h-4 w-4 text-ink shrink-0" />
               )}
               <span className="text-xs font-medium leading-snug">{t.message}</span>
             </div>

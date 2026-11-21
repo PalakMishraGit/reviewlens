@@ -214,7 +214,7 @@ export default function ReviewLensDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-canvas text-ink flex flex-col font-sans transition-colors relative selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-canvas text-ink flex flex-col font-sans transition-colors relative selection:bg-ink selection:text-canvas">
       {/* Dynamic Ambient Glow Vignette */}
       <div className="pointer-events-none fixed inset-0 z-0 opacity-40 dark:opacity-30 ambient-glow-dark dark:ambient-glow-dark light:ambient-glow-light" />
 
@@ -253,7 +253,7 @@ export default function ReviewLensDashboard() {
             <span>•</span>
             <button
               onClick={() => setIsShortcutsOpen(true)}
-              className="flex items-center gap-1 text-indigo-400 hover:text-indigo-300 transition-colors"
+              className="flex items-center gap-1 text-ink-subtle hover:text-ink transition-colors"
             >
               <Command className="h-3 w-3" />
               <span>Shortcuts (?)</span>
@@ -332,7 +332,7 @@ export default function ReviewLensDashboard() {
                 onClick={() => setActiveTab('reviews')}
                 className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all ${
                   activeTab === 'reviews'
-                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
+                    ? 'bg-ink text-canvas shadow-sm'
                     : 'text-ink-subtle hover:text-ink hover:bg-surface-2'
                 }`}
               >
@@ -345,7 +345,7 @@ export default function ReviewLensDashboard() {
                 onClick={() => setActiveTab('products')}
                 className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all ${
                   activeTab === 'products'
-                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
+                    ? 'bg-ink text-canvas shadow-sm'
                     : 'text-ink-subtle hover:text-ink hover:bg-surface-2'
                 }`}
               >
@@ -394,7 +394,7 @@ export default function ReviewLensDashboard() {
         {/* Empty State when no data has been loaded */}
         {!summary && !isLoading && (
           <div className="rounded-2xl border border-hairline bg-surface-1 p-10 text-center max-w-lg mx-auto space-y-4 shadow-sm">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-surface-2 border border-hairline text-indigo-400">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-surface-2 border border-hairline text-ink">
               <FileQuestion className="h-6 w-6" />
             </div>
             <div className="space-y-1">
@@ -405,7 +405,7 @@ export default function ReviewLensDashboard() {
             </div>
             <button
               onClick={handleAnalyzeSample}
-              className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-xs font-semibold text-white hover:bg-indigo-500 transition-all shadow-md shadow-indigo-500/20"
+              className="inline-flex items-center gap-2 rounded-xl bg-ink px-4 py-2.5 text-xs font-semibold text-canvas hover:opacity-90 active:scale-98 transition-all shadow-sm"
             >
               <Sparkles className="h-4 w-4" />
               <span>Load 30-Review Benchmark Dataset</span>
@@ -445,8 +445,8 @@ export default function ReviewLensDashboard() {
               RFC 4180 Verified
             </span>
             <span>•</span>
-            <span className="flex items-center gap-1 text-indigo-400">
-              <ShieldCheck className="h-3 w-3" />
+            <span className="flex items-center gap-1 text-ink-subtle">
+              <ShieldCheck className="h-3 w-3 text-emerald-500" />
               R012 Guardrail Active
             </span>
           </div>

@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="min-h-screen bg-canvas text-ink antialiased selection:bg-indigo-500 selection:text-white transition-colors">
+      <body className="min-h-screen bg-canvas text-ink antialiased selection:bg-ink selection:text-canvas transition-colors">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

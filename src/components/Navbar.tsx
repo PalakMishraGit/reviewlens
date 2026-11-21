@@ -11,7 +11,8 @@ import {
   Moon,
   HelpCircle,
   Sparkles,
-  Layers,
+  SlidersHorizontal,
+  Terminal,
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -34,59 +35,53 @@ export const Navbar: React.FC<NavbarProps> = ({
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className="sticky top-0 z-40 h-16 border-b border-hairline bg-canvas/80 backdrop-blur-xl transition-colors">
+    <header className="sticky top-0 z-40 h-14 border-b border-hairline bg-canvas/90 backdrop-blur-md transition-colors">
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Brand & Identity */}
+        {/* Brand & Identity (Technical Precision) */}
         <div className="flex items-center gap-3">
-          <div className="group relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 via-indigo-600 to-violet-700 text-white shadow-md shadow-indigo-500/20 ring-1 ring-white/20">
-            <Layers className="h-4 w-4 transition-transform group-hover:scale-110" />
-            <span className="absolute -bottom-0.5 -right-0.5 flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
-            </span>
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-surface-2 border border-hairline-strong text-ink shadow-sm">
+            <Terminal className="h-4 w-4 text-ink" />
           </div>
 
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-sm sm:text-base font-semibold tracking-tight text-ink">
+              <span className="text-sm font-semibold tracking-tight text-ink font-sans">
                 ReviewLens
               </span>
-              <span className="rounded-full bg-indigo-500/10 px-2 py-0.5 text-[10px] font-medium text-indigo-400 border border-indigo-500/20 font-mono">
-                v2.1
+              <span className="rounded bg-surface-2 px-1.5 py-0.5 text-[10px] font-mono text-ink-subtle border border-hairline">
+                v2.2
               </span>
-            </div>
-            <div className="hidden sm:flex items-center gap-2 text-[11px] text-ink-subtle">
-              <span>CEDCOSS Intelligence</span>
-              <span className="text-ink-tertiary">•</span>
-              <span className="text-ink-tertiary font-mono">Batch 2027</span>
+              <span className="hidden sm:inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-mono text-emerald-500 border border-emerald-500/20">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                Live Console
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Center / Status Chips (Desktop) */}
+        {/* Center / Security Status */}
         <div className="hidden md:flex items-center gap-2">
-          {/* Adversarial Defense Pill */}
-          <div className="flex items-center gap-1.5 rounded-full border border-hairline bg-surface-1 px-3 py-1 text-xs text-ink shadow-sm">
+          {/* Defense Protocol Badge */}
+          <div className="flex items-center gap-1.5 rounded-md border border-hairline bg-surface-1 px-2.5 py-1 text-xs text-ink-subtle shadow-sm font-mono">
             <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" />
-            <span className="font-medium text-[11px]">Adversarial Defense</span>
-            <span className="text-[10px] text-emerald-400 font-mono">R012 Protected</span>
+            <span className="text-[11px] text-ink">XML Guardrail</span>
+            <span className="text-[10px] text-ink-tertiary">| R012 Neutralized</span>
           </div>
 
           {/* Engine Status */}
-          <div className="flex items-center gap-1.5 rounded-full border border-hairline bg-surface-1 px-3 py-1 text-xs text-ink shadow-sm">
-            <Cpu className="h-3.5 w-3.5 text-indigo-400" />
-            <span className="text-ink-tertiary text-[11px]">Engine:</span>
-            <span className="font-mono text-[11px] font-medium text-ink">{apiProvider}</span>
+          <div className="flex items-center gap-1.5 rounded-md border border-hairline bg-surface-1 px-2.5 py-1 text-xs text-ink-subtle shadow-sm font-mono">
+            <Cpu className="h-3.5 w-3.5 text-ink-tertiary" />
+            <span className="text-[11px] text-ink">{apiProvider}</span>
           </div>
         </div>
 
-        {/* Right Actions & Utilities */}
+        {/* Right Utilities */}
         <div className="flex items-center gap-2">
-          {/* Cache Indicator */}
-          <div className="flex items-center gap-1.5 rounded-lg border border-hairline bg-surface-1 px-2.5 py-1.5 text-xs text-ink shadow-sm">
+          {/* Cache Counter & Purge */}
+          <div className="flex items-center gap-1.5 rounded-md border border-hairline bg-surface-1 px-2 py-1 text-xs text-ink shadow-sm font-mono">
             <Database className="h-3.5 w-3.5 text-ink-tertiary" />
-            <span className="font-mono text-xs tabular-nums font-semibold text-ink">{cacheEntries}</span>
-            <span className="hidden sm:inline text-ink-tertiary text-[11px]">cached</span>
+            <span className="text-xs tabular-nums font-semibold text-ink">{cacheEntries}</span>
+            <span className="hidden sm:inline text-ink-tertiary text-[10px]">cached</span>
             {onClearCache && cacheEntries > 0 && (
               <button
                 onClick={onClearCache}
@@ -99,38 +94,38 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </div>
 
-          {/* Theme Switcher Button */}
+          {/* Theme Toggle (Monochrome) */}
           <button
             onClick={toggleTheme}
             title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} mode (Press T)`}
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-surface-1 text-ink-subtle hover:text-ink hover:border-hairline-strong transition-all shadow-sm"
+            className="flex h-8 w-8 items-center justify-center rounded-md border border-hairline bg-surface-1 text-ink-subtle hover:text-ink hover:border-hairline-strong transition-all shadow-sm"
           >
             {theme === 'dark' ? (
-              <Sun className="h-4 w-4 text-amber-400 transition-transform hover:rotate-45" />
+              <Sun className="h-3.5 w-3.5 text-amber-400" />
             ) : (
-              <Moon className="h-4 w-4 text-indigo-500 transition-transform hover:-rotate-12" />
+              <Moon className="h-3.5 w-3.5 text-zinc-900" />
             )}
           </button>
 
-          {/* Shortcuts & Guide Button */}
+          {/* Shortcuts Button */}
           {onOpenShortcuts && (
             <button
               onClick={onOpenShortcuts}
               title="Keyboard shortcuts & architecture (?)"
-              className="hidden sm:flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-surface-1 text-ink-subtle hover:text-ink hover:border-hairline-strong transition-colors shadow-sm"
+              className="hidden sm:flex h-8 w-8 items-center justify-center rounded-md border border-hairline bg-surface-1 text-ink-subtle hover:text-ink hover:border-hairline-strong transition-colors shadow-sm"
             >
-              <HelpCircle className="h-4 w-4" />
+              <HelpCircle className="h-3.5 w-3.5" />
             </button>
           )}
 
-          {/* Benchmark Dataset Quick Button (if provided) */}
+          {/* Quick Benchmark Button (High-contrast pure white/black) */}
           {onLoadSample && (
             <button
               onClick={onLoadSample}
               disabled={isLoading}
-              className="hidden lg:flex items-center gap-1.5 rounded-lg bg-surface-2 border border-hairline px-3 py-1.5 text-xs font-medium text-ink hover:bg-surface-3 transition-colors shadow-sm"
+              className="flex items-center gap-1.5 rounded-md bg-ink text-canvas hover:opacity-90 active:scale-[0.98] px-3 py-1 text-xs font-medium transition-all shadow-sm"
             >
-              <Sparkles className="h-3.5 w-3.5 text-indigo-400" />
+              <Sparkles className="h-3 w-3" />
               <span>Benchmark 30</span>
             </button>
           )}

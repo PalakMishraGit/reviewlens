@@ -17,14 +17,14 @@ export const DashboardSkeleton: React.FC<DashboardSkeletonProps> = ({
       <div className="rounded-xl border border-hairline bg-surface-1 p-4 shadow-lg backdrop-blur-md">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-3.5">
           <div className="flex items-center gap-3">
-            <div className="relative flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">
-              <Loader2 className="h-4 w-4 animate-spin text-indigo-500" />
+            <div className="relative flex h-8 w-8 items-center justify-center rounded-lg bg-surface-2 border border-hairline text-ink">
+              <Loader2 className="h-4 w-4 animate-spin text-ink" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-sm font-semibold text-ink">Intelligence Engine Processing</span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-indigo-500/10 px-2 py-0.5 text-[10px] font-medium text-indigo-400 border border-indigo-500/20">
-                  <Sparkles className="h-2.5 w-2.5" />
+                <span className="inline-flex items-center gap-1 rounded-full bg-surface-2 px-2 py-0.5 text-[10px] font-medium text-ink-subtle border border-hairline">
+                  <Sparkles className="h-2.5 w-2.5 text-amber-500" />
                   Live Batches
                 </span>
               </div>
@@ -49,10 +49,10 @@ export const DashboardSkeleton: React.FC<DashboardSkeletonProps> = ({
           </div>
 
           <div className="flex items-center gap-2 rounded-lg bg-surface-2 p-2 border border-hairline">
-            <Database className="h-3.5 w-3.5 text-indigo-400 shrink-0 animate-pulse" />
+            <Database className="h-3.5 w-3.5 text-ink-subtle shrink-0 animate-pulse" />
             <div className="truncate">
               <div className="font-medium text-ink truncate">2. SHA-256 Dedupe</div>
-              <div className="text-[10px] text-indigo-300">Atomic Cache Check</div>
+              <div className="text-[10px] text-ink-subtle">Atomic Cache Check</div>
             </div>
           </div>
 
@@ -65,7 +65,7 @@ export const DashboardSkeleton: React.FC<DashboardSkeletonProps> = ({
           </div>
 
           <div className="flex items-center gap-2 rounded-lg bg-surface-2 p-2 border border-hairline">
-            <Loader2 className="h-3.5 w-3.5 text-indigo-400 shrink-0 animate-spin" />
+            <Loader2 className="h-3.5 w-3.5 text-ink-subtle shrink-0 animate-spin" />
             <div className="truncate">
               <div className="font-medium text-ink truncate">4. Zod Validation</div>
               <div className="text-[10px] text-ink-subtle">Chunk Batches of 5</div>

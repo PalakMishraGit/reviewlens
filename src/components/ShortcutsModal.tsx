@@ -24,7 +24,7 @@ export const ShortcutsModal: React.FC<ShortcutsModalProps> = ({ isOpen, onClose 
           {/* Header */}
           <div className="flex items-center justify-between border-b border-hairline pb-4">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-surface-2 border border-hairline text-ink">
                 <Keyboard className="h-4 w-4" />
               </div>
               <div>
@@ -78,14 +78,14 @@ export const ShortcutsModal: React.FC<ShortcutsModalProps> = ({ isOpen, onClose 
               <span>Adversarial Defense Protocol Active</span>
             </div>
             <p className="text-[11px] text-ink-subtle leading-relaxed">
-              Reviews are evaluated within isolated XML boundary tags (<code className="font-mono text-ink">&lt;review_text&gt;</code>). Prompt injection payloads (such as in review <code className="font-mono text-indigo-400">R012</code>) are isolated as inert strings, preventing jailbreak instruction overrides.
+              Reviews are evaluated within isolated XML boundary tags (<code className="font-mono text-ink">&lt;review_text&gt;</code>). Prompt injection payloads (such as in review <code className="font-mono text-amber-500 font-semibold">R012</code>) are isolated as inert strings, preventing jailbreak instruction overrides.
             </p>
           </div>
 
           <div className="flex justify-end pt-1">
             <button
               onClick={onClose}
-              className="rounded-lg bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-500 transition-colors shadow-sm"
+              className="rounded-lg bg-ink px-4 py-2 text-xs font-semibold text-canvas hover:opacity-90 active:scale-98 transition-colors shadow-sm"
             >
               Got it
             </button>
