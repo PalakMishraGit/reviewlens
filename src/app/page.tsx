@@ -99,7 +99,7 @@ export default function ReviewLensDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0d14] text-[#eef0f5] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#010102] text-[#f7f8f8] flex flex-col font-sans">
       <Navbar
         cacheEntries={cacheCount}
         apiProvider={summary?.telemetry?.api_provider || apiProvider}
@@ -107,18 +107,18 @@ export default function ReviewLensDashboard() {
         isLoading={isLoading}
       />
 
-      <main className="flex-1 mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-6">
+      <main className="flex-1 mx-auto w-full max-w-7xl px-4 py-7 sm:px-6 lg:px-8 space-y-5">
         {/* Header Section */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-white/[0.08] pb-5">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-[#23252a] pb-4">
           <div>
-            <h1 className="text-xl sm:text-2xl font-medium tracking-tight text-[#eef0f5]">
+            <h1 className="text-xl sm:text-2xl font-medium tracking-tight text-[#f7f8f8]">
               Review intelligence
             </h1>
-            <p className="mt-1 text-xs text-[#7a8296] max-w-xl leading-relaxed">
+            <p className="mt-0.5 text-xs text-[#8a8f98] max-w-xl leading-relaxed">
               Customer sentiment, recurring complaints, rating mismatch detection, and on-demand merchant reply queue.
             </p>
           </div>
-          <div className="text-xs text-[#7a8296] font-mono">
+          <div className="text-xs text-[#62666d] font-mono">
             October 2026 dataset
           </div>
         </div>
@@ -133,7 +133,7 @@ export default function ReviewLensDashboard() {
         </section>
 
         {error && (
-          <div className="rounded-xl border border-[#e5484d]/30 bg-[#e5484d]/10 p-3 text-xs text-[#e5484d] flex items-center gap-2">
+          <div className="rounded-lg border border-[#eb5757]/30 bg-[#eb5757]/10 p-3 text-xs text-[#eb5757] flex items-center gap-2">
             <AlertCircle className="h-4 w-4 shrink-0" strokeWidth={1.5} />
             <span>{error}</span>
           </div>
@@ -141,7 +141,7 @@ export default function ReviewLensDashboard() {
 
         {/* Dashboard Content */}
         {summary && (
-          <div className="space-y-6 animate-in fade-in duration-200">
+          <div className="space-y-5 animate-in fade-in duration-150">
             {/* Telemetry Bar */}
             <TelemetryBar telemetry={summary.telemetry} />
 
@@ -163,13 +163,13 @@ export default function ReviewLensDashboard() {
             </section>
 
             {/* View Switcher Tabs (Explorer vs Product View) */}
-            <div className="flex items-center gap-1.5 border-b border-white/[0.08] pb-2.5">
+            <div className="flex items-center gap-1 border-b border-[#23252a] pb-2">
               <button
                 onClick={() => setActiveTab('reviews')}
-                className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+                className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
                   activeTab === 'reviews'
-                    ? 'bg-[#1a1e28] text-[#eef0f5] border border-white/[0.1]'
-                    : 'text-[#7a8296] hover:text-[#a3a9b8]'
+                    ? 'bg-[#141516] text-[#f7f8f8] border border-[#23252a]'
+                    : 'text-[#8a8f98] hover:text-[#d0d6e0]'
                 }`}
               >
                 <Layers className="h-3.5 w-3.5" strokeWidth={1.5} />
@@ -178,10 +178,10 @@ export default function ReviewLensDashboard() {
 
               <button
                 onClick={() => setActiveTab('products')}
-                className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+                className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
                   activeTab === 'products'
-                    ? 'bg-[#1a1e28] text-[#eef0f5] border border-white/[0.1]'
-                    : 'text-[#7a8296] hover:text-[#a3a9b8]'
+                    ? 'bg-[#141516] text-[#f7f8f8] border border-[#23252a]'
+                    : 'text-[#8a8f98] hover:text-[#d0d6e0]'
                 }`}
               >
                 <Package className="h-3.5 w-3.5" strokeWidth={1.5} />
@@ -214,14 +214,14 @@ export default function ReviewLensDashboard() {
 
         {/* Empty State when no data has been loaded */}
         {!summary && !isLoading && (
-          <div className="rounded-xl border border-white/[0.06] bg-[#11141c]/50 p-8 text-center max-w-md mx-auto space-y-2">
-            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.06] bg-[#1a1e28] text-[#7a8296]">
+          <div className="rounded-lg border border-[#23252a] bg-[#0f1011]/60 p-8 text-center max-w-md mx-auto space-y-2">
+            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-md border border-[#23252a] bg-[#141516] text-[#62666d]">
               <FileQuestion className="h-4 w-4" strokeWidth={1.5} />
             </div>
-            <h3 className="text-xs font-medium text-[#eef0f5]">No review data loaded</h3>
-            <p className="text-[11px] text-[#7a8296] leading-relaxed">
-              Upload <code className="font-mono text-[#a3a9b8]">reviews.csv</code> or click{' '}
-              <span className="text-[#eef0f5]">Load benchmark dataset</span> to populate review intelligence.
+            <h3 className="text-xs font-medium text-[#f7f8f8]">No review data loaded</h3>
+            <p className="text-[11px] text-[#8a8f98] leading-relaxed">
+              Upload <code className="font-mono text-[#d0d6e0]">reviews.csv</code> or click{' '}
+              <span className="text-[#f7f8f8]">Load benchmark dataset</span> to populate review intelligence.
             </p>
           </div>
         )}
@@ -235,11 +235,11 @@ export default function ReviewLensDashboard() {
       />
 
       {/* Footer */}
-      <footer className="mt-auto border-t border-white/[0.06] bg-[#0b0d14] py-4 text-xs text-[#7a8296]">
+      <footer className="mt-auto border-t border-[#23252a] bg-[#010102] py-4 text-xs text-[#62666d]">
         <div className="mx-auto max-w-7xl px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <span>ReviewLens — CEDCOSS Technical Assessment (Batch 2027)</span>
-          <span className="font-mono text-[11px] text-[#7a8296]">
-            Ink &amp; Graphite design system (Unslop craft)
+          <span className="font-mono text-[11px] text-[#62666d]">
+            Linear Design System (awesome-design-md + Unslop craft)
           </span>
         </div>
       </footer>

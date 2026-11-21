@@ -3,47 +3,73 @@
 @tailwind utilities;
 
 :root {
-  --background: #0b0d14;
-  --surface-deep: #07080d;
-  --surface-card: #11141c;
-  --surface-raised: #1a1e28;
-  --hairline: rgba(255, 255, 255, 0.08);
-  --text-primary: #eef0f5;
-  --text-secondary: #a3a9b8;
-  --text-muted: #7a8296;
+  /* Linear-grade canvas & surface tokens (from VoltAgent/awesome-design-md) */
+  --canvas: #010102;
+  --surface-1: #0f1011;
+  --surface-2: #141516;
+  --surface-3: #18191a;
+  --surface-4: #191a1b;
+
+  /* Hairlines & borders */
+  --hairline: #23252a;
+  --hairline-strong: #34343a;
+  --hairline-tertiary: #3e3e44;
+
+  /* Typography / Ink tokens */
+  --ink: #f7f8f8;
+  --ink-muted: #d0d6e0;
+  --ink-subtle: #8a8f98;
+  --ink-tertiary: #62666d;
+
+  /* Signature chromatic accent */
+  --primary: #5e6ad2;
+  --primary-hover: #828fff;
+  --primary-focus: #5e69d1;
+
+  /* Semantics */
+  --semantic-success: #27a644;
+  --semantic-warning: #f59e0b;
+  --semantic-danger: #eb5757;
 }
 
 body {
-  color: var(--text-primary);
-  background: var(--background);
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  color: var(--ink);
+  background: var(--canvas);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Hairline utility */
-.border-hairline {
-  border-color: var(--hairline);
+/* Linear-style keycaps for meta & tags */
+.kbd-cap {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  line-height: 1;
+  padding: 2px 5px;
+  background: #141516;
+  border: 1px solid #23252a;
+  border-radius: 4px;
+  color: #8a8f98;
 }
 
-/* Tabular figures for all metrics and data */
+/* Tabular figures for high-precision alignment */
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }
 
-/* Minimalist scrollbar */
+/* Linear-grade minimalist scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b0d14;
+  background: #010102;
 }
 ::-webkit-scrollbar-thumb {
-  background: #232734;
-  border-radius: 3px;
+  background: #23252a;
+  border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #32384a;
+  background: #34343a;
 }

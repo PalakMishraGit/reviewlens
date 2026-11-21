@@ -67,60 +67,60 @@ export const ReplyModal: React.FC<ReplyModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-150">
-      <div className="relative w-full max-w-xl rounded-xl border border-white/[0.1] bg-[#11141c] p-5 shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#010102]/70 backdrop-blur-sm animate-in fade-in duration-150">
+      <div className="relative w-full max-w-xl rounded-lg border border-[#23252a] bg-[#0f1011] p-4 shadow-2xl">
         {/* Header */}
-        <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
+        <div className="flex items-center justify-between pb-3 border-b border-[#23252a]">
           <div className="flex items-center gap-2">
-            <MessageSquare className="h-4 w-4 text-[#a3a9b8]" strokeWidth={1.5} />
-            <span className="text-sm font-medium text-[#eef0f5]">Draft store reply</span>
-            <span className="font-mono text-xs text-[#7a8296]">{review.review_id}</span>
+            <MessageSquare className="h-4 w-4 text-[#8a8f98]" strokeWidth={1.5} />
+            <span className="text-sm font-medium text-[#f7f8f8]">Draft store reply</span>
+            <span className="kbd-cap">{review.review_id}</span>
           </div>
 
           <button
             onClick={onClose}
-            className="rounded p-1 text-[#7a8296] hover:text-[#eef0f5] transition-colors"
+            className="rounded p-1 text-[#62666d] hover:text-[#f7f8f8] transition-colors"
           >
             <X className="h-4 w-4" strokeWidth={1.5} />
           </button>
         </div>
 
         {/* Customer Review Summary Card */}
-        <div className="mt-4 rounded-lg border border-white/[0.06] bg-[#161a24] p-3 space-y-1.5">
+        <div className="mt-3.5 rounded-md border border-[#23252a] bg-[#141516] p-3 space-y-1">
           <div className="flex items-center justify-between text-xs">
-            <span className="font-medium text-[#eef0f5]">{review.product}</span>
-            <span className="font-mono text-[11px] text-[#7a8296]">{review.date}</span>
+            <span className="font-medium text-[#f7f8f8]">{review.product}</span>
+            <span className="font-mono text-[11px] text-[#62666d]">{review.date}</span>
           </div>
-          <p className="text-xs text-[#a3a9b8] leading-relaxed">&quot;{review.cleaned_text}&quot;</p>
+          <p className="text-xs text-[#8a8f98] leading-relaxed">&quot;{review.cleaned_text}&quot;</p>
           {review.analysis?.summary && (
-            <div className="pt-1 text-[11px] text-[#7a8296] flex items-center gap-1.5">
+            <div className="pt-0.5 text-[11px] text-[#62666d] flex items-center gap-1.5">
               <span>Detected issue:</span>
-              <span className="text-[#eef0f5]">{review.analysis.summary}</span>
+              <span className="text-[#f7f8f8]">{review.analysis.summary}</span>
             </div>
           )}
         </div>
 
         {/* Reply Area */}
-        <div className="mt-4 space-y-2">
+        <div className="mt-3.5 space-y-1.5">
           <div className="flex items-center justify-between text-xs">
-            <span className="text-xs text-[#7a8296]">
+            <span className="text-xs text-[#8a8f98]">
               Suggested response
               {isCached && (
-                <span className="ml-1.5 font-mono text-[10px] text-[#7a8296] bg-[#1a1e28] px-1 py-0.2 rounded border border-white/[0.04]">
+                <span className="ml-1.5 font-mono text-[10px] text-[#62666d] bg-[#141516] px-1 py-0.2 rounded border border-[#23252a]">
                   cached
                 </span>
               )}
             </span>
-            <span className="text-[11px] text-[#7a8296]">Editable draft</span>
+            <span className="text-[11px] text-[#62666d]">Editable draft</span>
           </div>
 
           {isLoading ? (
-            <div className="flex flex-col items-center justify-center py-10 rounded-lg border border-white/[0.06] bg-[#161a24] gap-2">
-              <Loader2 className="h-5 w-5 text-[#a3a9b8] animate-spin" strokeWidth={1.5} />
-              <p className="text-xs text-[#7a8296]">Drafting reply...</p>
+            <div className="flex flex-col items-center justify-center py-10 rounded-md border border-[#23252a] bg-[#141516] gap-2">
+              <Loader2 className="h-4 w-4 text-[#8a8f98] animate-spin" strokeWidth={1.5} />
+              <p className="text-xs text-[#62666d]">Drafting reply...</p>
             </div>
           ) : error ? (
-            <div className="p-3 rounded-lg border border-[#e5484d]/30 bg-[#e5484d]/10 text-xs text-[#e5484d]">
+            <div className="p-3 rounded-md border border-[#eb5757]/30 bg-[#eb5757]/10 text-xs text-[#eb5757]">
               {error}
             </div>
           ) : (
@@ -128,15 +128,15 @@ export const ReplyModal: React.FC<ReplyModalProps> = ({
               rows={4}
               value={replyText}
               onChange={e => setReplyText(e.target.value)}
-              className="w-full rounded-lg border border-white/[0.08] bg-[#161a24] p-3 text-xs text-[#eef0f5] focus:border-white/30 focus:outline-none resize-none leading-relaxed"
+              className="w-full rounded-md border border-[#23252a] bg-[#141516] p-3 text-xs text-[#f7f8f8] focus:border-[#5e6ad2] focus:outline-none resize-none leading-relaxed"
               placeholder="Your reply will appear here..."
             />
           )}
         </div>
 
         {/* Footer Actions */}
-        <div className="mt-4 flex items-center justify-between pt-3 border-t border-white/[0.06]">
-          <span className="text-[11px] text-[#7a8296]">
+        <div className="mt-3.5 flex items-center justify-between pt-3 border-t border-[#23252a]">
+          <span className="text-[11px] text-[#62666d]">
             Generated on-demand
           </span>
 
@@ -144,7 +144,7 @@ export const ReplyModal: React.FC<ReplyModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg border border-white/[0.08] bg-[#161a24] px-3 py-1.5 text-xs text-[#a3a9b8] hover:text-[#eef0f5] transition-colors"
+              className="rounded-md border border-[#23252a] bg-[#141516] px-3 py-1.5 text-xs text-[#8a8f98] hover:text-[#f7f8f8] transition-colors"
             >
               Close
             </button>
@@ -152,7 +152,7 @@ export const ReplyModal: React.FC<ReplyModalProps> = ({
               type="button"
               onClick={handleCopy}
               disabled={isLoading || !replyText}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-[#eef0f5] px-3 py-1.5 text-xs font-medium text-[#0b0d14] hover:bg-white active:scale-[0.98] transition-all disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 rounded-md bg-[#f7f8f8] px-3 py-1.5 text-xs font-medium text-[#010102] hover:bg-[#ffffff] active:scale-[0.98] transition-all disabled:opacity-50"
             >
               {copied ? (
                 <>
