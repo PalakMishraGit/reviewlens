@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
 
     // Generate fresh reply via AI
     const effectiveApiKey = clientKey || process.env.GEMINI_API_KEY || process.env.GROQ_API_KEY;
-    const effectiveModel = clientModel || process.env.AI_MODEL || 'gemini-1.5-flash';
+    const effectiveModel = clientModel || process.env.AI_MODEL || 'gemini-2.5-flash';
 
     const reply = await generateMerchantReply(review, {
       apiKey: effectiveApiKey,

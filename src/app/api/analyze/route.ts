@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
 
     // 3. Process batches with AI / Cache
     const effectiveApiKey = clientKey || process.env.GEMINI_API_KEY || process.env.GROQ_API_KEY;
-    const effectiveModel = clientModel || process.env.AI_MODEL || 'gemini-1.5-flash';
+    const effectiveModel = clientModel || process.env.AI_MODEL || 'gemini-2.5-flash';
 
     const { reviews, telemetry } = await processReviewsInBatches(cleanedReviews, {
       apiKey: effectiveApiKey,

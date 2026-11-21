@@ -196,8 +196,10 @@ export function analyzeReviewDeterministic(review: CleanedReview): LLMAnalysisOu
 /**
  * Calls Gemini REST API
  */
-async function callGeminiApi(prompt: string, apiKey: string, modelName = 'gemini-1.5-flash'): Promise<string> {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+async function callGeminiApi(prompt: string, apiKey: string, modelName = 'gemini-2.5-flash'): Promise<string> {
+  // Automatically normalize legacy or deprecated gemini-1.5-flash to working gemini-2.5-flash
+  const activeModel = (!modelName || modelName === 'gemini-1.5-flash') ? 'gemini-2.5-flash' : modelName;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${activeModel}:generateContent?key=${apiKey}`;
 
   const response = await fetch(url, {
     method: 'POST',

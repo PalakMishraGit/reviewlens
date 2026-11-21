@@ -186,7 +186,7 @@ export default function ReviewLensDashboard() {
       const savedKey = localStorage.getItem('pulselens_api_key');
       if (savedKey) {
         setCustomApiKey(savedKey);
-        setApiProvider('Google Gemini 1.5 Flash');
+        setApiProvider('Google Gemini 2.5 Flash');
       }
     } catch {}
   }, []);
@@ -196,8 +196,8 @@ export default function ReviewLensDashboard() {
     try {
       if (key) {
         localStorage.setItem('pulselens_api_key', key);
-        setApiProvider('Google Gemini 1.5 Flash');
-        addToast('success', 'Gemini API Key active! Engine switched to Google Gemini 1.5 Flash.');
+        setApiProvider('Google Gemini 2.5 Flash');
+        addToast('success', 'Gemini API Key active! Engine switched to Google Gemini 2.5 Flash.');
       } else {
         localStorage.removeItem('pulselens_api_key');
         setApiProvider('Local Analytical Engine (Mock)');
