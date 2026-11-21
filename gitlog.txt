@@ -1,3 +1,15 @@
+commit 72aee9cf7b650bf44d04d3ddca4e7426b0d963ac
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 23:04:28 +0530
+
+    feat(ui): add time-based greeting, daily motivational quotes, live calendar, Google Fonts, and MNC footer
+
+commit 02d5a029df1913be0341fa085bee2b47dbdfb96d
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 22:52:13 +0530
+
+    docs(submission): update gitlog.txt with cinematic capsule UI commits
+
 commit e1a0d771cb08e5827a0920f7803a8f0e139ad5e6
 Author: Amrit <amrit@reviewlens.local>
 Date:   2026-11-21 22:52:01 +0530
