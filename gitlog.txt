@@ -1,3 +1,15 @@
+commit 1313772eebcf89376421414836a097855fc80283
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-22 00:14:25 +0530
+
+    fix(gemini): default model to gemini-2.5-flash and auto-upgrade deprecated 1.5 endpoint
+
+commit cdba3b5ab57c16a68ed348e1cae0a9b5721a5e76
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-22 00:08:49 +0530
+
+    docs: sync gitlog.txt with favicon commit
+
 commit f749ce1906df7a558a337d937d657744b5962c8b
 Author: Amrit <amrit@reviewlens.local>
 Date:   2026-11-22 00:08:49 +0530
