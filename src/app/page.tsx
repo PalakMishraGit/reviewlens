@@ -226,22 +226,22 @@ export default function ReviewLensDashboard() {
         body: JSON.stringify({ csvText, apiKey: customApiKey }),
       }).then(r => r.json());
 
-      // Paced visual progression through the 4 pipeline stages
-      await new Promise(r => setTimeout(r, 220));
+      // Steady visual progression through the 4 pipeline stages
+      await new Promise(r => setTimeout(r, 650));
       setLoadingMessage('Stage 2/4: Computing SHA-256 signatures & verifying atomic cache...');
 
-      await new Promise(r => setTimeout(r, 220));
+      await new Promise(r => setTimeout(r, 650));
       setLoadingMessage('Stage 3/4: Activating prompt injection defense envelope for R012...');
 
-      await new Promise(r => setTimeout(r, 220));
-      setLoadingMessage('Stage 4/4: Validating structured outputs with Zod schemas...');
+      await new Promise(r => setTimeout(r, 650));
+      setLoadingMessage('Stage 4/4: Executing Google Gemini 2.5 Flash batch inference & Zod validation...');
 
       const data = await apiPromise;
 
-      // Ensure human-perceivable transition duration (minimum 850ms)
+      // Ensure calm transition duration so skeleton doesn't disappear abruptly
       const elapsed = Date.now() - startTime;
-      if (elapsed < 850) {
-        await new Promise(r => setTimeout(r, 850 - elapsed));
+      if (elapsed < 2600) {
+        await new Promise(r => setTimeout(r, 2600 - elapsed));
       }
 
       if (!data.success) {
@@ -687,33 +687,61 @@ export default function ReviewLensDashboard() {
               </p>
             </div>
 
-            {/* Right: Real Interactive Actions & Quick Triggers */}
-            <div className="flex flex-wrap items-center gap-2 shrink-0">
-              <button
-                onClick={() => setIsShortcutsOpen(true)}
-                className="flex items-center gap-1.5 rounded-full bg-surface-2 border border-hairline hover:border-hairline-strong px-3.5 py-1.5 text-xs font-bold text-ink transition-all hover:scale-105 active:scale-95 shadow-sm"
+            {/* Right: Official Social Media Links & Cache Purge */}
+            <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+              {/* Official X (Twitter) */}
+              <a
+                href="https://x.com"
+                target="_blank"
+                rel="noreferrer"
+                title="Follow PulseLens on X (Twitter)"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-hairline bg-surface-2 text-ink hover:text-emerald-500 hover:border-hairline-strong transition-all shadow-sm hover:scale-110 active:scale-95"
               >
-                <Keyboard className="h-3.5 w-3.5 text-emerald-500" strokeWidth={2.2} />
-                <span>Shortcuts &amp; Specs (?)</span>
-              </button>
+                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current" aria-hidden="true">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              </a>
 
-              <button
-                onClick={toggleTheme}
-                className="flex items-center gap-1.5 rounded-full bg-surface-2 border border-hairline hover:border-hairline-strong px-3.5 py-1.5 text-xs font-bold text-ink transition-all hover:scale-105 active:scale-95 shadow-sm"
+              {/* LinkedIn */}
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noreferrer"
+                title="Connect on LinkedIn"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-hairline bg-surface-2 text-ink hover:text-emerald-500 hover:border-hairline-strong transition-all shadow-sm hover:scale-110 active:scale-95"
               >
-                <span className="font-mono text-emerald-500 font-bold">T</span>
-                <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
-              </button>
+                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current" aria-hidden="true">
+                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                </svg>
+              </a>
 
-              <button
-                onClick={handleAnalyzeSample}
-                disabled={isLoading}
-                className="flex items-center gap-1.5 rounded-full bg-ink text-canvas hover:opacity-90 px-4 py-1.5 text-xs font-bold transition-all shadow-sm"
+              {/* Facebook */}
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noreferrer"
+                title="Follow on Facebook"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-hairline bg-surface-2 text-ink hover:text-emerald-500 hover:border-hairline-strong transition-all shadow-sm hover:scale-110 active:scale-95"
               >
-                <Sparkles className="h-3.5 w-3.5 text-amber-400" strokeWidth={2.4} />
-                <span>Run Benchmark (30)</span>
-              </button>
+                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current" aria-hidden="true">
+                  <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
+                </svg>
+              </a>
 
+              {/* GitHub */}
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noreferrer"
+                title="GitHub Repository & Codebase"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-hairline bg-surface-2 text-ink hover:text-emerald-500 hover:border-hairline-strong transition-all shadow-sm hover:scale-110 active:scale-95"
+              >
+                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-current" aria-hidden="true">
+                  <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+                </svg>
+              </a>
+
+              {/* Cache Purge Trigger (When cache > 0) */}
               {cacheCount > 0 && (
                 <button
                   onClick={handleClearCache}

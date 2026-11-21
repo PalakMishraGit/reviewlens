@@ -26,8 +26,8 @@ async function capture() {
     await sampleBtn.click();
   }
 
-  // Wait for data to load and render
-  await page.waitForSelector('section[aria-label="Executive KPI Summary"]', { timeout: 15000 });
+  // Wait for data to load and render (allow up to 60s for live Gemini API calls)
+  await page.waitForSelector('section[aria-label="Executive KPI Summary"]', { timeout: 60000 });
   await new Promise(r => setTimeout(r, 1200));
 
   // 1. Dashboard Overview Screenshot (Dark Theme)

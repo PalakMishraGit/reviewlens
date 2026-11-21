@@ -141,8 +141,8 @@ export async function processReviewsInBatches(
           ? 'Local Analytical Engine (Mock)'
           : options.provider === 'groq' || options.apiKey?.startsWith('gsk_') || process.env.GROQ_API_KEY
           ? 'Groq (Llama 3.3)'
-          : 'Google Gemini 1.5 Flash',
-      model_name: options.model || process.env.AI_MODEL || 'gemini-1.5-flash',
+          : 'Google Gemini 2.5 Flash',
+      model_name: options.model || process.env.AI_MODEL || 'gemini-2.5-flash',
     },
   };
 }

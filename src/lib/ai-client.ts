@@ -286,7 +286,7 @@ export async function callAiWithBackoff(
         return await callGroqApi(prompt, process.env.GROQ_API_KEY, options.model || 'llama-3.3-70b-versatile');
       } else {
         const key = apiKey || process.env.GEMINI_API_KEY!;
-        return await callGeminiApi(prompt, key, options.model || process.env.AI_MODEL || 'gemini-1.5-flash');
+        return await callGeminiApi(prompt, key, options.model || process.env.AI_MODEL || 'gemini-2.5-flash');
       }
     } catch (err: any) {
       attempt++;

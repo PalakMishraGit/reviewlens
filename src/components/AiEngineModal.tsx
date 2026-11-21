@@ -50,7 +50,7 @@ export const AiEngineModal: React.FC<AiEngineModalProps> = ({
               </div>
               <div>
                 <h3 className="text-sm font-extrabold text-ink font-sans">AI Model &amp; Free Tier Engine</h3>
-                <p className="text-xs text-ink font-medium">Google Gemini 1.5 Flash &amp; Fallback Architecture</p>
+                <p className="text-xs text-ink font-medium">Google Gemini 2.5 Flash &amp; Fallback Architecture</p>
               </div>
             </div>
 
@@ -67,7 +67,7 @@ export const AiEngineModal: React.FC<AiEngineModalProps> = ({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Cpu className="h-4 w-4 text-emerald-500" strokeWidth={2.4} />
-                <span className="text-xs font-extrabold text-ink font-sans">Primary Model: Google Gemini 1.5 Flash</span>
+                <span className="text-xs font-extrabold text-ink font-sans">Primary Model: Google Gemini 2.5 Flash</span>
               </div>
               <span className="rounded-full bg-emerald-500/15 border border-emerald-500/30 px-2 py-0.5 text-[10px] font-mono font-bold text-emerald-500">
                 Official Free Tier
@@ -75,7 +75,7 @@ export const AiEngineModal: React.FC<AiEngineModalProps> = ({
             </div>
 
             <p className="text-xs text-ink leading-relaxed font-medium">
-              As required by the assignment guidelines, PulseLens uses Google's official free tier model (<code className="font-mono text-emerald-500 font-bold">gemini-1.5-flash</code>), featuring:
+              As required by the assignment guidelines, PulseLens uses Google's official free tier model (<code className="font-mono text-emerald-500 font-bold">gemini-2.5-flash</code>), featuring:
             </p>
 
             <ul className="space-y-1.5 text-xs text-ink font-medium">
