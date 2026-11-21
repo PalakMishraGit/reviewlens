@@ -89,13 +89,13 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({
         className="relative flex flex-col justify-between rounded-2xl border border-hairline bg-surface-1 p-5 shadow-sm transition-all hover:border-hairline-strong card-glow"
       >
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs font-semibold text-ink-subtle">
+          <div className="flex items-center gap-2 text-xs font-bold text-ink">
             <div className="p-1.5 rounded-lg bg-surface-2 border border-hairline">
-              <FileText className="h-4 w-4 text-ink-tertiary" />
+              <FileText className="h-4 w-4 text-ink" strokeWidth={2.2} />
             </div>
             <span>Total reviews</span>
           </div>
-          <span className="text-[11px] font-mono font-semibold text-ink-tertiary">
+          <span className="text-[11px] font-mono font-bold text-ink">
             {total_raw_rows} raw
           </span>
         </div>
@@ -113,9 +113,9 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({
           <div>{upSparkline('currentColor')}</div>
         </div>
 
-        <div className="flex items-center justify-between text-[11px] font-mono text-ink-tertiary border-t border-hairline pt-2.5">
+        <div className="flex items-center justify-between text-[11px] font-mono text-ink border-t border-hairline pt-2.5 font-bold">
           <span>{skipped_empty} empty</span>
-          <span className="text-ink font-semibold">{duplicates_detected} dedupe</span>
+          <span className="text-ink font-extrabold">{duplicates_detected} dedupe</span>
         </div>
       </motion.div>
 
@@ -163,9 +163,9 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({
           <div className="text-emerald-500">{upSparkline('#10b981')}</div>
         </div>
 
-        <div className="flex items-center justify-between text-[11px] font-medium text-ink-subtle border-t border-hairline pt-2.5">
+        <div className="flex items-center justify-between text-[11px] font-bold text-ink border-t border-hairline pt-2.5">
           <span>Satisfied customers</span>
-          <span className="text-emerald-500 font-semibold font-mono">Filter →</span>
+          <span className="text-emerald-500 font-extrabold font-mono">Filter →</span>
         </div>
       </motion.button>
 
@@ -213,9 +213,9 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({
           <div className="text-amber-500">{flatSparkline('#f59e0b')}</div>
         </div>
 
-        <div className="flex items-center justify-between text-[11px] font-medium text-ink-subtle border-t border-hairline pt-2.5">
+        <div className="flex items-center justify-between text-[11px] font-bold text-ink border-t border-hairline pt-2.5">
           <span>Mixed / Ambivalent</span>
-          <span className="text-amber-500 font-semibold font-mono">Filter →</span>
+          <span className="text-amber-500 font-extrabold font-mono">Filter →</span>
         </div>
       </motion.button>
 
@@ -263,9 +263,9 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({
           <div className="text-rose-500">{downSparkline('#f43f5e')}</div>
         </div>
 
-        <div className="flex items-center justify-between text-[11px] font-medium text-ink-subtle border-t border-hairline pt-2.5">
+        <div className="flex items-center justify-between text-[11px] font-bold text-ink border-t border-hairline pt-2.5">
           <span>Critical issues</span>
-          <span className="text-rose-500 font-semibold font-mono">Filter →</span>
+          <span className="text-rose-500 font-extrabold font-mono">Filter →</span>
         </div>
       </motion.button>
 
@@ -311,9 +311,9 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({
           <div className="text-ink">{upSparkline('currentColor')}</div>
         </div>
 
-        <div className="flex items-center justify-between text-[11px] font-medium text-ink-subtle border-t border-hairline pt-2.5">
+        <div className="flex items-center justify-between text-[11px] font-bold text-ink border-t border-hairline pt-2.5">
           <span>Merchant reply draft</span>
-          <span className="text-ink font-semibold font-mono">Toggle →</span>
+          <span className="text-ink font-extrabold font-mono">Toggle →</span>
         </div>
       </motion.button>
     </div>

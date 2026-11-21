@@ -426,11 +426,11 @@ export default function ReviewLensDashboard() {
           {!summary && !isLoading && (
             <div className="rounded-3xl border border-hairline bg-surface-1 p-12 text-center max-w-lg mx-auto space-y-5 shadow-sm">
               <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-surface-2 border border-hairline text-ink">
-                <FileQuestion className="h-7 w-7" />
+                <FileQuestion className="h-7 w-7 text-ink" strokeWidth={2.2} />
               </div>
               <div className="space-y-2">
-                <h3 className="text-base font-bold text-ink font-sans">No review dataset loaded</h3>
-                <p className="text-xs sm:text-sm text-ink-subtle leading-relaxed">
+                <h3 className="text-base font-extrabold text-ink font-sans">No review dataset loaded</h3>
+                <p className="text-xs sm:text-sm text-ink leading-relaxed font-medium">
                   Upload your merchant review file above, or click below to populate the intelligence engine with the official 30-row CEDCOSS benchmark.
                 </p>
               </div>
@@ -438,7 +438,7 @@ export default function ReviewLensDashboard() {
                 onClick={handleAnalyzeSample}
                 className="inline-flex items-center gap-2 rounded-xl bg-ink px-5 py-3 text-xs sm:text-sm font-bold text-canvas hover:opacity-90 active:scale-98 transition-all shadow-md"
               >
-                <Sparkles className="h-4 w-4 text-amber-400" />
+                <Sparkles className="h-4 w-4 text-amber-400" strokeWidth={2.2} />
                 <span>Load 30-Review Benchmark Dataset</span>
               </button>
             </div>
@@ -446,21 +446,21 @@ export default function ReviewLensDashboard() {
         </main>
 
         {/* Enterprise Footer */}
-        <footer className="border-t border-hairline bg-surface-1 px-8 py-4 text-xs text-ink-tertiary">
+        <footer className="border-t border-hairline bg-surface-1 px-8 py-4 text-xs text-ink">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 max-w-7xl mx-auto">
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-ink">ReviewLens</span>
+            <div className="flex items-center gap-2 font-medium">
+              <span className="font-extrabold text-ink">ReviewLens</span>
               <span>—</span>
-              <span>CEDCOSS Technical Assessment (Round 2 Take-Home, Batch 2027)</span>
+              <span className="text-ink font-semibold">CEDCOSS Technical Assessment (Round 2 Take-Home, Batch 2027)</span>
             </div>
-            <div className="flex items-center gap-3 font-mono text-[11px]">
+            <div className="flex items-center gap-3 font-mono text-[11px] font-bold">
               <span className="flex items-center gap-1 text-emerald-500">
-                <CheckCircle2 className="h-3 w-3" />
+                <CheckCircle2 className="h-3 w-3" strokeWidth={2.5} />
                 RFC 4180 Verified
               </span>
               <span>•</span>
-              <span className="flex items-center gap-1 text-ink-subtle">
-                <ShieldCheck className="h-3 w-3 text-emerald-500" />
+              <span className="flex items-center gap-1 text-emerald-500">
+                <ShieldCheck className="h-3 w-3 text-emerald-500" strokeWidth={2.5} />
                 R012 Guardrail Active
               </span>
             </div>

@@ -62,10 +62,10 @@ export const InsightsOverview: React.FC<InsightsOverviewProps> = ({
                       {index + 1}
                     </span>
                     <div className="min-w-0">
-                      <h4 className="text-sm font-bold text-ink truncate group-hover:text-ink transition-colors">
+                      <h4 className="text-sm font-extrabold text-ink truncate group-hover:text-ink transition-colors">
                         {item.text}
                       </h4>
-                      <p className="text-xs text-ink-subtle truncate mt-0.5">
+                      <p className="text-xs text-ink truncate mt-0.5 font-medium">
                         {item.products.length > 0
                           ? `Affecting: ${item.products.join(', ')}`
                           : 'Detected across store items'}
@@ -136,10 +136,10 @@ export const InsightsOverview: React.FC<InsightsOverviewProps> = ({
                     {index + 1}
                   </span>
                   <div className="min-w-0">
-                    <h4 className="text-sm font-bold text-ink truncate group-hover:text-ink transition-colors">
+                    <h4 className="text-sm font-extrabold text-ink truncate group-hover:text-ink transition-colors">
                       {item.text}
                     </h4>
-                    <p className="text-xs text-ink-subtle truncate mt-0.5">
+                    <p className="text-xs text-ink truncate mt-0.5 font-medium">
                       {item.products.length > 0
                         ? `Highlights: ${item.products.join(', ')}`
                         : 'Customer praise highlights'}

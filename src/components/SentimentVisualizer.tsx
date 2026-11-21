@@ -38,33 +38,33 @@ export const SentimentVisualizer: React.FC<SentimentVisualizerProps> = ({
             <h3 className="text-base sm:text-lg font-bold text-ink tracking-tight font-sans">
               Sentiment Distribution
             </h3>
-            <p className="text-xs text-ink-subtle">
+            <p className="text-xs text-ink font-medium">
               Proportional distribution of customer ratings &amp; sentiment polarity
             </p>
           </div>
         </div>
 
-        {/* Legend matching Image 1 */}
-        <div className="flex flex-wrap items-center gap-4 text-xs font-semibold">
+        {/* Legend matching Image 1 (Crisp, High Contrast) */}
+        <div className="flex flex-wrap items-center gap-4 text-xs font-bold">
           <div className="flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
-            <span className="text-ink-subtle">Positive</span>
-            <span className="font-bold text-ink font-mono">{sentiment_percentages.positive}%</span>
+            <span className="text-ink">Positive</span>
+            <span className="font-extrabold text-ink font-mono">{sentiment_percentages.positive}%</span>
           </div>
 
           <div className="flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-amber-500" />
-            <span className="text-ink-subtle">Neutral</span>
-            <span className="font-bold text-ink font-mono">{sentiment_percentages.neutral}%</span>
+            <span className="text-ink">Neutral</span>
+            <span className="font-extrabold text-ink font-mono">{sentiment_percentages.neutral}%</span>
           </div>
 
           <div className="flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-rose-500" />
-            <span className="text-ink-subtle">Negative</span>
-            <span className="font-bold text-ink font-mono">{sentiment_percentages.negative}%</span>
+            <span className="text-ink">Negative</span>
+            <span className="font-extrabold text-ink font-mono">{sentiment_percentages.negative}%</span>
           </div>
 
-          <div className="hidden md:flex items-center gap-1.5 rounded-lg border border-hairline bg-surface-2 px-2.5 py-1 text-ink-subtle text-[11px] font-mono">
+          <div className="hidden md:flex items-center gap-1.5 rounded-lg border border-hairline bg-surface-2 px-2.5 py-1 text-ink text-[11px] font-mono font-bold">
             <span>vs. Benchmark</span>
           </div>
         </div>

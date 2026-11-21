@@ -6,7 +6,7 @@
 
 :root,
 .dark {
-  /* 2026 Titanium & Obsidian Industrial Console */
+  /* 2026 Titanium & Obsidian High-Contrast Console */
   --canvas: #090a0f;
   --canvas-subtle: #0f1118;
   --surface-1: #131622;
@@ -14,21 +14,21 @@
   --surface-3: #22283d;
   --surface-4: #2d3550;
 
-  /* Hairlines & Technical Borders - Clear, crisp definition */
-  --hairline: rgba(255, 255, 255, 0.12);
-  --hairline-strong: rgba(255, 255, 255, 0.22);
-  --hairline-focus: rgba(255, 255, 255, 0.6);
+  /* Hairlines & Technical Borders - Crisp & Visible */
+  --hairline: rgba(255, 255, 255, 0.18);
+  --hairline-strong: rgba(255, 255, 255, 0.35);
+  --hairline-focus: #ffffff;
 
-  /* Typography / High-Contrast Ink - WCAG AAA Readable */
+  /* Typography / High-Contrast Ink - PURE CRISP WHITE & LIGHT (ZERO MUDDY GREY) */
   --ink: #ffffff;
-  --ink-muted: #f4f4f6;
-  --ink-subtle: #d1d5db;
-  --ink-tertiary: #9ca3af;
+  --ink-muted: #ffffff;
+  --ink-subtle: #f8fafc; /* Crisp bright off-white */
+  --ink-tertiary: #f1f5f9; /* Crisp light slate, 100% visible */
 
-  /* Primary Monochrome Accent (Zero Purple) */
+  /* Primary Monochrome Accent */
   --accent: #ffffff;
   --accent-hover: #f4f4f5;
-  --accent-muted: rgba(255, 255, 255, 0.16);
+  --accent-muted: rgba(255, 255, 255, 0.2);
 
   /* Semantics: Crisp & High-Contrast */
   --semantic-success: #34d399;
@@ -39,7 +39,7 @@
 
 .light,
 [data-theme="light"] {
-  /* 2026 Architectural Studio Light Canvas */
+  /* High-Contrast Light Canvas */
   --canvas: #f8fafc;
   --canvas-subtle: #f1f5f9;
   --surface-1: #ffffff;
@@ -47,21 +47,21 @@
   --surface-3: #e2e8f0;
   --surface-4: #cbd5e1;
 
-  /* Hairlines & Technical Borders - Crisp and defined */
+  /* Hairlines & Technical Borders */
   --hairline: #cbd5e1;
   --hairline-strong: #94a3b8;
-  --hairline-focus: #0f172a;
+  --hairline-focus: #090a0f;
 
-  /* Typography / High-Contrast Ink - WCAG AAA Bold & Sharp */
-  --ink: #0f172a;
-  --ink-muted: #1e293b;
-  --ink-subtle: #334155;
-  --ink-tertiary: #475569;
+  /* Typography / High-Contrast Ink - PURE CRISP DARK (ZERO FADED GREY) */
+  --ink: #090a0f;
+  --ink-muted: #0f172a;
+  --ink-subtle: #0f172a; /* Deep dark black */
+  --ink-tertiary: #1e293b; /* Rich dark slate, 100% visible */
 
   /* Primary Monochrome Accent */
-  --accent: #0f172a;
+  --accent: #090a0f;
   --accent-hover: #1e293b;
-  --accent-muted: rgba(15, 23, 42, 0.08);
+  --accent-muted: rgba(15, 23, 42, 0.12);
 
   /* Semantics */
   --semantic-success: #059669;

@@ -9,7 +9,6 @@ import {
   Loader2,
   ShieldCheck,
   Sparkles,
-  ArrowRight,
   Upload,
 } from 'lucide-react';
 
@@ -81,7 +80,7 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
 
   return (
     <div className="w-full space-y-3">
-      {/* Horizontal Split Ingestion Card (Inspired by Modern SaaS Reference) */}
+      {/* Horizontal Split Ingestion Card */}
       <div className="rounded-2xl border border-hairline bg-surface-1 p-6 shadow-sm transition-all hover:border-hairline-strong">
         <input
           ref={fileInputRef}
@@ -96,20 +95,20 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
           {/* Left section: Title & Description */}
           <div className="lg:col-span-5 flex items-start gap-4">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-surface-2 border border-hairline text-ink shadow-sm">
-              <UploadCloud className="h-6 w-6 text-ink" />
+              <UploadCloud className="h-6 w-6 text-ink" strokeWidth={2.2} />
             </div>
             <div className="space-y-1">
               <h2 className="text-base sm:text-lg font-bold text-ink tracking-tight font-sans">
                 Import customer reviews
               </h2>
-              <p className="text-xs sm:text-sm text-ink-subtle leading-relaxed">
+              <p className="text-xs sm:text-sm text-ink leading-relaxed font-medium">
                 Upload a CSV file containing customer reviews from your store. RFC 4180 multiline &amp; quotes handled automatically.
               </p>
-              <div className="flex items-center gap-2 pt-1 font-mono text-xs text-ink-tertiary">
+              <div className="flex items-center gap-2 pt-1 font-mono text-xs">
                 <span className="flex h-2 w-2 rounded-full bg-emerald-500" />
-                <span className="text-emerald-500 font-semibold">Ready for ingestion</span>
-                <span>•</span>
-                <span>Max 10MB</span>
+                <span className="text-emerald-500 font-bold">Ready for ingestion</span>
+                <span className="text-ink">•</span>
+                <span className="text-ink font-semibold">Max 10MB</span>
               </div>
             </div>
           </div>
@@ -124,19 +123,19 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
               className={`flex-1 w-full flex items-center justify-center gap-3 rounded-xl border border-dashed py-5 px-6 transition-all cursor-pointer text-center ${
                 isDragOver
                   ? 'border-ink bg-surface-2'
-                  : 'border-hairline-strong bg-surface-2/40 hover:border-ink/60 hover:bg-surface-2'
+                  : 'border-hairline-strong bg-surface-2 hover:border-ink hover:bg-surface-3'
               } ${isLoading ? 'pointer-events-none opacity-80' : ''}`}
             >
-              <Upload className="h-4 w-4 text-ink-tertiary shrink-0" />
-              <div className="text-xs sm:text-sm font-semibold text-ink">
+              <Upload className="h-4 w-4 text-ink shrink-0" strokeWidth={2.2} />
+              <div className="text-xs sm:text-sm font-bold text-ink">
                 {isLoading ? (
                   <span className="font-mono text-ink animate-pulse">{loadingMessage}</span>
                 ) : (
                   <span>
-                    Drop a CSV file here or <span className="underline text-ink">browse files</span>
+                    Drop a CSV file here or <span className="underline text-ink font-extrabold">browse files</span>
                   </span>
                 )}
-                <div className="text-[11px] text-ink-tertiary font-normal">Supports: .csv (RFC 4180 compliant)</div>
+                <div className="text-[11px] text-ink font-medium mt-0.5">Supports: .csv (RFC 4180 compliant)</div>
               </div>
             </div>
 
@@ -148,7 +147,7 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
               {isLoading ? (
                 <Loader2 className="h-4 w-4 animate-spin text-canvas" />
               ) : (
-                <UploadCloud className="h-4 w-4" />
+                <UploadCloud className="h-4 w-4" strokeWidth={2.2} />
               )}
               <span>Upload CSV</span>
             </button>
@@ -158,28 +157,28 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
         {/* Feature badges row */}
         <div className="mt-5 pt-4 border-t border-hairline flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-lg bg-surface-2 border border-hairline px-3 py-1 font-medium text-ink">
-              <Check className="h-3 w-3 text-emerald-500" />
+            <span className="inline-flex items-center gap-1.5 rounded-lg bg-surface-2 border border-hairline px-3 py-1 font-bold text-ink">
+              <Check className="h-3 w-3 text-emerald-500" strokeWidth={2.5} />
               <span>Multiline RFC 4180</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-lg bg-surface-2 border border-hairline px-3 py-1 font-medium text-ink">
-              <Check className="h-3 w-3 text-emerald-500" />
+            <span className="inline-flex items-center gap-1.5 rounded-lg bg-surface-2 border border-hairline px-3 py-1 font-bold text-ink">
+              <Check className="h-3 w-3 text-emerald-500" strokeWidth={2.5} />
               <span>Multilingual / Hindi</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-lg bg-surface-2 border border-hairline px-3 py-1 font-medium text-ink">
-              <ShieldCheck className="h-3 w-3 text-emerald-500" />
+            <span className="inline-flex items-center gap-1.5 rounded-lg bg-surface-2 border border-hairline px-3 py-1 font-bold text-ink">
+              <ShieldCheck className="h-3 w-3 text-emerald-500" strokeWidth={2.5} />
               <span>R012 Prompt Defense</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-lg bg-surface-2 border border-hairline px-3 py-1 font-medium text-ink">
-              <Check className="h-3 w-3 text-emerald-500" />
+            <span className="inline-flex items-center gap-1.5 rounded-lg bg-surface-2 border border-hairline px-3 py-1 font-bold text-ink">
+              <Check className="h-3 w-3 text-emerald-500" strokeWidth={2.5} />
               <span>Rating Mismatches</span>
             </span>
           </div>
 
-          <div className="flex items-center gap-2 text-ink-subtle">
-            <FileSpreadsheet className="h-3.5 w-3.5 text-ink-tertiary" />
+          <div className="flex items-center gap-2 text-ink font-bold">
+            <FileSpreadsheet className="h-3.5 w-3.5 text-ink" strokeWidth={2.2} />
             <span>Active file:</span>
-            <span className="text-ink font-semibold">
+            <span className="text-ink font-extrabold underline underline-offset-2">
               {selectedFileName || 'reviews.csv (default benchmark ready)'}
             </span>
           </div>
