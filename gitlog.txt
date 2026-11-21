@@ -1,3 +1,19 @@
+commit a614d1995554a0825152cc3857919a49d90e63e0
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 22:44:15 +0530
+
+    fix(layout): perfectly centered PulseLens.ai island brand and dedicated segmented view switcher
+    
+    - Navbar: pinned PulseLens.ai to absolute center without overlap from tabs
+    - Segmented Tabs: moved Overview / Reviews / Products / Telemetry tabs to dedicated floating island segmented control in main viewport
+    - Verification: 10/10 tests pass, all 6 documentation screenshots regenerated
+
+commit ada712f9ea9b1177150fdf5963746aca2cd5c360
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 22:39:57 +0530
+
+    docs(submission): update gitlog.txt with PulseLens.ai rebranding and floating navbar commit
+
 commit f9ff027ee0a28291a89bbd29ba161e28eba5de28
 Author: Amrit <amrit@reviewlens.local>
 Date:   2026-11-21 22:39:49 +0530
