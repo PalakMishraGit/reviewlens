@@ -1,3 +1,25 @@
+commit 8d5d7c1b5b57ecef6c2904fa2a7c07a30ccccbc8
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 21:55:47 +0530
+
+    style(dashboard): premium spacing overhaul — wider navbar (72px), left accent borders on KPI cards, thicker sentiment bar, generous whitespace between sections, card hover glow effects, and refined pagination
+    
+    - Navbar: h-16 → py-4 px-8, icon buttons h-9 → h-10, badge text xs → sm, separator added
+    - Page layout: space-y-6 → space-y-8, py-8 → py-10 for more breathing room
+    - Summary cards: gap-3 → gap-4, p-4/5 → p-5/6, colored left accent borders (emerald/amber/rose/ink)
+    - Sentiment bar: h-4 → h-5, container p-5 → p-6 with space-y-5
+    - Insights: gap-4 → gap-5, card p-5 → p-6, rank badges h-5 → h-6
+    - Telemetry: px-5 py-3 → px-6 py-4
+    - Upload dropzone: py-8 → py-10, chip gap-2 → gap-3
+    - ReviewTable: p-4/5 → p-5/6, pagination pt-2 → pt-4
+    - CSS: card-glow hover effect, fadeSlideUp animation, focus-ring utility
+
+commit fb83ee6840ac0839f6bfe1ddd6d37117857643ab
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 21:43:01 +0530
+
+    docs(submission): update gitlog.txt with typography scale overhaul commit
+
 commit 962a23d17d4d3f2f80d220eec3db0cc5f09aac63
 Author: Amrit <amrit@reviewlens.local>
 Date:   2026-11-21 21:43:01 +0530
