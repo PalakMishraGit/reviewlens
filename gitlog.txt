@@ -1,3 +1,24 @@
+commit 7d1856bb78ce7107c9d47283ea627694652bfd7d
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 22:23:23 +0530
+
+    feat(ui): complete dashboard architecture transformation to modern SaaS Sidebar + Main Stage layout
+    
+    - Typography: switch to Plus Jakarta Sans for UI and JetBrains Mono for technical data
+    - Sidebar: full left navigation with brand identity, store switcher, Overview/Reviews/Products/Telemetry tabs, theme toggle, shortcuts, and SHA-256 cache monitor
+    - Top Navbar: spacious non-cramped header with Review Intelligence title, Batch 2027 pill, dataset date, and isolated XML Guardrail / Engine badges
+    - Dropzone: sleek horizontal split import card with quick upload button, RFC 4180 feature chips, and active file indicator
+    - KPI Cards: 5 cards with mini SVG sparkline trend graphs, percentage metrics, and left accent indicators
+    - Sentiment Spectrum: full-width segmented bar with inline percentages and CSAT/NSS badges
+    - Complaints & Praises: 2-column cards with severity badges (High/Medium/Positive) and quick drilldown
+    - Skeletons: enhanced multi-stage pipeline skeleton with shimmer cards, sparklines, filters, and table placeholders
+
+commit 89a64ae6cefc006b26749851d195ff6b654f2809
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 22:08:39 +0530
+
+    docs(submission): update gitlog.txt with refreshed screenshots
+
 commit 6eb603e41b50b1e23540d365cd74e60608208385
 Author: Amrit <amrit@reviewlens.local>
 Date:   2026-11-21 22:08:39 +0530
