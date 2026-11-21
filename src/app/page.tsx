@@ -247,32 +247,32 @@ export default function ReviewLensDashboard() {
 
       <main className="relative z-10 flex-1 mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-6">
         {/* Hero Header Section */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-hairline pb-5">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-hairline pb-6">
           <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink">
+            <div className="flex items-center gap-3">
+              <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink font-sans">
                 Review Intelligence
               </h1>
-              <span className="rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-semibold text-emerald-500 border border-emerald-500/20 font-mono">
+              <span className="rounded-full bg-emerald-500/10 px-3 py-0.5 text-xs font-bold text-emerald-500 border border-emerald-500/30 font-mono">
                 Batch 2027
               </span>
             </div>
-            <p className="mt-1 text-xs sm:text-sm text-ink-subtle max-w-2xl leading-relaxed">
+            <p className="mt-2 text-sm sm:text-base text-ink-subtle font-medium max-w-2xl leading-relaxed">
               Resilient RFC 4180 ingestion, prompt-injection defense, multilingual sentiment classification, and on-demand merchant reply studio.
             </p>
           </div>
 
-          <div className="flex items-center gap-3 text-xs text-ink-tertiary font-mono">
-            <span className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-emerald-500" />
+          <div className="flex items-center gap-3 text-xs sm:text-sm text-ink-tertiary font-mono">
+            <span className="flex items-center gap-2">
+              <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
               Dataset: October 2026
             </span>
             <span>•</span>
             <button
               onClick={() => setIsShortcutsOpen(true)}
-              className="flex items-center gap-1 text-ink-subtle hover:text-ink transition-colors"
+              className="flex items-center gap-1.5 text-ink-subtle hover:text-ink font-semibold transition-colors"
             >
-              <Command className="h-3 w-3" />
+              <Command className="h-3.5 w-3.5" />
               <span>Shortcuts (?)</span>
             </button>
           </div>
@@ -343,30 +343,30 @@ export default function ReviewLensDashboard() {
             </section>
 
             {/* View Switcher Tabs (Reviews Table vs Product Analytics) */}
-            <div className="flex items-center gap-2 border-b border-hairline pb-3">
+            <div className="flex items-center gap-3 border-b border-hairline pb-3.5">
               <button
                 data-testid="tab-reviews"
                 onClick={() => setActiveTab('reviews')}
-                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all ${
+                className={`flex items-center gap-2.5 rounded-xl px-5 py-2.5 text-sm font-bold transition-all ${
                   activeTab === 'reviews'
                     ? 'bg-ink text-canvas shadow-sm'
                     : 'text-ink-subtle hover:text-ink hover:bg-surface-2'
                 }`}
               >
-                <Layers className="h-3.5 w-3.5" />
+                <Layers className="h-4 w-4" />
                 <span>Reviews Explorer ({reviews.length})</span>
               </button>
 
               <button
                 data-testid="tab-products"
                 onClick={() => setActiveTab('products')}
-                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all ${
+                className={`flex items-center gap-2.5 rounded-xl px-5 py-2.5 text-sm font-bold transition-all ${
                   activeTab === 'products'
                     ? 'bg-ink text-canvas shadow-sm'
                     : 'text-ink-subtle hover:text-ink hover:bg-surface-2'
                 }`}
               >
-                <Package className="h-3.5 w-3.5" />
+                <Package className="h-4 w-4" />
                 <span>Product Intelligence ({summary.product_insights.length})</span>
               </button>
             </div>

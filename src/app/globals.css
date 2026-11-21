@@ -5,61 +5,61 @@
 :root,
 .dark {
   /* 2026 Titanium & Obsidian Industrial Console */
-  --canvas: #08090c;
-  --canvas-subtle: #0d0f14;
-  --surface-1: #111319;
-  --surface-2: #161821;
-  --surface-3: #1c202b;
-  --surface-4: #242936;
+  --canvas: #090a0f;
+  --canvas-subtle: #0f1118;
+  --surface-1: #131622;
+  --surface-2: #191e2e;
+  --surface-3: #22283d;
+  --surface-4: #2d3550;
 
-  /* Hairlines & Technical Borders */
-  --hairline: rgba(255, 255, 255, 0.08);
-  --hairline-strong: rgba(255, 255, 255, 0.16);
-  --hairline-focus: rgba(255, 255, 255, 0.4);
+  /* Hairlines & Technical Borders - Clear, crisp definition */
+  --hairline: rgba(255, 255, 255, 0.12);
+  --hairline-strong: rgba(255, 255, 255, 0.22);
+  --hairline-focus: rgba(255, 255, 255, 0.6);
 
-  /* Typography / High-Contrast Ink */
+  /* Typography / High-Contrast Ink - WCAG AAA Readable */
   --ink: #ffffff;
-  --ink-muted: #e4e4e7;
-  --ink-subtle: #a1a1aa;
-  --ink-tertiary: #71717a;
+  --ink-muted: #f4f4f6;
+  --ink-subtle: #d1d5db;
+  --ink-tertiary: #9ca3af;
 
   /* Primary Monochrome Accent (Zero Purple) */
   --accent: #ffffff;
   --accent-hover: #f4f4f5;
-  --accent-muted: rgba(255, 255, 255, 0.12);
+  --accent-muted: rgba(255, 255, 255, 0.16);
 
-  /* Semantics: Crisp & Precise */
-  --semantic-success: #10b981;
-  --semantic-warning: #f59e0b;
-  --semantic-danger: #f43f5e;
-  --semantic-cyan: #06b6d4;
+  /* Semantics: Crisp & High-Contrast */
+  --semantic-success: #34d399;
+  --semantic-warning: #fbbf24;
+  --semantic-danger: #fb7185;
+  --semantic-cyan: #22d3ee;
 }
 
 .light,
 [data-theme="light"] {
   /* 2026 Architectural Studio Light Canvas */
-  --canvas: #f8f9fa;
-  --canvas-subtle: #f1f3f5;
+  --canvas: #f8fafc;
+  --canvas-subtle: #f1f5f9;
   --surface-1: #ffffff;
-  --surface-2: #f8f9fa;
-  --surface-3: #f1f3f5;
-  --surface-4: #e9ecef;
+  --surface-2: #f1f5f9;
+  --surface-3: #e2e8f0;
+  --surface-4: #cbd5e1;
 
-  /* Hairlines & Technical Borders */
-  --hairline: #e2e5e9;
-  --hairline-strong: #cbd0d6;
-  --hairline-focus: #18181b;
+  /* Hairlines & Technical Borders - Crisp and defined */
+  --hairline: #cbd5e1;
+  --hairline-strong: #94a3b8;
+  --hairline-focus: #0f172a;
 
-  /* Typography / High-Contrast Ink */
-  --ink: #09090b;
-  --ink-muted: #27272a;
-  --ink-subtle: #52525b;
-  --ink-tertiary: #a1a1aa;
+  /* Typography / High-Contrast Ink - WCAG AAA Bold & Sharp */
+  --ink: #0f172a;
+  --ink-muted: #1e293b;
+  --ink-subtle: #334155;
+  --ink-tertiary: #475569;
 
   /* Primary Monochrome Accent */
-  --accent: #09090b;
-  --accent-hover: #27272a;
-  --accent-muted: rgba(0, 0, 0, 0.06);
+  --accent: #0f172a;
+  --accent-hover: #1e293b;
+  --accent-muted: rgba(15, 23, 42, 0.08);
 
   /* Semantics */
   --semantic-success: #059669;
@@ -94,13 +94,14 @@ body {
 /* Linear-style hardware keycaps for metadata & hotkeys */
 .kbd-cap {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1;
-  padding: 3px 6px;
+  padding: 4px 8px;
   background: var(--surface-2);
   border: 1px solid var(--hairline-strong);
-  border-radius: 5px;
-  color: var(--ink-muted);
+  border-radius: 6px;
+  color: var(--ink);
+  font-weight: 600;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
 }
 

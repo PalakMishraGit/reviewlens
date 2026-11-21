@@ -17,24 +17,24 @@ export const InsightsOverview: React.FC<InsightsOverviewProps> = ({
   onSelectTopic,
 }) => {
   return (
-    <div className="grid grid-cols-1 gap-3.5 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       {/* Top Complaints Card */}
-      <div className="rounded-xl border border-hairline bg-surface-1 p-4 sm:p-5 shadow-sm space-y-3.5">
-        <div className="flex items-center justify-between border-b border-hairline pb-3">
-          <div className="flex items-center gap-2">
-            <h3 className="text-xs sm:text-sm font-semibold text-ink flex items-center gap-2 font-sans">
+      <div className="rounded-xl border border-hairline bg-surface-1 p-5 shadow-sm space-y-4">
+        <div className="flex items-center justify-between border-b border-hairline pb-3.5">
+          <div className="flex items-center gap-2.5">
+            <h3 className="text-base sm:text-lg font-bold text-ink flex items-center gap-2 font-sans">
               Top Customer Complaints
             </h3>
-            <span className="rounded bg-rose-500/10 px-1.5 py-0.5 text-[10px] font-mono font-medium text-rose-500 border border-rose-500/20">
+            <span className="rounded bg-rose-500/10 px-2 py-0.5 text-xs font-mono font-bold text-rose-400 border border-rose-500/20">
               Action Needed
             </span>
           </div>
-          <span className="text-[11px] text-ink-tertiary font-mono">Ranked by count</span>
+          <span className="text-xs text-ink-subtle font-mono font-medium">Ranked by count</span>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-2.5">
           {topComplaints.length === 0 ? (
-            <div className="py-6 text-center text-xs text-ink-tertiary">No complaints detected in this dataset</div>
+            <div className="py-8 text-center text-sm text-ink-tertiary">No complaints detected in this dataset</div>
           ) : (
             topComplaints.map((item, index) => (
               <motion.div
@@ -42,39 +42,39 @@ export const InsightsOverview: React.FC<InsightsOverviewProps> = ({
                 whileHover={{ y: -1 }}
                 transition={{ duration: 0.15 }}
                 onClick={() => onSelectTopic && onSelectTopic(item.topics[0])}
-                className="group flex flex-col gap-1.5 rounded-xl border border-hairline bg-surface-2 p-3 hover:border-hairline-strong hover:bg-surface-3 transition-all cursor-pointer shadow-sm"
+                className="group flex flex-col gap-2 rounded-xl border border-hairline bg-surface-2 p-3.5 hover:border-hairline-strong hover:bg-surface-3 transition-all cursor-pointer shadow-sm"
               >
                 <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-start gap-2">
-                    <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded bg-surface-3 border border-hairline font-mono text-[10px] font-semibold text-rose-400">
+                  <div className="flex items-start gap-2.5">
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-surface-3 border border-hairline font-mono text-xs font-bold text-rose-400">
                       {index + 1}
                     </span>
-                    <span className="text-xs font-medium text-ink group-hover:text-ink transition-colors leading-snug">
+                    <span className="text-sm font-semibold text-ink group-hover:text-ink transition-colors leading-snug">
                       {item.text}
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-1 shrink-0 font-mono">
-                    <span className="text-[11px] text-rose-400 bg-rose-500/10 border border-rose-500/20 px-1.5 py-0.2 rounded">
+                  <div className="flex items-center gap-1.5 shrink-0 font-mono">
+                    <span className="text-xs font-bold text-rose-400 bg-rose-500/10 border border-rose-500/20 px-2 py-0.5 rounded-md">
                       {item.count} {item.count === 1 ? 'review' : 'reviews'}
                     </span>
-                    <ChevronRight className="h-3.5 w-3.5 text-ink-tertiary group-hover:translate-x-0.5 transition-transform" />
+                    <ChevronRight className="h-4 w-4 text-ink-tertiary group-hover:translate-x-0.5 transition-transform" />
                   </div>
                 </div>
 
                 {/* Affected Products */}
-                <div className="flex flex-wrap items-center gap-1.5 pt-0.5 text-[10px] text-ink-subtle font-mono">
-                  <span className="text-ink-tertiary uppercase">Products:</span>
+                <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-ink-subtle font-mono">
+                  <span className="text-ink-tertiary uppercase font-semibold text-[11px]">Products:</span>
                   {item.products.slice(0, 3).map((prod, pIdx) => (
                     <span
                       key={pIdx}
-                      className="rounded bg-surface-1 px-1.5 py-0.2 text-[10px] text-ink-muted border border-hairline"
+                      className="rounded bg-surface-1 px-2 py-0.5 text-xs text-ink font-medium border border-hairline"
                     >
                       {prod}
                     </span>
                   ))}
                   {item.products.length > 3 && (
-                    <span className="text-ink-tertiary">
+                    <span className="text-ink-tertiary text-xs">
                       +{item.products.length - 3} more
                     </span>
                   )}
@@ -86,22 +86,22 @@ export const InsightsOverview: React.FC<InsightsOverviewProps> = ({
       </div>
 
       {/* Top Praises Card */}
-      <div className="rounded-xl border border-hairline bg-surface-1 p-4 sm:p-5 shadow-sm space-y-3.5">
-        <div className="flex items-center justify-between border-b border-hairline pb-3">
-          <div className="flex items-center gap-2">
-            <h3 className="text-xs sm:text-sm font-semibold text-ink flex items-center gap-2 font-sans">
+      <div className="rounded-xl border border-hairline bg-surface-1 p-5 shadow-sm space-y-4">
+        <div className="flex items-center justify-between border-b border-hairline pb-3.5">
+          <div className="flex items-center gap-2.5">
+            <h3 className="text-base sm:text-lg font-bold text-ink flex items-center gap-2 font-sans">
               Top Customer Praises
             </h3>
-            <span className="rounded bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-mono font-medium text-emerald-500 border border-emerald-500/20">
+            <span className="rounded bg-emerald-500/10 px-2 py-0.5 text-xs font-mono font-bold text-emerald-400 border border-emerald-500/20">
               Core Strengths
             </span>
           </div>
-          <span className="text-[11px] text-ink-tertiary font-mono">Ranked by count</span>
+          <span className="text-xs text-ink-subtle font-mono font-medium">Ranked by count</span>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-2.5">
           {topPraises.length === 0 ? (
-            <div className="py-6 text-center text-xs text-ink-tertiary">No praises detected in this dataset</div>
+            <div className="py-8 text-center text-sm text-ink-tertiary">No praises detected in this dataset</div>
           ) : (
             topPraises.map((item, index) => (
               <motion.div
@@ -109,39 +109,39 @@ export const InsightsOverview: React.FC<InsightsOverviewProps> = ({
                 whileHover={{ y: -1 }}
                 transition={{ duration: 0.15 }}
                 onClick={() => onSelectTopic && onSelectTopic(item.topics[0])}
-                className="group flex flex-col gap-1.5 rounded-xl border border-hairline bg-surface-2 p-3 hover:border-hairline-strong hover:bg-surface-3 transition-all cursor-pointer shadow-sm"
+                className="group flex flex-col gap-2 rounded-xl border border-hairline bg-surface-2 p-3.5 hover:border-hairline-strong hover:bg-surface-3 transition-all cursor-pointer shadow-sm"
               >
                 <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-start gap-2">
-                    <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded bg-surface-3 border border-hairline font-mono text-[10px] font-semibold text-emerald-400">
+                  <div className="flex items-start gap-2.5">
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-surface-3 border border-hairline font-mono text-xs font-bold text-emerald-400">
                       {index + 1}
                     </span>
-                    <span className="text-xs font-medium text-ink group-hover:text-ink transition-colors leading-snug">
+                    <span className="text-sm font-semibold text-ink group-hover:text-ink transition-colors leading-snug">
                       {item.text}
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-1 shrink-0 font-mono">
-                    <span className="text-[11px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.2 rounded">
+                  <div className="flex items-center gap-1.5 shrink-0 font-mono">
+                    <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-md">
                       {item.count} {item.count === 1 ? 'review' : 'reviews'}
                     </span>
-                    <ChevronRight className="h-3.5 w-3.5 text-ink-tertiary group-hover:translate-x-0.5 transition-transform" />
+                    <ChevronRight className="h-4 w-4 text-ink-tertiary group-hover:translate-x-0.5 transition-transform" />
                   </div>
                 </div>
 
                 {/* Affected Products */}
-                <div className="flex flex-wrap items-center gap-1.5 pt-0.5 text-[10px] text-ink-subtle font-mono">
-                  <span className="text-ink-tertiary uppercase">Products:</span>
+                <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-ink-subtle font-mono">
+                  <span className="text-ink-tertiary uppercase font-semibold text-[11px]">Products:</span>
                   {item.products.slice(0, 3).map((prod, pIdx) => (
                     <span
                       key={pIdx}
-                      className="rounded bg-surface-1 px-1.5 py-0.2 text-[10px] text-ink-muted border border-hairline"
+                      className="rounded bg-surface-1 px-2 py-0.5 text-xs text-ink font-medium border border-hairline"
                     >
                       {prod}
                     </span>
                   ))}
                   {item.products.length > 3 && (
-                    <span className="text-ink-tertiary">
+                    <span className="text-ink-tertiary text-xs">
                       +{item.products.length - 3} more
                     </span>
                   )}

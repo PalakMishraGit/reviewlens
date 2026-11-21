@@ -109,58 +109,58 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
         />
 
         {/* Console Upload Icon */}
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-surface-2 border border-hairline-strong text-ink shadow-sm transition-transform group-hover:scale-105">
+        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-surface-2 border border-hairline-strong text-ink shadow-sm transition-transform group-hover:scale-105">
           {isLoading ? (
-            <Loader2 className="h-5 w-5 animate-spin text-ink" />
+            <Loader2 className="h-6 w-6 animate-spin text-ink" />
           ) : (
-            <Upload className="h-5 w-5" />
+            <Upload className="h-6 w-6" />
           )}
         </div>
 
         {/* Text Instructions */}
-        <div className="mt-3 text-center space-y-1">
-          <p className="text-xs sm:text-sm font-medium text-ink">
+        <div className="mt-3.5 text-center space-y-1.5">
+          <p className="text-sm sm:text-base font-semibold text-ink">
             {isLoading ? (
               <span className="text-ink font-mono">{loadingMessage}</span>
             ) : (
               <span>
-                Drop <code className="font-mono text-ink font-semibold">reviews.csv</code> here or{' '}
-                <span className="underline underline-offset-4 text-ink-muted hover:text-ink">browse file</span>
+                Drop <code className="font-mono text-ink font-bold">reviews.csv</code> here or{' '}
+                <span className="underline underline-offset-4 text-ink hover:text-ink-muted">browse file</span>
               </span>
             )}
           </p>
-          <p className="text-[11px] text-ink-subtle">
+          <p className="text-xs sm:text-sm text-ink-subtle">
             Standard RFC 4180 parsing with quotes, multiline handling, and automatic deduplication
           </p>
         </div>
 
         {/* Hardware Status Chips */}
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5 text-xs font-mono">
-          <span className="inline-flex items-center gap-1.5 rounded bg-surface-2 border border-hairline px-2.5 py-1 text-[10px] text-ink-subtle">
-            <Check className="h-3 w-3 text-emerald-500" />
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs font-mono">
+          <span className="inline-flex items-center gap-1.5 rounded-md bg-surface-2 border border-hairline px-3 py-1 text-xs font-medium text-ink">
+            <Check className="h-3.5 w-3.5 text-emerald-500" />
             <span>Multiline RFC 4180</span>
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded bg-surface-2 border border-hairline px-2.5 py-1 text-[10px] text-ink-subtle">
-            <Check className="h-3 w-3 text-emerald-500" />
+          <span className="inline-flex items-center gap-1.5 rounded-md bg-surface-2 border border-hairline px-3 py-1 text-xs font-medium text-ink">
+            <Check className="h-3.5 w-3.5 text-emerald-500" />
             <span>Multilingual / Hindi</span>
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded bg-surface-2 border border-hairline px-2.5 py-1 text-[10px] text-ink-subtle">
-            <ShieldCheck className="h-3 w-3 text-emerald-500" />
+          <span className="inline-flex items-center gap-1.5 rounded-md bg-surface-2 border border-hairline px-3 py-1 text-xs font-medium text-ink">
+            <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" />
             <span>R012 Prompt Defense</span>
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded bg-surface-2 border border-hairline px-2.5 py-1 text-[10px] text-ink-subtle">
-            <Check className="h-3 w-3 text-emerald-500" />
+          <span className="inline-flex items-center gap-1.5 rounded-md bg-surface-2 border border-hairline px-3 py-1 text-xs font-medium text-ink">
+            <Check className="h-3.5 w-3.5 text-emerald-500" />
             <span>Rating Mismatches</span>
           </span>
         </div>
       </div>
 
       {/* Dock Bar */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-        <div className="flex items-center gap-2 text-ink-subtle font-mono text-[11px]">
-          <FileSpreadsheet className="h-3.5 w-3.5 text-ink-tertiary" />
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm">
+        <div className="flex items-center gap-2 text-ink-subtle font-mono text-xs sm:text-sm">
+          <FileSpreadsheet className="h-4 w-4 text-ink-tertiary" />
           <span>Active file:</span>
-          <span className="text-ink font-medium">
+          <span className="text-ink font-semibold">
             {selectedFileName || 'reviews.csv (default benchmark ready)'}
           </span>
         </div>
@@ -168,11 +168,11 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
         <button
           onClick={handleLoadSample}
           disabled={isLoading}
-          className="flex items-center gap-1.5 rounded-lg bg-surface-2 border border-hairline-strong px-3.5 py-1.5 font-medium text-ink hover:bg-surface-3 active:scale-[0.98] transition-all shadow-sm"
+          className="flex items-center gap-2 rounded-lg bg-surface-2 border border-hairline-strong px-4 py-2 font-semibold text-ink hover:bg-surface-3 active:scale-[0.98] transition-all shadow-sm text-xs sm:text-sm"
         >
-          <Sparkles className="h-3.5 w-3.5 text-amber-400" />
+          <Sparkles className="h-4 w-4 text-amber-400" />
           <span>Load benchmark dataset (30 reviews)</span>
-          <ArrowRight className="h-3 w-3 text-ink-tertiary" />
+          <ArrowRight className="h-3.5 w-3.5 text-ink-tertiary" />
         </button>
       </div>
 

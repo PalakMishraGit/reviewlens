@@ -272,61 +272,61 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
   return (
     <div className="rounded-xl border border-hairline bg-surface-1 p-4 sm:p-5 space-y-4 shadow-sm">
       {/* Console Top Toolbar */}
-      <div className="space-y-3 border-b border-hairline pb-4">
+      <div className="space-y-4 border-b border-hairline pb-4">
         {/* Title & Export Actions */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <div className="flex items-center gap-2">
-              <h3 className="text-xs sm:text-sm font-semibold text-ink font-sans">
+            <div className="flex items-center gap-2.5">
+              <h3 className="text-base sm:text-lg font-bold text-ink font-sans">
                 Customer Reviews Explorer
               </h3>
-              <span className="font-mono text-xs text-ink-tertiary">
+              <span className="font-mono text-xs sm:text-sm font-bold text-ink-subtle">
                 ({filteredReviews.length} / {reviews.length})
               </span>
             </div>
-            <p className="text-[11px] text-ink-subtle mt-0.5">
+            <p className="text-xs sm:text-sm text-ink-subtle mt-1 font-medium">
               Sanitized, deduplicated reviews with inline XML prompt injection inspection
             </p>
           </div>
 
-          <div className="flex items-center gap-1.5 font-mono text-xs">
+          <div className="flex items-center gap-2 font-mono text-xs sm:text-sm">
             {hasActiveFilters && (
               <button
                 onClick={clearAllFilters}
-                className="flex items-center gap-1 rounded-md border border-hairline bg-surface-2 px-2.5 py-1 text-xs text-rose-400 hover:text-rose-300 transition-colors"
+                className="flex items-center gap-1.5 rounded-lg border border-hairline bg-surface-2 px-3 py-1.5 text-xs sm:text-sm font-semibold text-rose-400 hover:text-rose-300 transition-colors"
               >
-                <RotateCcw className="h-3 w-3" />
+                <RotateCcw className="h-3.5 w-3.5" />
                 <span>Reset</span>
               </button>
             )}
 
             <button
               onClick={() => exportData('csv')}
-              className="flex items-center gap-1.5 rounded-md border border-hairline bg-surface-2 px-2.5 py-1 text-xs text-ink-muted hover:text-ink hover:bg-surface-3 transition-colors shadow-sm"
+              className="flex items-center gap-1.5 rounded-lg border border-hairline bg-surface-2 px-3 py-1.5 text-xs sm:text-sm font-semibold text-ink hover:bg-surface-3 transition-colors shadow-sm"
             >
-              <Download className="h-3 w-3 text-ink-tertiary" />
+              <Download className="h-3.5 w-3.5 text-ink-tertiary" />
               <span>CSV</span>
             </button>
 
             <button
               onClick={() => exportData('json')}
-              className="flex items-center gap-1.5 rounded-md border border-hairline bg-surface-2 px-2.5 py-1 text-xs text-ink-muted hover:text-ink hover:bg-surface-3 transition-colors shadow-sm"
+              className="flex items-center gap-1.5 rounded-lg border border-hairline bg-surface-2 px-3 py-1.5 text-xs sm:text-sm font-semibold text-ink hover:bg-surface-3 transition-colors shadow-sm"
             >
-              <Code2 className="h-3 w-3 text-ink-tertiary" />
+              <Code2 className="h-3.5 w-3.5 text-ink-tertiary" />
               <span>JSON</span>
             </button>
           </div>
         </div>
 
         {/* Quick Presets Bar (Monochrome & Precise) */}
-        <div className="flex flex-wrap items-center gap-1 text-xs font-mono">
-          <span className="text-[10px] uppercase text-ink-tertiary mr-1">Filter:</span>
+        <div className="flex flex-wrap items-center gap-1.5 text-xs sm:text-sm font-mono">
+          <span className="text-xs font-bold uppercase tracking-wider text-ink-tertiary mr-1">Filter:</span>
           
           <button
             onClick={() => setQuickPreset('all')}
-            className={`rounded px-2 py-0.5 text-[11px] transition-all ${
+            className={`rounded-md px-3 py-1 text-xs font-bold transition-all ${
               quickPreset === 'all'
-                ? 'bg-ink text-canvas font-semibold shadow-sm'
+                ? 'bg-ink text-canvas shadow-sm'
                 : 'bg-surface-2 text-ink-subtle hover:text-ink border border-hairline'
             }`}
           >
@@ -335,9 +335,9 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
 
           <button
             onClick={() => setQuickPreset('needs_reply')}
-            className={`rounded px-2 py-0.5 text-[11px] transition-all ${
+            className={`rounded-md px-3 py-1 text-xs font-bold transition-all ${
               quickPreset === 'needs_reply'
-                ? 'bg-ink text-canvas font-semibold shadow-sm'
+                ? 'bg-ink text-canvas shadow-sm'
                 : 'bg-surface-2 text-ink-subtle hover:text-ink border border-hairline'
             }`}
           >
@@ -346,9 +346,9 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
 
           <button
             onClick={() => setQuickPreset('mismatches')}
-            className={`rounded px-2 py-0.5 text-[11px] transition-all ${
+            className={`rounded-md px-3 py-1 text-xs font-bold transition-all ${
               quickPreset === 'mismatches'
-                ? 'bg-amber-500/20 text-amber-400 border border-amber-500/40 font-semibold shadow-sm'
+                ? 'bg-amber-500/20 text-amber-400 border border-amber-500/40 shadow-sm'
                 : 'bg-surface-2 text-ink-subtle hover:text-ink border border-hairline'
             }`}
           >
@@ -357,9 +357,9 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
 
           <button
             onClick={() => setQuickPreset('adversarial')}
-            className={`rounded px-2 py-0.5 text-[11px] transition-all ${
+            className={`rounded-md px-3 py-1 text-xs font-bold transition-all ${
               quickPreset === 'adversarial'
-                ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-semibold shadow-sm'
+                ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 shadow-sm'
                 : 'bg-surface-2 text-ink-subtle hover:text-ink border border-hairline'
             }`}
           >
@@ -368,7 +368,7 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
 
           <button
             onClick={() => setQuickPreset('multilingual')}
-            className={`rounded px-2 py-0.5 text-[11px] transition-all ${
+            className={`rounded-md px-3 py-1 text-xs font-bold transition-all ${
               quickPreset === 'multilingual'
                 ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 font-semibold shadow-sm'
                 : 'bg-surface-2 text-ink-subtle hover:text-ink border border-hairline'
@@ -379,10 +379,10 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
         </div>
 
         {/* Search & Filter Dropdowns Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 pt-0.5 font-mono text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 pt-1 font-mono text-xs sm:text-sm">
           {/* Search Input */}
           <div className="relative sm:col-span-2">
-            <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-ink-tertiary" />
+            <Search className="absolute left-3 top-3 h-4 w-4 text-ink-tertiary" />
             <input
               ref={searchInputRef}
               type="text"
@@ -392,14 +392,14 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                 setSearchQuery(e.target.value);
                 setCurrentPage(1);
               }}
-              className="h-8 w-full rounded-md border border-hairline bg-surface-2 pl-8 pr-7 text-xs text-ink placeholder-ink-tertiary focus:border-hairline-strong focus:outline-none transition-colors"
+              className="h-10 w-full rounded-lg border border-hairline bg-surface-2 pl-9 pr-8 text-xs sm:text-sm text-ink placeholder-ink-tertiary focus:border-hairline-strong focus:outline-none transition-colors font-medium"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-2 top-2 text-ink-tertiary hover:text-ink"
+                className="absolute right-2.5 top-2.5 text-ink-tertiary hover:text-ink"
               >
-                <X className="h-3 w-3" />
+                <X className="h-4 w-4" />
               </button>
             )}
           </div>
@@ -412,7 +412,7 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                 if (onSelectProductFilter) onSelectProductFilter(e.target.value);
                 setCurrentPage(1);
               }}
-              className="h-8 w-full rounded-md border border-hairline bg-surface-2 px-2 text-xs text-ink focus:border-hairline-strong focus:outline-none transition-colors"
+              className="h-10 w-full rounded-lg border border-hairline bg-surface-2 px-3 text-xs sm:text-sm text-ink font-medium focus:border-hairline-strong focus:outline-none transition-colors"
             >
               <option value="all">All products ({products.length})</option>
               {products.map(p => (
@@ -431,7 +431,7 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                 if (onSelectSentimentFilter) onSelectSentimentFilter(e.target.value);
                 setCurrentPage(1);
               }}
-              className="h-8 w-full rounded-md border border-hairline bg-surface-2 px-2 text-xs text-ink focus:border-hairline-strong focus:outline-none transition-colors"
+              className="h-10 w-full rounded-lg border border-hairline bg-surface-2 px-3 text-xs sm:text-sm text-ink font-medium focus:border-hairline-strong focus:outline-none transition-colors"
             >
               <option value="all">All sentiments</option>
               <option value="positive">Positive</option>
@@ -448,7 +448,7 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                 if (onClearTopicFilter && e.target.value === 'all') onClearTopicFilter();
                 setCurrentPage(1);
               }}
-              className="h-8 w-full rounded-md border border-hairline bg-surface-2 px-2 text-xs text-ink focus:border-hairline-strong focus:outline-none transition-colors"
+              className="h-10 w-full rounded-lg border border-hairline bg-surface-2 px-3 text-xs sm:text-sm text-ink font-medium focus:border-hairline-strong focus:outline-none transition-colors"
             >
               <option value="all">All topics</option>
               <option value="quality">Quality</option>
@@ -467,50 +467,50 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
       <div className="overflow-x-auto rounded-lg border border-hairline bg-surface-1">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="border-b border-hairline bg-surface-2/70 text-[10px] font-mono uppercase tracking-wider text-ink-tertiary">
-              <th className="py-2.5 px-2 w-7 text-center"></th>
+            <tr className="border-b border-hairline bg-surface-2 text-xs font-mono font-bold uppercase tracking-wider text-ink">
+              <th className="py-3 px-2 w-8 text-center"></th>
               <th
                 onClick={() => toggleSort('id')}
-                className="py-2.5 px-3 cursor-pointer hover:text-ink transition-colors font-medium"
+                className="py-3 px-3.5 cursor-pointer hover:text-ink transition-colors font-bold"
               >
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1.5">
                   ID
-                  <ArrowUpDown className="h-3 w-3" />
+                  <ArrowUpDown className="h-3.5 w-3.5 text-ink-tertiary" />
                 </div>
               </th>
               <th
                 onClick={() => toggleSort('product')}
-                className="py-2.5 px-3 cursor-pointer hover:text-ink transition-colors font-medium"
+                className="py-3 px-3.5 cursor-pointer hover:text-ink transition-colors font-bold"
               >
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1.5">
                   Product
-                  <ArrowUpDown className="h-3 w-3" />
+                  <ArrowUpDown className="h-3.5 w-3.5 text-ink-tertiary" />
                 </div>
               </th>
               <th
                 onClick={() => toggleSort('rating')}
-                className="py-2.5 px-3 cursor-pointer hover:text-ink transition-colors font-medium"
+                className="py-3 px-3.5 cursor-pointer hover:text-ink transition-colors font-bold"
               >
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1.5">
                   Rating
-                  <ArrowUpDown className="h-3 w-3" />
+                  <ArrowUpDown className="h-3.5 w-3.5 text-ink-tertiary" />
                 </div>
               </th>
-              <th className="py-2.5 px-3 font-medium">Sentiment</th>
-              <th className="py-2.5 px-3 font-medium">Topics</th>
-              <th className="py-2.5 px-3 font-medium min-w-[300px]">Review &amp; Summary</th>
-              <th className="py-2.5 px-3 text-right font-medium">Action</th>
+              <th className="py-3 px-3.5 font-bold">Sentiment</th>
+              <th className="py-3 px-3.5 font-bold">Topics</th>
+              <th className="py-3 px-3.5 font-bold min-w-[300px]">Review &amp; Summary</th>
+              <th className="py-3 px-3.5 text-right font-bold">Action</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-hairline text-xs font-sans">
+          <tbody className="divide-y divide-hairline text-sm font-sans">
             {paginatedReviews.length === 0 ? (
               <tr>
-                <td colSpan={8} className="py-12 text-center text-xs text-ink-tertiary">
-                  <div className="flex flex-col items-center justify-center space-y-1.5 font-mono">
-                    <span className="text-ink">No matching reviews found</span>
+                <td colSpan={8} className="py-16 text-center text-sm text-ink-tertiary">
+                  <div className="flex flex-col items-center justify-center space-y-2 font-mono">
+                    <span className="text-ink font-semibold text-base">No matching reviews found</span>
                     <button
                       onClick={clearAllFilters}
-                      className="text-xs text-ink-muted hover:text-ink underline"
+                      className="text-xs sm:text-sm text-ink-subtle hover:text-ink underline font-bold"
                     >
                       Clear filters
                     </button>
@@ -529,34 +529,34 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                       data-testid={`review-row-${review.review_id}`}
                       onClick={() => toggleExpandRow(review.review_id)}
                       className={`cursor-pointer transition-colors ${
-                        isExpanded ? 'bg-surface-2' : 'hover:bg-surface-2/50'
+                        isExpanded ? 'bg-surface-2' : 'hover:bg-surface-2/60'
                       }`}
                     >
                       {/* Expand Toggle Chevron */}
-                      <td className="py-2.5 pl-2.5 pr-0 text-ink-tertiary text-center">
+                      <td className="py-3.5 pl-3 pr-0 text-ink-tertiary text-center">
                         {isExpanded ? (
-                          <ChevronDown className="h-3.5 w-3.5 text-ink" />
+                          <ChevronDown className="h-4 w-4 text-ink" />
                         ) : (
-                          <ChevronRight className="h-3.5 w-3.5 text-ink-tertiary" />
+                          <ChevronRight className="h-4 w-4 text-ink-tertiary" />
                         )}
                       </td>
 
                       {/* Review ID */}
-                      <td className="py-2.5 px-3 font-mono text-[11px]">
-                        <div className="flex items-center gap-1.5">
-                          <span className="kbd-cap font-semibold">{review.review_id}</span>
+                      <td className="py-3.5 px-3.5 font-mono text-xs sm:text-sm">
+                        <div className="flex items-center gap-2">
+                          <span className="kbd-cap font-bold">{review.review_id}</span>
                           {isSpecialInjection && (
                             <span
                               title="Prompt injection defense verified: attack neutralized"
                               className="text-emerald-500"
                             >
-                              <ShieldCheck className="h-3.5 w-3.5" />
+                              <ShieldCheck className="h-4 w-4" />
                             </span>
                           )}
                           {review.is_duplicate && (
                             <span
                               title={`Duplicate of ${review.duplicate_of}`}
-                              className="rounded bg-surface-3 px-1 py-0.2 text-[9px] text-ink-tertiary font-mono border border-hairline"
+                              className="rounded bg-surface-3 px-1.5 py-0.5 text-[10px] text-ink-subtle font-mono border border-hairline font-bold"
                             >
                               dup
                             </span>
@@ -564,7 +564,7 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                           {isHindi && (
                             <span
                               title="Multilingual Hindi/Hinglish review"
-                              className="rounded bg-cyan-500/10 px-1 py-0.2 text-[9px] text-cyan-400 font-mono border border-cyan-500/20"
+                              className="rounded bg-cyan-500/10 px-1.5 py-0.5 text-[10px] text-cyan-400 font-mono border border-cyan-500/20 font-bold"
                             >
                               HI
                             </span>
@@ -573,31 +573,31 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                       </td>
 
                       {/* Product & Date */}
-                      <td className="py-2.5 px-3">
-                        <div className="font-medium text-ink leading-tight">{review.product}</div>
-                        <div className="text-[10px] text-ink-tertiary font-mono mt-0.5">{review.date}</div>
+                      <td className="py-3.5 px-3.5">
+                        <div className="font-bold text-ink leading-tight text-sm">{review.product}</div>
+                        <div className="text-xs text-ink-subtle font-mono mt-0.5 font-medium">{review.date}</div>
                       </td>
 
                       {/* Rating with Mismatch Flag */}
-                      <td className="py-2.5 px-3">
-                        <div className="flex items-center gap-1.5">
+                      <td className="py-3.5 px-3.5">
+                        <div className="flex items-center gap-2">
                           {review.rating !== null ? (
-                            <div className="flex items-center gap-1">
-                              <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-                              <span className="font-mono text-xs font-semibold tabular-nums text-ink">
+                            <div className="flex items-center gap-1.5">
+                              <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
+                              <span className="font-mono text-sm font-bold tabular-nums text-ink">
                                 {review.rating}
                               </span>
                             </div>
                           ) : (
-                            <span className="font-mono text-[10px] text-ink-tertiary">unknown</span>
+                            <span className="font-mono text-xs text-ink-subtle italic">unknown</span>
                           )}
 
                           {review.rating_mismatch && (
                             <span
                               title="Rating Mismatch: Review sentiment disagrees with numerical star rating"
-                              className="flex items-center gap-1 rounded bg-amber-500/15 border border-amber-500/30 px-1 py-0.2 text-[9px] font-mono font-medium text-amber-400"
+                              className="flex items-center gap-1 rounded bg-amber-500/15 border border-amber-500/30 px-2 py-0.5 text-xs font-mono font-bold text-amber-400"
                             >
-                              <AlertTriangle className="h-2.5 w-2.5" />
+                              <AlertTriangle className="h-3 w-3" />
                               mismatch
                             </span>
                           )}
@@ -605,19 +605,19 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                       </td>
 
                       {/* Sentiment Badge (Hardware LED Dot style) */}
-                      <td className="py-2.5 px-3">
+                      <td className="py-3.5 px-3.5">
                         {review.analysis ? (
                           <span
-                            className={`inline-flex items-center gap-1.5 rounded px-2 py-0.5 text-[10px] font-mono font-medium border ${
+                            className={`inline-flex items-center gap-2 rounded-md px-2.5 py-1 text-xs font-mono font-bold border ${
                               review.analysis.sentiment === 'positive'
-                                ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
+                                ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/30'
                                 : review.analysis.sentiment === 'neutral'
-                                ? 'bg-amber-500/10 text-amber-500 border-amber-500/20'
-                                : 'bg-rose-500/10 text-rose-500 border-rose-500/20'
+                                ? 'bg-amber-500/10 text-amber-500 border-amber-500/30'
+                                : 'bg-rose-500/10 text-rose-500 border-rose-500/30'
                             }`}
                           >
                             <span
-                              className={`h-1.5 w-1.5 rounded-full ${
+                              className={`h-2 w-2 rounded-full ${
                                 review.analysis.sentiment === 'positive'
                                   ? 'bg-emerald-500'
                                   : review.analysis.sentiment === 'neutral'
@@ -628,40 +628,40 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                             <span className="capitalize">{review.analysis.sentiment}</span>
                           </span>
                         ) : review.is_empty ? (
-                          <span className="text-[10px] text-ink-tertiary font-mono">empty</span>
+                          <span className="text-xs text-ink-tertiary font-mono italic">empty</span>
                         ) : (
-                          <span className="text-[10px] text-ink-tertiary font-mono">unprocessed</span>
+                          <span className="text-xs text-ink-tertiary font-mono">unprocessed</span>
                         )}
                       </td>
 
                       {/* Topic Tags */}
-                      <td className="py-2.5 px-3">
-                        <div className="flex flex-wrap gap-1">
+                      <td className="py-3.5 px-3.5">
+                        <div className="flex flex-wrap gap-1.5">
                           {review.analysis?.topics && review.analysis.topics.length > 0 ? (
                             review.analysis.topics.map(t => (
                               <span
                                 key={t}
-                                className="rounded bg-surface-2 px-1.5 py-0.2 text-[10px] font-mono text-ink-subtle border border-hairline"
+                                className="rounded bg-surface-2 px-2 py-0.5 text-xs font-mono font-semibold text-ink border border-hairline"
                               >
                                 {t}
                               </span>
                             ))
                           ) : (
-                            <span className="text-ink-tertiary font-mono text-[10px]">-</span>
+                            <span className="text-ink-tertiary font-mono text-xs">-</span>
                           )}
                         </div>
                       </td>
 
                       {/* Customer Review & Summary */}
-                      <td className="py-2.5 px-3 max-w-md">
-                        <div className="text-xs text-ink-subtle line-clamp-1 leading-relaxed">
+                      <td className="py-3.5 px-3.5 max-w-md">
+                        <div className="text-sm text-ink font-medium leading-relaxed">
                           {review.cleaned_text || (
                             <span className="italic text-ink-tertiary">(empty review)</span>
                           )}
                         </div>
 
                         {review.analysis?.summary && (
-                          <div className="mt-0.5 text-xs font-medium text-ink line-clamp-1 flex items-center gap-1.5">
+                          <div className="mt-1 text-xs sm:text-sm font-semibold text-ink-subtle flex items-center gap-1.5">
                             <span className="text-emerald-500 font-bold">•</span>
                             <span>{review.analysis.summary}</span>
                           </div>
@@ -669,20 +669,20 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                       </td>
 
                       {/* Action Button */}
-                      <td className="py-2.5 px-3 text-right">
+                      <td className="py-3.5 px-3.5 text-right">
                         {review.analysis?.needs_reply ? (
                           <button
                             onClick={e => {
                               e.stopPropagation();
                               onOpenReplyModal(review);
                             }}
-                            className="inline-flex items-center gap-1.5 rounded border border-hairline-strong bg-surface-2 px-2.5 py-1 text-[11px] font-medium text-ink hover:bg-surface-3 transition-colors shadow-sm"
+                            className="inline-flex items-center gap-1.5 rounded-lg border border-hairline-strong bg-surface-2 px-3 py-1.5 text-xs font-bold text-ink hover:bg-surface-3 transition-colors shadow-sm"
                           >
-                            <MessageSquare className="h-3 w-3 text-ink-muted" />
+                            <MessageSquare className="h-3.5 w-3.5 text-ink-subtle" />
                             <span>Draft reply</span>
                           </button>
                         ) : (
-                          <span className="text-[10px] text-ink-tertiary font-mono">-</span>
+                          <span className="text-xs text-ink-tertiary font-mono">-</span>
                         )}
                       </td>
                     </tr>
@@ -801,42 +801,42 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
 
       {/* Pagination Footer */}
       {filteredReviews.length > 0 && (
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1 text-xs text-ink-subtle font-mono">
-          <div className="flex items-center gap-2">
-            <span>Rows:</span>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 text-xs sm:text-sm text-ink font-mono">
+          <div className="flex items-center gap-2.5">
+            <span className="font-semibold text-ink-subtle">Rows:</span>
             <select
               value={pageSize}
               onChange={e => {
                 setPageSize(Number(e.target.value));
                 setCurrentPage(1);
               }}
-              className="rounded border border-hairline bg-surface-2 px-1.5 py-0.5 text-xs text-ink focus:outline-none"
+              className="rounded-lg border border-hairline bg-surface-2 px-3 py-1.5 text-xs sm:text-sm font-bold text-ink focus:outline-none"
             >
               <option value={10}>10</option>
               <option value={15}>15</option>
               <option value={30}>30 (All)</option>
             </select>
-            <span className="text-ink-tertiary">
+            <span className="text-ink-subtle font-medium">
               Showing {(currentPage - 1) * pageSize + 1} -{' '}
               {Math.min(currentPage * pageSize, filteredReviews.length)} of {filteredReviews.length}
             </span>
           </div>
 
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <button
               onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="rounded border border-hairline bg-surface-2 px-2.5 py-1 text-xs text-ink disabled:opacity-40 hover:bg-surface-3 transition-colors"
+              className="rounded-lg border border-hairline bg-surface-2 px-3.5 py-1.5 text-xs sm:text-sm font-bold text-ink disabled:opacity-40 hover:bg-surface-3 transition-colors shadow-sm"
             >
               Previous
             </button>
-            <span className="px-2 text-xs">
+            <span className="px-2.5 text-xs sm:text-sm font-bold text-ink">
               Page {currentPage} / {totalPages}
             </span>
             <button
               onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="rounded border border-hairline bg-surface-2 px-2.5 py-1 text-xs text-ink disabled:opacity-40 hover:bg-surface-3 transition-colors"
+              className="rounded-lg border border-hairline bg-surface-2 px-3.5 py-1.5 text-xs sm:text-sm font-bold text-ink disabled:opacity-40 hover:bg-surface-3 transition-colors shadow-sm"
             >
               Next
             </button>
