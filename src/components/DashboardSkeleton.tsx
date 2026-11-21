@@ -6,11 +6,25 @@ import { Loader2, ShieldCheck, Sparkles, Database, FileCheck } from 'lucide-reac
 
 interface DashboardSkeletonProps {
   stageMessage?: string;
+  activeStage?: number;
 }
 
 export const DashboardSkeleton: React.FC<DashboardSkeletonProps> = ({
   stageMessage = 'Analyzing customer reviews & running adversarial defense checks...',
+  activeStage,
 }) => {
+  const currentStage =
+    activeStage ??
+    (stageMessage.includes('Stage 1') || stageMessage.includes('Parsing')
+      ? 1
+      : stageMessage.includes('Stage 2') || stageMessage.includes('SHA-256')
+      ? 2
+      : stageMessage.includes('Stage 3') || stageMessage.includes('injection')
+      ? 3
+      : stageMessage.includes('Stage 4') || stageMessage.includes('Zod')
+      ? 4
+      : 1);
+
   return (
     <div className="w-full space-y-6 animate-in fade-in duration-300">
       {/* Live Pipeline Processing Banner */}
@@ -23,9 +37,9 @@ export const DashboardSkeleton: React.FC<DashboardSkeletonProps> = ({
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-sm font-semibold text-ink">Intelligence Engine Processing</span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-surface-2 px-2 py-0.5 text-[10px] font-medium text-ink-subtle border border-hairline">
+                <span className="inline-flex items-center gap-1 rounded-full bg-surface-2 px-2 py-0.5 text-[10px] font-medium text-ink-subtle border border-hairline font-mono">
                   <Sparkles className="h-2.5 w-2.5 text-amber-500" />
-                  Live Batches
+                  Stage {currentStage}/4
                 </span>
               </div>
               <p className="text-xs text-ink-subtle mt-0.5">{stageMessage}</p>
@@ -40,34 +54,80 @@ export const DashboardSkeleton: React.FC<DashboardSkeletonProps> = ({
 
         {/* 4 Pipeline Stages */}
         <div className="mt-3.5 grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-xs">
-          <div className="flex items-center gap-2 rounded-lg bg-surface-2 p-2 border border-hairline">
-            <FileCheck className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
+          <div
+            className={`flex items-center gap-2 rounded-lg p-2 border transition-all ${
+              currentStage === 1
+                ? 'bg-surface-3 border-ink text-ink shadow-sm'
+                : currentStage > 1
+                ? 'bg-surface-2 border-emerald-500/30 text-ink'
+                : 'bg-surface-2 border-hairline opacity-60 text-ink-subtle'
+            }`}
+          >
+            <FileCheck
+              className={`h-3.5 w-3.5 shrink-0 ${
+                currentStage >= 1 ? 'text-emerald-500' : 'text-ink-tertiary'
+              }`}
+            />
             <div className="truncate">
-              <div className="font-medium text-ink truncate">1. CSV Clean & Parse</div>
+              <div className="font-medium truncate">1. CSV Clean &amp; Parse</div>
               <div className="text-[10px] text-emerald-400">RFC 4180 Compliant</div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 rounded-lg bg-surface-2 p-2 border border-hairline">
-            <Database className="h-3.5 w-3.5 text-ink-subtle shrink-0 animate-pulse" />
+          <div
+            className={`flex items-center gap-2 rounded-lg p-2 border transition-all ${
+              currentStage === 2
+                ? 'bg-surface-3 border-ink text-ink shadow-sm'
+                : currentStage > 2
+                ? 'bg-surface-2 border-emerald-500/30 text-ink'
+                : 'bg-surface-2 border-hairline opacity-60 text-ink-subtle'
+            }`}
+          >
+            <Database
+              className={`h-3.5 w-3.5 shrink-0 ${
+                currentStage === 2 ? 'text-ink animate-pulse' : currentStage > 2 ? 'text-emerald-500' : 'text-ink-tertiary'
+              }`}
+            />
             <div className="truncate">
-              <div className="font-medium text-ink truncate">2. SHA-256 Dedupe</div>
+              <div className="font-medium truncate">2. SHA-256 Dedupe</div>
               <div className="text-[10px] text-ink-subtle">Atomic Cache Check</div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 rounded-lg bg-surface-2 p-2 border border-hairline">
-            <ShieldCheck className="h-3.5 w-3.5 text-amber-500 shrink-0" />
+          <div
+            className={`flex items-center gap-2 rounded-lg p-2 border transition-all ${
+              currentStage === 3
+                ? 'bg-surface-3 border-ink text-ink shadow-sm'
+                : currentStage > 3
+                ? 'bg-surface-2 border-emerald-500/30 text-ink'
+                : 'bg-surface-2 border-hairline opacity-60 text-ink-subtle'
+            }`}
+          >
+            <ShieldCheck
+              className={`h-3.5 w-3.5 shrink-0 ${
+                currentStage === 3 ? 'text-amber-500 animate-pulse' : currentStage > 3 ? 'text-emerald-500' : 'text-ink-tertiary'
+              }`}
+            />
             <div className="truncate">
-              <div className="font-medium text-ink truncate">3. Defense Envelope</div>
+              <div className="font-medium truncate">3. Defense Envelope</div>
               <div className="text-[10px] text-amber-400">Neutralizing Injections</div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 rounded-lg bg-surface-2 p-2 border border-hairline">
-            <Loader2 className="h-3.5 w-3.5 text-ink-subtle shrink-0 animate-spin" />
+          <div
+            className={`flex items-center gap-2 rounded-lg p-2 border transition-all ${
+              currentStage === 4
+                ? 'bg-surface-3 border-ink text-ink shadow-sm'
+                : 'bg-surface-2 border-hairline opacity-60 text-ink-subtle'
+            }`}
+          >
+            <Loader2
+              className={`h-3.5 w-3.5 shrink-0 ${
+                currentStage === 4 ? 'text-ink animate-spin' : 'text-ink-tertiary'
+              }`}
+            />
             <div className="truncate">
-              <div className="font-medium text-ink truncate">4. Zod Validation</div>
+              <div className="font-medium truncate">4. Zod Validation</div>
               <div className="text-[10px] text-ink-subtle">Chunk Batches of 5</div>
             </div>
           </div>

@@ -128,9 +128,17 @@ export const ReplyModal: React.FC<ReplyModalProps> = ({
           </div>
 
           {isLoading ? (
-            <div className="flex flex-col items-center justify-center py-12 rounded-xl border border-hairline bg-surface-2 gap-2.5">
-              <Loader2 className="h-5 w-5 text-ink animate-spin" />
-              <p className="text-xs font-medium text-ink-subtle">Drafting empathetic response...</p>
+            <div className="p-4 rounded-xl border border-hairline bg-surface-2 space-y-3 shadow-inner">
+              <div className="flex items-center gap-2 pb-2 border-b border-hairline">
+                <Loader2 className="h-4 w-4 text-ink animate-spin" />
+                <span className="text-xs font-semibold text-ink">Drafting empathetic merchant reply...</span>
+              </div>
+              <div className="space-y-2 pt-1">
+                <div className="h-3 w-4/5 rounded shimmer-skeleton" />
+                <div className="h-3 w-full rounded shimmer-skeleton" />
+                <div className="h-3 w-11/12 rounded shimmer-skeleton" />
+                <div className="h-3 w-2/3 rounded shimmer-skeleton" />
+              </div>
             </div>
           ) : error ? (
             <div className="p-3.5 rounded-xl border border-rose-500/30 bg-rose-500/10 text-xs text-rose-500">
