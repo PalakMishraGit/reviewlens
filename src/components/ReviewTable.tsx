@@ -289,7 +289,7 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
             {hasActiveFilters && (
               <button
                 onClick={clearAllFilters}
-                className="flex items-center gap-1.5 rounded-xl border border-hairline bg-surface-2 px-3 py-2 text-xs font-semibold text-rose-500 hover:text-rose-400 transition-colors"
+                className="flex items-center gap-1.5 rounded-full border border-hairline bg-surface-2 px-3.5 py-2 text-xs font-bold text-rose-500 hover:text-rose-400 transition-colors"
               >
                 <RotateCcw className="h-3.5 w-3.5" />
                 <span>Reset filters</span>
@@ -298,25 +298,25 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
 
             <button
               onClick={() => exportData('csv')}
-              className="flex items-center gap-1.5 rounded-xl border border-hairline bg-surface-2 px-3.5 py-2 text-xs font-semibold text-ink hover:bg-surface-3 transition-colors shadow-sm"
+              className="flex items-center gap-1.5 rounded-full border border-hairline bg-surface-2 px-4 py-2 text-xs font-bold text-ink hover:bg-surface-3 transition-colors shadow-sm"
             >
-              <Download className="h-3.5 w-3.5 text-ink-tertiary" />
+              <Download className="h-3.5 w-3.5 text-ink" strokeWidth={2.2} />
               <span>Export CSV</span>
             </button>
 
             <button
               onClick={() => exportData('json')}
-              className="flex items-center gap-1.5 rounded-xl border border-hairline bg-surface-2 px-3.5 py-2 text-xs font-semibold text-ink hover:bg-surface-3 transition-colors shadow-sm"
+              className="flex items-center gap-1.5 rounded-full border border-hairline bg-surface-2 px-4 py-2 text-xs font-bold text-ink hover:bg-surface-3 transition-colors shadow-sm"
             >
-              <Code2 className="h-3.5 w-3.5 text-ink-tertiary" />
+              <Code2 className="h-3.5 w-3.5 text-ink" strokeWidth={2.2} />
               <span>JSON</span>
             </button>
           </div>
         </div>
 
-        {/* Full-width Search Input */}
+        {/* Full-width Search Input (Capsule Style) */}
         <div className="relative">
-          <Search className="absolute left-4 top-3.5 h-4 w-4 text-ink-tertiary" />
+          <Search className="absolute left-5 top-3.5 h-4 w-4 text-ink" strokeWidth={2.4} />
           <input
             ref={searchInputRef}
             type="text"
@@ -326,28 +326,28 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
               setSearchQuery(e.target.value);
               setCurrentPage(1);
             }}
-            className="h-11 w-full rounded-xl border border-hairline bg-surface-2/60 pl-11 pr-10 text-sm text-ink placeholder-ink-tertiary focus:border-hairline-strong focus:outline-none focus:bg-surface-2 transition-all font-sans"
+            className="h-11 w-full rounded-full border border-hairline-strong bg-surface-2/80 pl-12 pr-11 text-sm text-ink font-medium placeholder:text-ink/60 focus:border-hairline-focus focus:outline-none focus:bg-surface-2 transition-all font-sans shadow-inner"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-3.5 top-3.5 text-ink-tertiary hover:text-ink"
+              className="absolute right-4 top-3.5 text-ink hover:scale-110 transition-transform"
             >
-              <X className="h-4 w-4" />
+              <X className="h-4 w-4" strokeWidth={2.2} />
             </button>
           )}
         </div>
 
         {/* Filter Dropdown Bar & Preset Pills */}
         <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-          {/* Preset Buttons */}
+          {/* Preset Buttons (Capsule Pills) */}
           <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
             <button
               onClick={() => setQuickPreset('all')}
-              className={`rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
+              className={`rounded-full px-3.5 py-1.5 text-xs font-extrabold transition-all ${
                 quickPreset === 'all'
                   ? 'bg-ink text-canvas shadow-sm'
-                  : 'bg-surface-2 text-ink-subtle hover:text-ink border border-hairline'
+                  : 'bg-surface-2 text-ink hover:bg-surface-3 border border-hairline'
               }`}
             >
               All ({reviews.length})
@@ -355,10 +355,10 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
 
             <button
               onClick={() => setQuickPreset('needs_reply')}
-              className={`rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
+              className={`rounded-full px-3.5 py-1.5 text-xs font-extrabold transition-all ${
                 quickPreset === 'needs_reply'
                   ? 'bg-ink text-canvas shadow-sm'
-                  : 'bg-surface-2 text-ink-subtle hover:text-ink border border-hairline'
+                  : 'bg-surface-2 text-ink hover:bg-surface-3 border border-hairline'
               }`}
             >
               Needs Reply ({reviews.filter(r => r.analysis?.needs_reply).length})
@@ -366,10 +366,10 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
 
             <button
               onClick={() => setQuickPreset('mismatches')}
-              className={`rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
+              className={`rounded-full px-3.5 py-1.5 text-xs font-extrabold transition-all ${
                 quickPreset === 'mismatches'
                   ? 'bg-amber-500/20 text-amber-500 border border-amber-500/40 shadow-sm'
-                  : 'bg-surface-2 text-ink-subtle hover:text-ink border border-hairline'
+                  : 'bg-surface-2 text-ink hover:bg-surface-3 border border-hairline'
               }`}
             >
               Mismatches ({reviews.filter(r => r.rating_mismatch).length})
@@ -377,10 +377,10 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
 
             <button
               onClick={() => setQuickPreset('adversarial')}
-              className={`rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
+              className={`rounded-full px-3.5 py-1.5 text-xs font-extrabold transition-all ${
                 quickPreset === 'adversarial'
                   ? 'bg-emerald-500/20 text-emerald-500 border border-emerald-500/40 shadow-sm'
-                  : 'bg-surface-2 text-ink-subtle hover:text-ink border border-hairline'
+                  : 'bg-surface-2 text-ink hover:bg-surface-3 border border-hairline'
               }`}
             >
               Shield (R012)
@@ -388,17 +388,17 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
 
             <button
               onClick={() => setQuickPreset('multilingual')}
-              className={`rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
+              className={`rounded-full px-3.5 py-1.5 text-xs font-extrabold transition-all ${
                 quickPreset === 'multilingual'
                   ? 'bg-cyan-500/20 text-cyan-500 border border-cyan-500/40 shadow-sm'
-                  : 'bg-surface-2 text-ink-subtle hover:text-ink border border-hairline'
+                  : 'bg-surface-2 text-ink hover:bg-surface-3 border border-hairline'
               }`}
             >
               Hindi / Hinglish
             </button>
           </div>
 
-          {/* Dropdown Selectors */}
+          {/* Dropdown Selectors (Capsule Rounded) */}
           <div className="flex flex-wrap items-center gap-2.5 font-sans text-xs">
             <select
               value={selectedProductFilter}
@@ -406,7 +406,7 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                 if (onSelectProductFilter) onSelectProductFilter(e.target.value);
                 setCurrentPage(1);
               }}
-              className="h-9 rounded-xl border border-hairline bg-surface-2 px-3 text-xs text-ink font-semibold focus:outline-none"
+              className="h-9 rounded-full border border-hairline bg-surface-2 px-3.5 text-xs text-ink font-bold focus:outline-none"
             >
               <option value="all">Product: All ({products.length})</option>
               {products.map(p => (
@@ -422,7 +422,7 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                 if (onSelectSentimentFilter) onSelectSentimentFilter(e.target.value);
                 setCurrentPage(1);
               }}
-              className="h-9 rounded-xl border border-hairline bg-surface-2 px-3 text-xs text-ink font-semibold focus:outline-none"
+              className="h-9 rounded-full border border-hairline bg-surface-2 px-3.5 text-xs text-ink font-bold focus:outline-none"
             >
               <option value="all">Sentiment: All</option>
               <option value="positive">Positive</option>
@@ -441,7 +441,7 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                 }
                 setCurrentPage(1);
               }}
-              className="h-9 rounded-xl border border-hairline bg-surface-2 px-3 text-xs text-ink font-semibold focus:outline-none"
+              className="h-9 rounded-full border border-hairline bg-surface-2 px-3.5 text-xs text-ink font-bold focus:outline-none"
             >
               <option value="all">Topic: All</option>
               {topics.map(t => (
@@ -602,9 +602,9 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                         <button
                           data-testid="draft-reply-btn"
                           onClick={() => onOpenReplyModal(r)}
-                          className="inline-flex items-center gap-1.5 rounded-xl border border-hairline bg-surface-2 px-3 py-1.5 text-xs font-semibold text-ink hover:bg-surface-3 transition-colors shadow-sm"
+                          className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-surface-2 px-3.5 py-1.5 text-xs font-bold text-ink hover:bg-surface-3 transition-colors shadow-sm"
                         >
-                          <Eye className="h-3.5 w-3.5 text-ink-tertiary" />
+                          <Eye className="h-3.5 w-3.5 text-ink" strokeWidth={2.2} />
                           <span>View</span>
                         </button>
                       </td>

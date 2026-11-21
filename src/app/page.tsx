@@ -318,12 +318,14 @@ export default function ReviewLensDashboard() {
         {/* Dashboard Content when Ready */}
         {!isLoading && summary && (
           <div className="space-y-8 animate-in fade-in duration-200">
-            {/* View Switcher Floating Segmented Tabs */}
-            <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-hairline bg-surface-1 p-1.5 shadow-sm">
-              <button
+            {/* View Switcher Floating Capsule Segmented Tabs (Cinematic UI) */}
+            <div className="flex flex-wrap items-center gap-2 rounded-full border border-hairline-strong bg-surface-1/90 backdrop-blur-xl p-1.5 shadow-lg w-fit">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 data-testid="tab-overview"
                 onClick={() => setActiveTab('overview')}
-                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs sm:text-sm font-extrabold transition-all ${
+                className={`flex items-center gap-2 rounded-full px-5 py-2 text-xs sm:text-sm font-extrabold transition-all ${
                   activeTab === 'overview'
                     ? 'bg-ink text-canvas shadow-md'
                     : 'text-ink hover:bg-surface-2'
@@ -331,25 +333,29 @@ export default function ReviewLensDashboard() {
               >
                 <Layers className="h-4 w-4" strokeWidth={2.2} />
                 <span>Executive Overview</span>
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 data-testid="tab-reviews"
                 onClick={() => setActiveTab('reviews')}
-                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs sm:text-sm font-extrabold transition-all ${
+                className={`flex items-center gap-2 rounded-full px-5 py-2 text-xs sm:text-sm font-extrabold transition-all ${
                   activeTab === 'reviews'
                     ? 'bg-ink text-canvas shadow-md'
                     : 'text-ink hover:bg-surface-2'
                 }`}
               >
-                <ShieldCheck className="h-4 w-4" strokeWidth={2.2} />
+                <ShieldCheck className="h-4 w-4 text-emerald-500" strokeWidth={2.2} />
                 <span>Reviews Explorer ({reviews.length})</span>
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 data-testid="tab-products"
                 onClick={() => setActiveTab('products')}
-                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs sm:text-sm font-extrabold transition-all ${
+                className={`flex items-center gap-2 rounded-full px-5 py-2 text-xs sm:text-sm font-extrabold transition-all ${
                   activeTab === 'products'
                     ? 'bg-ink text-canvas shadow-md'
                     : 'text-ink hover:bg-surface-2'
@@ -357,12 +363,14 @@ export default function ReviewLensDashboard() {
               >
                 <Boxes className="h-4 w-4" strokeWidth={2.2} />
                 <span>Product Intelligence ({summary.product_insights.length})</span>
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 data-testid="tab-telemetry"
                 onClick={() => setActiveTab('telemetry')}
-                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs sm:text-sm font-extrabold transition-all ${
+                className={`flex items-center gap-2 rounded-full px-5 py-2 text-xs sm:text-sm font-extrabold transition-all ${
                   activeTab === 'telemetry'
                     ? 'bg-ink text-canvas shadow-md'
                     : 'text-ink hover:bg-surface-2'
@@ -370,7 +378,7 @@ export default function ReviewLensDashboard() {
               >
                 <Activity className="h-4 w-4" strokeWidth={2.2} />
                 <span>System Telemetry</span>
-              </button>
+              </motion.button>
             </div>
             {/* Tab: Overview (Complete Executive Dashboard) */}
             {activeTab === 'overview' && (
