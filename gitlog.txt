@@ -1,3 +1,15 @@
+commit e1a0d771cb08e5827a0920f7803a8f0e139ad5e6
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 22:52:01 +0530
+
+    feat(ui): implement cinematic capsule floating navbar and refined design system
+
+commit 873ca3c09d1f340363aea02514461aa8989203ad
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 22:44:23 +0530
+
+    docs(submission): update gitlog.txt with layout fix
+
 commit a614d1995554a0825152cc3857919a49d90e63e0
 Author: Amrit <amrit@reviewlens.local>
 Date:   2026-11-21 22:44:15 +0530
