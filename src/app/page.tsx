@@ -5,11 +5,13 @@ import { CleanedReview, AnalysisSummary } from '@/types/review';
 import { Navbar } from '@/components/Navbar';
 import { UploadDropzone } from '@/components/UploadDropzone';
 import { SummaryCards } from '@/components/SummaryCards';
+import { SentimentVisualizer } from '@/components/SentimentVisualizer';
 import { InsightsOverview } from '@/components/InsightsOverview';
 import { ReviewTable } from '@/components/ReviewTable';
 import { ProductView } from '@/components/ProductView';
 import { TelemetryBar } from '@/components/TelemetryBar';
 import { ReplyModal } from '@/components/ReplyModal';
+import { ToastContainer, ToastMessage } from '@/components/Toast';
 import {
   Layers,
   Package,
@@ -23,11 +25,33 @@ export default function ReviewLensDashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState('Processing reviews...');
   const [activeTab, setActiveTab] = useState<'reviews' | 'products'>('reviews');
+  
+  // Interactive Filter States
   const [selectedTopicFilter, setSelectedTopicFilter] = useState<string>('all');
+  const [selectedSentimentFilter, setSelectedSentimentFilter] = useState<string>('all');
+  const [selectedProductFilter, setSelectedProductFilter] = useState<string>('all');
+  const [onlyNeedsReply, setOnlyNeedsReply] = useState<boolean>(false);
+  const [onlyMismatches, setOnlyMismatches] = useState<boolean>(false);
+
   const [activeReplyReview, setActiveReplyReview] = useState<CleanedReview | null>(null);
   const [cacheCount, setCacheCount] = useState<number>(0);
   const [apiProvider, setApiProvider] = useState<string>('Detecting...');
   const [error, setError] = useState<string | null>(null);
+
+  // Toast notifications
+  const [toasts, setToasts] = useState<ToastMessage[]>([]);
+
+  const addToast = (type: 'success' | 'error' | 'info', message: string) => {
+    const id = Math.random().toString(36).substring(2, 9);
+    setToasts(prev => [...prev, { id, type, message }]);
+    setTimeout(() => {
+      setToasts(prev => prev.filter(t => t.id !== id));
+    }, 3800);
+  };
+
+  const dismissToast = (id: string) => {
+    setToasts(prev => prev.filter(t => t.id !== id));
+  };
 
   // Fetch cache stats on mount
   const fetchCacheStats = async () => {
@@ -72,9 +96,18 @@ export default function ReviewLensDashboard() {
         setApiProvider(data.summary.telemetry.api_provider);
       }
       await fetchCacheStats();
+
+      const hits = data.summary?.telemetry?.cache_hits ?? 0;
+      const count = data.reviews?.length ?? 0;
+      addToast(
+        'success',
+        `Analyzed ${count} reviews (${hits} cache ${hits === 1 ? 'hit' : 'hits'})`
+      );
     } catch (err: any) {
       console.error('Analysis error:', err);
-      setError(err.message || 'An error occurred during review analysis');
+      const errMsg = err.message || 'An error occurred during review analysis';
+      setError(errMsg);
+      addToast('error', errMsg);
     } finally {
       setIsLoading(false);
     }
@@ -92,10 +125,37 @@ export default function ReviewLensDashboard() {
             telemetry: { ...summary.telemetry, cache_hits: 0 },
           });
         }
+        addToast('info', 'Local SHA-256 review cache cleared');
       }
     } catch (err: any) {
       console.error('Failed to clear cache:', err);
+      addToast('error', 'Failed to clear review cache');
     }
+  };
+
+  const handleFilterSentiment = (sentiment: string) => {
+    setSelectedSentimentFilter(sentiment);
+    if (sentiment !== 'all') {
+      addToast('info', `Filtering by ${sentiment} sentiment`);
+    } else {
+      addToast('info', 'Reset sentiment filter');
+    }
+  };
+
+  const handleToggleNeedsReply = () => {
+    setOnlyNeedsReply(prev => {
+      const next = !prev;
+      addToast('info', next ? 'Showing only reviews needing merchant replies' : 'Reset reply filter');
+      return next;
+    });
+  };
+
+  const handleToggleMismatches = () => {
+    setOnlyMismatches(prev => {
+      const next = !prev;
+      addToast('info', next ? 'Showing only rating-sentiment mismatches' : 'Reset mismatch filter');
+      return next;
+    });
   };
 
   return (
@@ -145,9 +205,26 @@ export default function ReviewLensDashboard() {
             {/* Telemetry Bar */}
             <TelemetryBar telemetry={summary.telemetry} />
 
-            {/* Summary Cards */}
+            {/* Interactive KPI Cards */}
             <section aria-label="Executive KPI Summary">
-              <SummaryCards summary={summary} />
+              <SummaryCards
+                summary={summary}
+                activeSentimentFilter={selectedSentimentFilter}
+                onFilterSentiment={handleFilterSentiment}
+                onlyNeedsReply={onlyNeedsReply}
+                onToggleNeedsReply={handleToggleNeedsReply}
+                onlyMismatches={onlyMismatches}
+                onToggleMismatches={handleToggleMismatches}
+              />
+            </section>
+
+            {/* Interactive Sentiment Distribution & Net Score */}
+            <section aria-label="Sentiment Visualizer">
+              <SentimentVisualizer
+                summary={summary}
+                activeSentimentFilter={selectedSentimentFilter}
+                onFilterSentiment={handleFilterSentiment}
+              />
             </section>
 
             {/* Top 3 Complaints & Top 3 Praises */}
@@ -158,6 +235,7 @@ export default function ReviewLensDashboard() {
                 onSelectTopic={topic => {
                   setSelectedTopicFilter(topic);
                   setActiveTab('reviews');
+                  addToast('info', `Filtered reviews by topic: ${topic}`);
                 }}
               />
             </section>
@@ -165,6 +243,7 @@ export default function ReviewLensDashboard() {
             {/* View Switcher Tabs (Explorer vs Product View) */}
             <div className="flex items-center gap-1 border-b border-[#23252a] pb-2">
               <button
+                data-testid="tab-reviews"
                 onClick={() => setActiveTab('reviews')}
                 className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
                   activeTab === 'reviews'
@@ -177,6 +256,7 @@ export default function ReviewLensDashboard() {
               </button>
 
               <button
+                data-testid="tab-products"
                 onClick={() => setActiveTab('products')}
                 className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
                   activeTab === 'products'
@@ -197,6 +277,18 @@ export default function ReviewLensDashboard() {
                   onOpenReplyModal={review => setActiveReplyReview(review)}
                   selectedTopicFilter={selectedTopicFilter}
                   onClearTopicFilter={() => setSelectedTopicFilter('all')}
+                  selectedSentimentFilter={selectedSentimentFilter}
+                  onSelectSentimentFilter={handleFilterSentiment}
+                  selectedProductFilter={selectedProductFilter}
+                  onSelectProductFilter={prod => {
+                    setSelectedProductFilter(prod);
+                    if (prod !== 'all') addToast('info', `Filtered by product: ${prod}`);
+                  }}
+                  onlyNeedsReply={onlyNeedsReply}
+                  onToggleNeedsReply={handleToggleNeedsReply}
+                  onlyMismatches={onlyMismatches}
+                  onToggleMismatches={handleToggleMismatches}
+                  onToast={addToast}
                 />
               </section>
             ) : (
@@ -204,7 +296,9 @@ export default function ReviewLensDashboard() {
                 <ProductView
                   insights={summary.product_insights}
                   onSelectProduct={p => {
+                    setSelectedProductFilter(p);
                     setActiveTab('reviews');
+                    addToast('info', `Filtered reviews by product: ${p}`);
                   }}
                 />
               </section>
@@ -232,7 +326,11 @@ export default function ReviewLensDashboard() {
         review={activeReplyReview}
         isOpen={Boolean(activeReplyReview)}
         onClose={() => setActiveReplyReview(null)}
+        onToast={addToast}
       />
+
+      {/* Floating Toast Notification Container */}
+      <ToastContainer toasts={toasts} onDismiss={dismissToast} />
 
       {/* Footer */}
       <footer className="mt-auto border-t border-[#23252a] bg-[#010102] py-4 text-xs text-[#62666d]">

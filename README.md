@@ -22,6 +22,10 @@ ReviewLens is a resilient, production-grade merchant intelligence web applicatio
 *Per-product sentiment distribution, average star rating, rating mismatch alerts, and recurring topic tags.*
 ![Product Analytics Breakdown](docs/screenshots/03-product-insights.png)
 
+### 4. Interactive Review Inspector & Adversarial Defense Drawer
+*Click any review row to expand an interactive drilldown drawer showing raw vs sanitized input, SHA-256 hash copy button, date/rating metadata, and verified prompt injection defense shield.*
+![Interactive Review Inspector Drawer](docs/screenshots/04-review-drawer-inspector.png)
+
 ---
 
 ## Features & Core Capabilities

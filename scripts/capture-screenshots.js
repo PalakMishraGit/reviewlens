@@ -62,7 +62,7 @@ async function capture() {
 
   // 3. Switch to Product Analytics tab
   console.log('Switching to Product analytics tab...');
-  const productTab = await page.waitForSelector('button::-p-text("Product analytics")');
+  const productTab = await page.waitForSelector('[data-testid="tab-products"]');
   if (productTab) {
     await productTab.click();
     await new Promise(r => setTimeout(r, 800));
@@ -72,6 +72,29 @@ async function capture() {
       path: path.join(screenshotDir, '03-product-insights.png'),
       fullPage: false,
     });
+  }
+
+  // 4. Switch back to Reviews table and expand R012 (Adversarial Prompt Injection)
+  console.log('Switching back to Reviews table and inspecting row R012...');
+  const reviewsTab = await page.waitForSelector('[data-testid="tab-reviews"]');
+  if (reviewsTab) {
+    await reviewsTab.click();
+    await new Promise(r => setTimeout(r, 600));
+
+    // Scroll table into view and click row R012
+    const r012Row = await page.waitForSelector('[data-testid="review-row-R012"]');
+    if (r012Row) {
+      await page.evaluate(el => el.scrollIntoView({ block: 'center', behavior: 'instant' }), r012Row);
+      await new Promise(r => setTimeout(r, 500));
+      await r012Row.click();
+      await new Promise(r => setTimeout(r, 800));
+
+      console.log('Capturing 04-review-drawer-inspector.png...');
+      await page.screenshot({
+        path: path.join(screenshotDir, '04-review-drawer-inspector.png'),
+        fullPage: false,
+      });
+    }
   }
 
   await browser.close();

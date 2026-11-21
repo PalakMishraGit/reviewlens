@@ -8,12 +8,14 @@ interface ReplyModalProps {
   review: CleanedReview | null;
   isOpen: boolean;
   onClose: () => void;
+  onToast?: (type: 'success' | 'error' | 'info', message: string) => void;
 }
 
 export const ReplyModal: React.FC<ReplyModalProps> = ({
   review,
   isOpen,
   onClose,
+  onToast,
 }) => {
   const [replyText, setReplyText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -60,6 +62,7 @@ export const ReplyModal: React.FC<ReplyModalProps> = ({
     try {
       await navigator.clipboard.writeText(replyText);
       setCopied(true);
+      onToast?.('success', 'Store reply copied to clipboard');
       setTimeout(() => setCopied(false), 2000);
     } catch {
       // Fallback
