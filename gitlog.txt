@@ -1,3 +1,15 @@
+commit f749ce1906df7a558a337d937d657744b5962c8b
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-22 00:08:49 +0530
+
+    feat(branding): add official PulseLens emblem as favicon and apple-touch-icon
+
+commit f51f99096c3faa2157e781a0ea545c83a838dce8
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 23:46:26 +0530
+
+    docs: finalize gitlog for submission
+
 commit 0a2e9f35341abef5b72f7cd2c9cf391b51c8e654
 Author: Amrit <amrit@reviewlens.local>
 Date:   2026-11-21 23:43:31 +0530
