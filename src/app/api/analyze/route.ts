@@ -9,6 +9,8 @@ export const dynamic = 'force-dynamic';
 export async function POST(req: NextRequest) {
   try {
     let csvContent = '';
+    let clientKey = req.headers.get('x-api-key') || req.headers.get('x-gemini-key') || '';
+    let clientModel = req.headers.get('x-ai-model') || '';
 
     const contentType = req.headers.get('content-type') || '';
 
@@ -22,9 +24,21 @@ export async function POST(req: NextRequest) {
         );
       }
       csvContent = await file.text();
+      if (!clientKey) {
+        clientKey = (formData.get('apiKey') as string) || '';
+      }
+      if (!clientModel) {
+        clientModel = (formData.get('model') as string) || '';
+      }
     } else {
       const body = await req.json();
       csvContent = body.csvText || '';
+      if (!clientKey && body.apiKey) {
+        clientKey = body.apiKey;
+      }
+      if (!clientModel && body.model) {
+        clientModel = body.model;
+      }
     }
 
     if (!csvContent || !csvContent.trim()) {
@@ -47,7 +61,14 @@ export async function POST(req: NextRequest) {
     const cleanedReviews = cleanReviews(rawRows);
 
     // 3. Process batches with AI / Cache
-    const { reviews, telemetry } = await processReviewsInBatches(cleanedReviews);
+    const effectiveApiKey = clientKey || process.env.GEMINI_API_KEY || process.env.GROQ_API_KEY;
+    const effectiveModel = clientModel || process.env.AI_MODEL || 'gemini-1.5-flash';
+
+    const { reviews, telemetry } = await processReviewsInBatches(cleanedReviews, {
+      apiKey: effectiveApiKey,
+      model: effectiveModel,
+      provider: effectiveApiKey?.startsWith('gsk_') ? 'groq' : 'gemini',
+    });
 
     // 4. Compute executive summary & KPIs
     const summary = computeAnalysisMetrics(reviews, telemetry);

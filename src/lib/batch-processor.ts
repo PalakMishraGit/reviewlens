@@ -134,8 +134,15 @@ export async function processReviewsInBatches(
       ai_calls_made: aiCallsMade,
       cache_hits: cacheHits,
       total_reviews_processed: finalReviews.length,
-      api_provider: process.env.MOCK_AI === 'true' || (!process.env.GEMINI_API_KEY && !process.env.GROQ_API_KEY) ? 'Local Analytical Engine (Mock)' : process.env.GROQ_API_KEY ? 'Groq' : 'Google Gemini',
-      model_name: process.env.AI_MODEL || 'gemini-1.5-flash',
+      api_provider:
+        options.provider === 'mock' ||
+        process.env.MOCK_AI === 'true' ||
+        (!options.apiKey && !process.env.GEMINI_API_KEY && !process.env.GROQ_API_KEY)
+          ? 'Local Analytical Engine (Mock)'
+          : options.provider === 'groq' || options.apiKey?.startsWith('gsk_') || process.env.GROQ_API_KEY
+          ? 'Groq (Llama 3.3)'
+          : 'Google Gemini 1.5 Flash',
+      model_name: options.model || process.env.AI_MODEL || 'gemini-1.5-flash',
     },
   };
 }

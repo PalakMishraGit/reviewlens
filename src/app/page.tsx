@@ -15,6 +15,7 @@ import { ReplyModal } from '@/components/ReplyModal';
 import { ToastContainer, ToastMessage } from '@/components/Toast';
 import { DashboardSkeleton } from '@/components/DashboardSkeleton';
 import { ShortcutsModal } from '@/components/ShortcutsModal';
+import { AiEngineModal } from '@/components/AiEngineModal';
 import { useTheme } from '@/context/ThemeContext';
 import {
   Sparkles,
@@ -55,6 +56,8 @@ export default function ReviewLensDashboard() {
   const [loadingMessage, setLoadingMessage] = useState('Processing reviews in batches...');
   const [activeTab, setActiveTab] = useState<'overview' | 'reviews' | 'products' | 'telemetry'>('overview');
   const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
+  const [isEngineModalOpen, setIsEngineModalOpen] = useState(false);
+  const [customApiKey, setCustomApiKey] = useState<string>('');
 
   // Dynamic Greeting, Date & Daily Motivational Quote
   const [greeting, setGreeting] = useState<string>('Good day');
@@ -178,7 +181,30 @@ export default function ReviewLensDashboard() {
     } catch {
       setCurrentDateFormatted('Today');
     }
+
+    try {
+      const savedKey = localStorage.getItem('pulselens_api_key');
+      if (savedKey) {
+        setCustomApiKey(savedKey);
+        setApiProvider('Google Gemini 1.5 Flash');
+      }
+    } catch {}
   }, []);
+
+  const handleSaveApiKey = (key: string) => {
+    setCustomApiKey(key);
+    try {
+      if (key) {
+        localStorage.setItem('pulselens_api_key', key);
+        setApiProvider('Google Gemini 1.5 Flash');
+        addToast('success', 'Gemini API Key active! Engine switched to Google Gemini 1.5 Flash.');
+      } else {
+        localStorage.removeItem('pulselens_api_key');
+        setApiProvider('Local Analytical Engine (Mock)');
+        addToast('info', 'Active engine switched to local deterministic fallback.');
+      }
+    } catch {}
+  };
 
   const handleAnalyze = async (csvText: string, filename: string) => {
     setIsLoading(true);
@@ -188,11 +214,16 @@ export default function ReviewLensDashboard() {
     try {
       const startTime = Date.now();
 
+      const reqHeaders: Record<string, string> = { 'Content-Type': 'application/json' };
+      if (customApiKey) {
+        reqHeaders['x-api-key'] = customApiKey;
+      }
+
       // Launch backend API analysis in parallel
       const apiPromise = fetch('/api/analyze', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ csvText }),
+        headers: reqHeaders,
+        body: JSON.stringify({ csvText, apiKey: customApiKey }),
       }).then(r => r.json());
 
       // Paced visual progression through the 4 pipeline stages
@@ -348,10 +379,14 @@ export default function ReviewLensDashboard() {
               </div>
 
               {/* Engine Status Pill */}
-              <div className="flex items-center gap-2 rounded-full bg-surface-2 border border-hairline px-4 py-2 text-ink shadow-sm">
+              <button
+                onClick={() => setIsEngineModalOpen(true)}
+                title="Configure Free Tier AI Engine & API Keys"
+                className="flex items-center gap-2 rounded-full bg-surface-2 border border-hairline hover:border-hairline-strong px-4 py-2 text-ink shadow-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
+              >
                 <Cpu className="h-4 w-4 text-amber-500" strokeWidth={2.4} />
                 <span className="font-sans font-extrabold text-[12px]">{summary?.telemetry?.api_provider || apiProvider}</span>
-              </div>
+              </button>
             </div>
           </div>
 
@@ -728,6 +763,15 @@ export default function ReviewLensDashboard() {
       <ShortcutsModal
         isOpen={isShortcutsOpen}
         onClose={() => setIsShortcutsOpen(false)}
+      />
+
+      {/* AI Model & Free Tier Engine Modal */}
+      <AiEngineModal
+        isOpen={isEngineModalOpen}
+        onClose={() => setIsEngineModalOpen(false)}
+        currentProvider={summary?.telemetry?.api_provider || apiProvider}
+        onSaveKey={handleSaveApiKey}
+        activeApiKey={customApiKey}
       />
 
       {/* Floating Toast Notifications */}

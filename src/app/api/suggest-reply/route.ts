@@ -11,6 +11,8 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const review: CleanedReview = body.review;
+    const clientKey = req.headers.get('x-api-key') || req.headers.get('x-gemini-key') || body.apiKey;
+    const clientModel = req.headers.get('x-ai-model') || body.model;
 
     if (!review || (!review.review_text && !review.cleaned_text)) {
       return NextResponse.json(
@@ -32,7 +34,14 @@ export async function POST(req: NextRequest) {
     }
 
     // Generate fresh reply via AI
-    const reply = await generateMerchantReply(review);
+    const effectiveApiKey = clientKey || process.env.GEMINI_API_KEY || process.env.GROQ_API_KEY;
+    const effectiveModel = clientModel || process.env.AI_MODEL || 'gemini-1.5-flash';
+
+    const reply = await generateMerchantReply(review, {
+      apiKey: effectiveApiKey,
+      model: effectiveModel,
+      provider: effectiveApiKey?.startsWith('gsk_') ? 'groq' : 'gemini',
+    });
 
     // Save to persistent cache
     setCachedReply(textHash, reply);
