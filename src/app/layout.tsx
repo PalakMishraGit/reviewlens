@@ -21,6 +21,13 @@ export const metadata: Metadata = {
   title: 'PulseLens.ai — Enterprise AI Review Intelligence',
   description:
     'Turn customer feedback into strategic product decisions. Enterprise-grade sentiment engineering, RFC 4180 ingestion, prompt injection defense, and automated merchant replies.',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/logo-icon.png', type: 'image/png' },
+    ],
+    apple: [{ url: '/logo-icon.png' }],
+  },
 };
 
 export default function RootLayout({
