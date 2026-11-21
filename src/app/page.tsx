@@ -11,14 +11,10 @@ import { ProductView } from '@/components/ProductView';
 import { TelemetryBar } from '@/components/TelemetryBar';
 import { ReplyModal } from '@/components/ReplyModal';
 import {
-  Sparkles,
   Layers,
   Package,
-  ShieldCheck,
   AlertCircle,
-  HelpCircle,
-  Info,
-  CheckCircle,
+  FileQuestion,
 } from 'lucide-react';
 
 export default function ReviewLensDashboard() {
@@ -56,7 +52,6 @@ export default function ReviewLensDashboard() {
     setLoadingMessage('Parsing CSV and validating rows (RFC 4180)...');
 
     try {
-      // Small simulated delay for visual feedback if instant
       setLoadingMessage('Checking persistent SHA-256 review cache...');
       
       const res = await fetch('/api/analyze', {
@@ -68,7 +63,7 @@ export default function ReviewLensDashboard() {
       const data = await res.json();
 
       if (!data.success) {
-        throw new Error(data.error || 'Failed to analyze reviews.');
+        throw new Error(data.error || 'Failed to analyze reviews');
       }
 
       setReviews(data.reviews || []);
@@ -91,7 +86,6 @@ export default function ReviewLensDashboard() {
       const data = await res.json();
       if (data.success) {
         setCacheCount(0);
-        // Refresh analysis telemetry if already loaded
         if (summary) {
           setSummary({
             ...summary,
@@ -105,7 +99,7 @@ export default function ReviewLensDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#0b0d14] text-[#eef0f5] flex flex-col font-sans">
       <Navbar
         cacheEntries={cacheCount}
         apiProvider={summary?.telemetry?.api_provider || apiProvider}
@@ -113,21 +107,19 @@ export default function ReviewLensDashboard() {
         isLoading={isLoading}
       />
 
-      <main className="flex-1 mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
-        {/* Hero Section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-800/80 pb-6">
+      <main className="flex-1 mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-6">
+        {/* Header Section */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-white/[0.08] pb-5">
           <div>
-            <div className="inline-flex items-center gap-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 text-xs font-semibold text-indigo-300 mb-3">
-              <Sparkles className="h-3.5 w-3.5" />
-              Turn Raw Reviews Into Store Owner Action in Seconds
-            </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-              E-Commerce Review Intelligence
+            <h1 className="text-xl sm:text-2xl font-medium tracking-tight text-[#eef0f5]">
+              Review intelligence
             </h1>
-            <p className="mt-2 text-sm text-slate-400 max-w-2xl">
-              Extract real customer sentiment, isolate top praises and complaints, catch rating mismatches,
-              and craft tailored support responses on-demand with adversarial prompt defense.
+            <p className="mt-1 text-xs text-[#7a8296] max-w-xl leading-relaxed">
+              Customer sentiment, recurring complaints, rating mismatch detection, and on-demand merchant reply queue.
             </p>
+          </div>
+          <div className="text-xs text-[#7a8296] font-mono">
+            October 2026 dataset
           </div>
         </div>
 
@@ -141,16 +133,16 @@ export default function ReviewLensDashboard() {
         </section>
 
         {error && (
-          <div className="rounded-2xl border border-rose-500/30 bg-rose-500/10 p-4 text-xs text-rose-300 flex items-center gap-2">
-            <AlertCircle className="h-4 w-4 shrink-0 text-rose-400" />
+          <div className="rounded-xl border border-[#e5484d]/30 bg-[#e5484d]/10 p-3 text-xs text-[#e5484d] flex items-center gap-2">
+            <AlertCircle className="h-4 w-4 shrink-0" strokeWidth={1.5} />
             <span>{error}</span>
           </div>
         )}
 
         {/* Dashboard Content */}
         {summary && (
-          <div className="space-y-8 animate-in fade-in duration-300">
-            {/* Telemetry & Cost intelligence */}
+          <div className="space-y-6 animate-in fade-in duration-200">
+            {/* Telemetry Bar */}
             <TelemetryBar telemetry={summary.telemetry} />
 
             {/* Summary Cards */}
@@ -171,29 +163,29 @@ export default function ReviewLensDashboard() {
             </section>
 
             {/* View Switcher Tabs (Explorer vs Product View) */}
-            <div className="flex items-center gap-2 border-b border-slate-800 pb-3">
+            <div className="flex items-center gap-1.5 border-b border-white/[0.08] pb-2.5">
               <button
                 onClick={() => setActiveTab('reviews')}
-                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all ${
+                className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
                   activeTab === 'reviews'
-                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30'
-                    : 'bg-slate-900 text-slate-400 hover:text-slate-200'
+                    ? 'bg-[#1a1e28] text-[#eef0f5] border border-white/[0.1]'
+                    : 'text-[#7a8296] hover:text-[#a3a9b8]'
                 }`}
               >
-                <Layers className="h-4 w-4" />
-                Review Explorer Table ({reviews.length})
+                <Layers className="h-3.5 w-3.5" strokeWidth={1.5} />
+                Reviews table ({reviews.length})
               </button>
 
               <button
                 onClick={() => setActiveTab('products')}
-                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all ${
+                className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
                   activeTab === 'products'
-                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30'
-                    : 'bg-slate-900 text-slate-400 hover:text-slate-200'
+                    ? 'bg-[#1a1e28] text-[#eef0f5] border border-white/[0.1]'
+                    : 'text-[#7a8296] hover:text-[#a3a9b8]'
                 }`}
               >
-                <Package className="h-4 w-4" />
-                Product Insights Breakdown ({summary.product_insights.length})
+                <Package className="h-3.5 w-3.5" strokeWidth={1.5} />
+                Product analytics ({summary.product_insights.length})
               </button>
             </div>
 
@@ -222,15 +214,14 @@ export default function ReviewLensDashboard() {
 
         {/* Empty State when no data has been loaded */}
         {!summary && !isLoading && (
-          <div className="rounded-2xl border border-slate-800/80 bg-slate-900/30 p-12 text-center max-w-xl mx-auto space-y-4">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-800 text-slate-400">
-              <Info className="h-6 w-6" />
+          <div className="rounded-xl border border-white/[0.06] bg-[#11141c]/50 p-8 text-center max-w-md mx-auto space-y-2">
+            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.06] bg-[#1a1e28] text-[#7a8296]">
+              <FileQuestion className="h-4 w-4" strokeWidth={1.5} />
             </div>
-            <h3 className="text-base font-semibold text-slate-200">No review data loaded yet</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Upload your <code className="font-mono text-indigo-300">reviews.csv</code> file above or click{' '}
-              <strong className="text-indigo-400">&quot;Load Official Benchmark&quot;</strong> to view instant AI sentiment
-              breakdowns, top customer complaints, and on-demand merchant replies.
+            <h3 className="text-xs font-medium text-[#eef0f5]">No review data loaded</h3>
+            <p className="text-[11px] text-[#7a8296] leading-relaxed">
+              Upload <code className="font-mono text-[#a3a9b8]">reviews.csv</code> or click{' '}
+              <span className="text-[#eef0f5]">Load benchmark dataset</span> to populate review intelligence.
             </p>
           </div>
         )}
@@ -244,12 +235,11 @@ export default function ReviewLensDashboard() {
       />
 
       {/* Footer */}
-      <footer className="mt-auto border-t border-slate-800/80 bg-slate-950/60 py-6 text-center text-xs text-slate-500">
-        <div className="mx-auto max-w-7xl px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <footer className="mt-auto border-t border-white/[0.06] bg-[#0b0d14] py-4 text-xs text-[#7a8296]">
+        <div className="mx-auto max-w-7xl px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <span>ReviewLens — CEDCOSS Technical Assessment (Batch 2027)</span>
-          <span className="flex items-center gap-1.5 text-slate-400">
-            <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
-            Built with Next.js 14, TypeScript &amp; Google Gemini AI
+          <span className="font-mono text-[11px] text-[#7a8296]">
+            Ink &amp; Graphite design system (Unslop craft)
           </span>
         </div>
       </footer>

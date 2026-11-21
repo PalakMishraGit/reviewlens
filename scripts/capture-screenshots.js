@@ -19,9 +19,9 @@ async function capture() {
   console.log('Navigating to http://localhost:3000...');
   await page.goto('http://localhost:3000', { waitUntil: 'networkidle2' });
 
-  // 1. Initial empty page or click "Load Official Benchmark"
-  console.log('Clicking Load Official Benchmark button...');
-  const sampleBtn = await page.waitForSelector('button::-p-text("Load Official Benchmark")');
+  // 1. Initial empty page or click "Load benchmark dataset"
+  console.log('Clicking Load benchmark dataset button...');
+  const sampleBtn = await page.waitForSelector('button::-p-text("Load benchmark dataset")');
   if (sampleBtn) {
     await sampleBtn.click();
   }
@@ -37,9 +37,9 @@ async function capture() {
     fullPage: false,
   });
 
-  // 2. Click "Draft Reply" button on the first review requiring a reply
-  console.log('Opening Draft Reply modal...');
-  const draftBtn = await page.waitForSelector('button::-p-text("Draft Reply")');
+  // 2. Click "Draft reply" button on the first review requiring a reply
+  console.log('Opening Draft reply modal...');
+  const draftBtn = await page.waitForSelector('button::-p-text("Draft reply")');
   if (draftBtn) {
     await draftBtn.click();
     // Wait for modal & textarea
@@ -61,8 +61,8 @@ async function capture() {
   }
 
   // 3. Switch to Product Analytics tab
-  console.log('Switching to Product Insights Breakdown tab...');
-  const productTab = await page.waitForSelector('button::-p-text("Product Insights Breakdown")');
+  console.log('Switching to Product analytics tab...');
+  const productTab = await page.waitForSelector('button::-p-text("Product analytics")');
   if (productTab) {
     await productTab.click();
     await new Promise(r => setTimeout(r, 800));

@@ -3,28 +3,47 @@
 @tailwind utilities;
 
 :root {
-  --background: #090d16;
-  --foreground: #f1f5f9;
+  --background: #0b0d14;
+  --surface-deep: #07080d;
+  --surface-card: #11141c;
+  --surface-raised: #1a1e28;
+  --hairline: rgba(255, 255, 255, 0.08);
+  --text-primary: #eef0f5;
+  --text-secondary: #a3a9b8;
+  --text-muted: #7a8296;
 }
 
 body {
-  color: var(--foreground);
+  color: var(--text-primary);
   background: var(--background);
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar */
+/* Hairline utility */
+.border-hairline {
+  border-color: var(--hairline);
+}
+
+/* Tabular figures for all metrics and data */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Minimalist scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #0b0d14;
 }
 ::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 4px;
+  background: #232734;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #32384a;
 }

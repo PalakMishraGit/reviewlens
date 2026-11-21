@@ -1,18 +1,13 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { CleanedReview, Sentiment, Topic } from '@/types/review';
+import { CleanedReview, Topic } from '@/types/review';
 import {
   Search,
-  Filter,
   Star,
-  MessageSquareReply,
+  MessageSquare,
   AlertTriangle,
-  Copy,
-  Check,
-  ShieldAlert,
-  Sparkles,
-  Layers,
+  ShieldCheck,
   ArrowUpDown,
 } from 'lucide-react';
 
@@ -150,44 +145,38 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
     onlyMismatches;
 
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 backdrop-blur-sm">
+    <div className="rounded-xl border border-white/[0.08] bg-[#11141c] p-5">
       {/* Header and Filter Controls */}
-      <div className="flex flex-col gap-4 border-b border-slate-800 pb-5">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div>
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <Layers className="h-5 w-5 text-indigo-400" />
-              Customer Reviews Explorer
-              <span className="rounded-full bg-slate-800 px-2.5 py-0.5 text-xs font-medium text-slate-300">
-                {filteredReviews.length} of {reviews.length}
-              </span>
-            </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Filter by product, sentiment, detected topic, or unresolved customer issues
-            </p>
+      <div className="flex flex-col gap-3 border-b border-white/[0.06] pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-medium text-[#eef0f5]">Customer reviews</h3>
+            <span className="font-mono text-xs tabular-nums text-[#7a8296] bg-[#1a1e28] px-2 py-0.5 rounded border border-white/[0.06]">
+              {filteredReviews.length} of {reviews.length}
+            </span>
           </div>
 
           {hasActiveFilters && (
             <button
               onClick={clearAllFilters}
-              className="text-xs text-indigo-400 hover:text-indigo-300 font-medium underline underline-offset-4 self-start sm:self-auto"
+              className="text-xs text-[#a3a9b8] hover:text-[#eef0f5] underline underline-offset-4 self-start sm:self-auto"
             >
-              Reset all filters
+              Reset filters
             </button>
           )}
         </div>
 
         {/* Filter Toolbar */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 pt-1">
           {/* Search Input */}
           <div className="relative">
-            <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-500" />
+            <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-[#7a8296]" strokeWidth={1.5} />
             <input
               type="text"
-              placeholder="Search text, ID, summary..."
+              placeholder="Search reviews..."
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              className="w-full rounded-xl border border-slate-800 bg-slate-950/80 py-2 pl-9 pr-3 text-xs text-slate-200 placeholder:text-slate-500 focus:border-indigo-500 focus:outline-none"
+              className="h-8 w-full rounded-lg border border-white/[0.08] bg-[#161a24] pl-8 pr-2.5 text-xs text-[#eef0f5] placeholder:text-[#7a8296] focus:border-white/30 focus:outline-none"
             />
           </div>
 
@@ -196,9 +185,9 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
             <select
               value={selectedProduct}
               onChange={e => setSelectedProduct(e.target.value)}
-              className="w-full rounded-xl border border-slate-800 bg-slate-950/80 py-2 px-3 text-xs text-slate-200 focus:border-indigo-500 focus:outline-none"
+              className="h-8 w-full rounded-lg border border-white/[0.08] bg-[#161a24] px-2.5 text-xs text-[#eef0f5] focus:border-white/30 focus:outline-none"
             >
-              <option value="all">All Products ({products.length})</option>
+              <option value="all">All products ({products.length})</option>
               {products.map(p => (
                 <option key={p} value={p}>
                   {p}
@@ -212,9 +201,9 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
             <select
               value={selectedSentiment}
               onChange={e => setSelectedSentiment(e.target.value)}
-              className="w-full rounded-xl border border-slate-800 bg-slate-950/80 py-2 px-3 text-xs text-slate-200 focus:border-indigo-500 focus:outline-none"
+              className="h-8 w-full rounded-lg border border-white/[0.08] bg-[#161a24] px-2.5 text-xs text-[#eef0f5] focus:border-white/30 focus:outline-none"
             >
-              <option value="all">All Sentiments</option>
+              <option value="all">All sentiments</option>
               <option value="positive">Positive</option>
               <option value="neutral">Neutral</option>
               <option value="negative">Negative</option>
@@ -226,37 +215,37 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
             <select
               value={selectedTopic}
               onChange={e => setSelectedTopic(e.target.value)}
-              className="w-full rounded-xl border border-slate-800 bg-slate-950/80 py-2 px-3 text-xs text-slate-200 focus:border-indigo-500 focus:outline-none"
+              className="h-8 w-full rounded-lg border border-white/[0.08] bg-[#161a24] px-2.5 text-xs text-[#eef0f5] focus:border-white/30 focus:outline-none"
             >
-              <option value="all">All Topics</option>
+              <option value="all">All topics</option>
               <option value="quality">Quality</option>
               <option value="delivery">Delivery</option>
               <option value="price">Price</option>
               <option value="packaging">Packaging</option>
               <option value="support">Support</option>
-              <option value="size_fit">Size & Fit</option>
+              <option value="size_fit">Size &amp; fit</option>
               <option value="other">Other</option>
             </select>
           </div>
 
           {/* Toggles */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <button
               onClick={() => setOnlyNeedsReply(!onlyNeedsReply)}
-              className={`flex-1 rounded-xl border py-2 px-2.5 text-[11px] font-semibold transition-all ${
+              className={`h-8 flex-1 rounded-lg border text-xs font-medium transition-colors ${
                 onlyNeedsReply
-                  ? 'border-indigo-500 bg-indigo-500/20 text-indigo-300'
-                  : 'border-slate-800 bg-slate-950/80 text-slate-400 hover:border-slate-700'
+                  ? 'border-white/30 bg-[#1a1e28] text-[#eef0f5]'
+                  : 'border-white/[0.08] bg-[#161a24] text-[#7a8296] hover:text-[#a3a9b8]'
               }`}
             >
-              Needs Reply
+              Needs reply
             </button>
             <button
               onClick={() => setOnlyMismatches(!onlyMismatches)}
-              className={`flex-1 rounded-xl border py-2 px-2.5 text-[11px] font-semibold transition-all ${
+              className={`h-8 flex-1 rounded-lg border text-xs font-medium transition-colors ${
                 onlyMismatches
-                  ? 'border-orange-500 bg-orange-500/20 text-orange-300'
-                  : 'border-slate-800 bg-slate-950/80 text-slate-400 hover:border-slate-700'
+                  ? 'border-[#eab308]/40 bg-[#eab308]/10 text-[#eab308]'
+                  : 'border-white/[0.08] bg-[#161a24] text-[#7a8296] hover:text-[#a3a9b8]'
               }`}
             >
               Mismatches
@@ -266,48 +255,48 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
       </div>
 
       {/* Table */}
-      <div className="mt-4 overflow-x-auto">
+      <div className="mt-2 overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="border-b border-slate-800 text-[11px] uppercase tracking-wider text-slate-400">
+            <tr className="border-b border-white/[0.06] text-[11px] text-[#7a8296]">
               <th
                 onClick={() => toggleSort('id')}
-                className="py-3 px-3 cursor-pointer hover:text-white font-semibold"
+                className="py-2.5 px-3 cursor-pointer hover:text-[#eef0f5] font-normal"
               >
                 <div className="flex items-center gap-1">
                   ID
-                  <ArrowUpDown className="h-3 w-3" />
+                  <ArrowUpDown className="h-3 w-3" strokeWidth={1.5} />
                 </div>
               </th>
               <th
                 onClick={() => toggleSort('product')}
-                className="py-3 px-3 cursor-pointer hover:text-white font-semibold"
+                className="py-2.5 px-3 cursor-pointer hover:text-[#eef0f5] font-normal"
               >
                 <div className="flex items-center gap-1">
                   Product
-                  <ArrowUpDown className="h-3 w-3" />
+                  <ArrowUpDown className="h-3 w-3" strokeWidth={1.5} />
                 </div>
               </th>
               <th
                 onClick={() => toggleSort('rating')}
-                className="py-3 px-3 cursor-pointer hover:text-white font-semibold"
+                className="py-2.5 px-3 cursor-pointer hover:text-[#eef0f5] font-normal"
               >
                 <div className="flex items-center gap-1">
                   Rating
-                  <ArrowUpDown className="h-3 w-3" />
+                  <ArrowUpDown className="h-3 w-3" strokeWidth={1.5} />
                 </div>
               </th>
-              <th className="py-3 px-3 font-semibold">Sentiment</th>
-              <th className="py-3 px-3 font-semibold">Topics</th>
-              <th className="py-3 px-4 font-semibold min-w-[260px]">Customer Review & AI Summary</th>
-              <th className="py-3 px-3 text-right font-semibold">Action</th>
+              <th className="py-2.5 px-3 font-normal">Sentiment</th>
+              <th className="py-2.5 px-3 font-normal">Topics</th>
+              <th className="py-2.5 px-3 font-normal min-w-[280px]">Review &amp; summary</th>
+              <th className="py-2.5 px-3 text-right font-normal">Action</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800/60 text-xs">
+          <tbody className="divide-y divide-white/[0.04] text-xs">
             {filteredReviews.length === 0 ? (
               <tr>
-                <td colSpan={7} className="py-12 text-center text-slate-500">
-                  No reviews match your selected filter criteria.
+                <td colSpan={7} className="py-10 text-center text-xs text-[#7a8296]">
+                  No reviews match your selected filters.
                 </td>
               </tr>
             ) : (
@@ -317,24 +306,24 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                 return (
                   <tr
                     key={review.review_id}
-                    className="group hover:bg-slate-800/30 transition-colors"
+                    className="hover:bg-[#161a24]/50 transition-colors"
                   >
                     {/* Review ID */}
-                    <td className="py-3 px-3 font-mono font-medium text-slate-300">
+                    <td className="py-2.5 px-3 font-mono text-[11px] text-[#a3a9b8]">
                       <div className="flex items-center gap-1.5">
                         <span>{review.review_id}</span>
                         {isSpecialInjection && (
                           <span
-                            title="Tested for prompt injection resistance"
-                            className="rounded bg-rose-500/20 text-rose-300 p-0.5"
+                            title="Prompt injection defense verified"
+                            className="text-[#4cc38a]"
                           >
-                            <ShieldAlert className="h-3 w-3" />
+                            <ShieldCheck className="h-3.5 w-3.5" strokeWidth={1.5} />
                           </span>
                         )}
                         {review.is_duplicate && (
                           <span
                             title={`Duplicate of ${review.duplicate_of}`}
-                            className="rounded bg-slate-800 text-slate-400 px-1 text-[10px]"
+                            className="rounded bg-[#1a1e28] text-[#7a8296] px-1 text-[10px] font-mono"
                           >
                             dup
                           </span>
@@ -343,95 +332,85 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                     </td>
 
                     {/* Product */}
-                    <td className="py-3 px-3 font-medium text-slate-200">
+                    <td className="py-2.5 px-3 font-normal text-[#eef0f5]">
                       {review.product}
                     </td>
 
                     {/* Rating with Mismatch Flag */}
-                    <td className="py-3 px-3">
-                      <div className="flex flex-col gap-1">
-                        <div className="flex items-center gap-1">
-                          {review.rating !== null ? (
-                            <>
-                              <div className="flex items-center text-amber-400">
-                                {Array.from({ length: 5 }).map((_, i) => (
-                                  <Star
-                                    key={i}
-                                    className={`h-3 w-3 ${
-                                      i < review.rating! ? 'fill-amber-400' : 'text-slate-700'
-                                    }`}
-                                  />
-                                ))}
-                              </div>
-                              <span className="font-semibold text-slate-300 ml-1">{review.rating}</span>
-                            </>
-                          ) : (
-                            <span className="rounded bg-slate-800 px-1.5 py-0.5 text-[10px] text-slate-400">
-                              Unknown (was: &quot;{review.raw_rating}&quot;)
-                            </span>
-                          )}
-                        </div>
+                    <td className="py-2.5 px-3">
+                      <div className="flex items-center gap-1.5">
+                        {review.rating !== null ? (
+                          <>
+                            <div className="flex items-center text-[#eab308]">
+                              <Star className="h-3 w-3 fill-[#eab308]" strokeWidth={1} />
+                            </div>
+                            <span className="font-mono text-xs tabular-nums text-[#eef0f5]">{review.rating}</span>
+                          </>
+                        ) : (
+                          <span className="font-mono text-[10px] text-[#7a8296]">
+                            unknown
+                          </span>
+                        )}
 
                         {review.rating_mismatch && (
-                          <div
+                          <span
                             title={review.mismatch_reason}
-                            className="inline-flex items-center gap-1 rounded bg-orange-500/10 border border-orange-500/30 px-1.5 py-0.5 text-[10px] font-semibold text-orange-400"
+                            className="font-mono text-[10px] text-[#eab308] bg-[#eab308]/10 border border-[#eab308]/20 px-1 py-0.2 rounded"
                           >
-                            <AlertTriangle className="h-2.5 w-2.5" />
-                            Mismatch
-                          </div>
+                            mismatch
+                          </span>
                         )}
                       </div>
                     </td>
 
                     {/* Sentiment */}
-                    <td className="py-3 px-3">
+                    <td className="py-2.5 px-3">
                       {review.analysis_status === 'skipped_empty' ? (
-                        <span className="rounded-full bg-slate-800 px-2.5 py-1 text-[11px] font-medium text-slate-400">
-                          Empty
-                        </span>
+                        <span className="text-[11px] text-[#7a8296]">empty</span>
                       ) : review.analysis_status === 'analysis_failed' ? (
-                        <span className="rounded-full bg-rose-500/20 px-2.5 py-1 text-[11px] font-medium text-rose-300 border border-rose-500/30">
-                          Analysis Failed
+                        <span className="font-mono text-[10px] text-[#e5484d] bg-[#e5484d]/10 px-1.5 py-0.5 rounded">
+                          failed
                         </span>
                       ) : (
-                        <span
-                          className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold border ${
-                            review.analysis?.sentiment === 'positive'
-                              ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
-                              : review.analysis?.sentiment === 'neutral'
-                              ? 'bg-amber-500/10 text-amber-400 border-amber-500/30'
-                              : 'bg-rose-500/10 text-rose-400 border-rose-500/30'
-                          }`}
-                        >
-                          {review.analysis?.sentiment}
-                        </span>
+                        <div className="flex items-center gap-1.5">
+                          <span
+                            className={`h-1.5 w-1.5 rounded-full ${
+                              review.analysis?.sentiment === 'positive'
+                                ? 'bg-[#4cc38a]'
+                                : review.analysis?.sentiment === 'neutral'
+                                ? 'bg-[#eab308]'
+                                : 'bg-[#e5484d]'
+                            }`}
+                          />
+                          <span className="capitalize text-[#eef0f5] text-[11px]">
+                            {review.analysis?.sentiment}
+                          </span>
+                        </div>
                       )}
                     </td>
 
                     {/* Topics */}
-                    <td className="py-3 px-3">
-                      <div className="flex flex-wrap gap-1 max-w-[160px]">
+                    <td className="py-2.5 px-3">
+                      <div className="flex flex-wrap gap-1 max-w-[150px]">
                         {review.analysis?.topics?.map(topic => (
                           <span
                             key={topic}
-                            className="rounded-md bg-slate-800/80 px-1.5 py-0.5 text-[10px] font-medium text-slate-300 border border-slate-700/50"
+                            className="rounded bg-[#1a1e28] px-1.5 py-0.2 text-[10px] text-[#a3a9b8] border border-white/[0.04]"
                           >
                             {topic}
                           </span>
-                        )) || <span className="text-slate-500">-</span>}
+                        )) || <span className="text-[#7a8296]">-</span>}
                       </div>
                     </td>
 
                     {/* Review text & AI summary */}
-                    <td className="py-3 px-4">
-                      <div className="space-y-1">
-                        <p className="text-slate-300 italic line-clamp-2">
-                          &quot;{review.cleaned_text || <span className="text-slate-600">(empty review text)</span>}&quot;
+                    <td className="py-2.5 px-3">
+                      <div className="space-y-0.5">
+                        <p className="text-[#a3a9b8] text-xs line-clamp-2">
+                          {review.cleaned_text || <span className="text-[#7a8296]">(empty review)</span>}
                         </p>
                         {review.analysis?.summary && (
-                          <p className="text-indigo-300 font-medium text-[11px] flex items-center gap-1.5">
-                            <Sparkles className="h-3 w-3 shrink-0 text-indigo-400" />
+                          <p className="text-[#eef0f5] text-[11px]">
                             {review.analysis.summary}
                           </p>
                         )}
@@ -439,17 +418,17 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                     </td>
 
                     {/* Action */}
-                    <td className="py-3 px-3 text-right">
+                    <td className="py-2.5 px-3 text-right">
                       {review.analysis?.needs_reply ? (
                         <button
                           onClick={() => onOpenReplyModal(review)}
-                          className="inline-flex items-center gap-1.5 rounded-xl border border-indigo-500/40 bg-indigo-600/20 px-3 py-1.5 text-[11px] font-semibold text-indigo-300 hover:bg-indigo-600/30 hover:border-indigo-500/70 transition-all shadow-sm"
+                          className="inline-flex items-center gap-1.5 rounded-md border border-white/[0.12] bg-[#1a1e28] px-2.5 py-1 text-[11px] font-medium text-[#eef0f5] hover:bg-[#232734] transition-colors"
                         >
-                          <MessageSquareReply className="h-3 w-3" />
-                          Draft Reply
+                          <MessageSquare className="h-3 w-3 text-[#a3a9b8]" strokeWidth={1.5} />
+                          Draft reply
                         </button>
                       ) : (
-                        <span className="text-[11px] text-slate-500">No reply needed</span>
+                        <span className="text-[11px] text-[#7a8296]">None</span>
                       )}
                     </td>
                   </tr>

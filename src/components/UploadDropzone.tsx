@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { UploadCloud, FileText, CheckCircle2, AlertCircle, Loader2, Sparkles, ShieldAlert } from 'lucide-react';
+import { Upload, FileText, Check, AlertCircle, Loader2, ShieldCheck } from 'lucide-react';
 
 interface UploadDropzoneProps {
   onAnalyze: (csvText: string, filename: string) => Promise<void>;
@@ -49,7 +49,7 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
 
   const processFile = async (file: File) => {
     if (!file.name.endsWith('.csv') && file.type !== 'text/csv') {
-      setError('Please upload a valid .csv file.');
+      setError('Please upload a valid .csv file');
       return;
     }
     setSelectedFileName(file.name);
@@ -63,7 +63,7 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
 
   const handleLoadSample = async () => {
     setError(null);
-    setSelectedFileName('reviews.csv (Official Benchmark)');
+    setSelectedFileName('reviews.csv');
     try {
       const res = await fetch('/api/sample');
       const data = await res.json();
@@ -77,17 +77,17 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full space-y-3">
       <div
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={() => !isLoading && fileInputRef.current?.click()}
-        className={`group relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed p-8 transition-all cursor-pointer ${
+        className={`group relative flex flex-col items-center justify-center rounded-xl border border-dashed transition-colors cursor-pointer py-9 px-6 ${
           isDragOver
-            ? 'border-indigo-500 bg-indigo-500/10 scale-[1.005]'
-            : 'border-slate-800 bg-slate-900/60 hover:border-slate-700 hover:bg-slate-900/90'
-        } ${isLoading ? 'pointer-events-none opacity-80' : ''}`}
+            ? 'border-white/40 bg-[#161a24]'
+            : 'border-white/[0.12] bg-[#11141c]/70 hover:border-white/[0.22] hover:bg-[#11141c]'
+        } ${isLoading ? 'pointer-events-none opacity-70' : ''}`}
       >
         <input
           ref={fileInputRef}
@@ -98,45 +98,45 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
           disabled={isLoading}
         />
 
-        <div className="flex flex-col items-center text-center max-w-xl">
+        <div className="flex flex-col items-center text-center max-w-lg">
           {isLoading ? (
-            <div className="flex flex-col items-center gap-3 py-4">
-              <Loader2 className="h-10 w-10 text-indigo-400 animate-spin" />
-              <div className="text-base font-semibold text-slate-200">{loadingMessage}</div>
-              <p className="text-xs text-slate-400">
-                Parsing rows • Checking persistent SHA-256 cache • Batching AI calls • Defeating injections
+            <div className="flex flex-col items-center gap-3 py-3">
+              <Loader2 className="h-6 w-6 text-[#a3a9b8] animate-spin" strokeWidth={1.5} />
+              <div className="text-sm font-medium text-[#eef0f5]">{loadingMessage}</div>
+              <p className="text-xs text-[#7a8296]">
+                Parsing RFC 4180 rows, querying SHA-256 cache, executing 5-item batches
               </p>
             </div>
           ) : (
             <>
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover:scale-110 transition-transform">
-                <UploadCloud className="h-7 w-7" />
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg border border-white/[0.08] bg-[#1a1e28] text-[#a3a9b8]">
+                <Upload className="h-4 w-4" strokeWidth={1.5} />
               </div>
 
-              <h3 className="text-lg font-semibold text-slate-100">
-                Upload your <code className="text-indigo-400 font-mono text-sm bg-indigo-950/60 px-1.5 py-0.5 rounded border border-indigo-800/40">reviews.csv</code> file
-              </h3>
-              <p className="mt-1 text-sm text-slate-400">
-                Drag and drop your CSV here, or click to browse from your device
+              <div className="text-sm font-medium text-[#eef0f5]">
+                Drop <span className="font-mono text-xs text-[#a3a9b8]">reviews.csv</span> here or click to browse
+              </div>
+              <p className="mt-1 text-xs text-[#7a8296]">
+                Supports comma-separated files up to 10 MB
               </p>
 
-              {/* Benchmark Dataset Feature Tags */}
-              <div className="mt-5 flex flex-wrap justify-center gap-2 text-xs">
-                <span className="inline-flex items-center gap-1 rounded-full bg-slate-800/90 px-2.5 py-1 text-slate-300 border border-slate-700/60">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
-                  Hinglish & Hindi support
+              {/* Verified Capabilities */}
+              <div className="mt-4 flex flex-wrap justify-center gap-2 text-[11px] text-[#a3a9b8]">
+                <span className="inline-flex items-center gap-1 rounded border border-white/[0.06] bg-[#1a1e28]/60 px-2 py-0.5">
+                  <Check className="h-3 w-3 text-[#4cc38a]" strokeWidth={1.5} />
+                  Hindi &amp; Hinglish parsing
                 </span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-slate-800/90 px-2.5 py-1 text-slate-300 border border-slate-700/60">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
-                  Empty & duplicate detection
+                <span className="inline-flex items-center gap-1 rounded border border-white/[0.06] bg-[#1a1e28]/60 px-2 py-0.5">
+                  <Check className="h-3 w-3 text-[#4cc38a]" strokeWidth={1.5} />
+                  Duplicate &amp; empty detection
                 </span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-slate-800/90 px-2.5 py-1 text-slate-300 border border-slate-700/60">
-                  <ShieldAlert className="h-3.5 w-3.5 text-amber-400" />
+                <span className="inline-flex items-center gap-1 rounded border border-white/[0.06] bg-[#1a1e28]/60 px-2 py-0.5">
+                  <ShieldCheck className="h-3 w-3 text-[#4cc38a]" strokeWidth={1.5} />
                   R012 prompt injection defense
                 </span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-slate-800/90 px-2.5 py-1 text-slate-300 border border-slate-700/60">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-indigo-400" />
-                  Rating mismatch check
+                <span className="inline-flex items-center gap-1 rounded border border-white/[0.06] bg-[#1a1e28]/60 px-2 py-0.5">
+                  <Check className="h-3 w-3 text-[#4cc38a]" strokeWidth={1.5} />
+                  Rating mismatch detection
                 </span>
               </div>
             </>
@@ -144,15 +144,15 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
         </div>
       </div>
 
-      {/* Quick Action: Load Sample Benchmark Button */}
-      <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3 px-1">
-        <div className="flex items-center gap-2 text-xs text-slate-400">
-          <FileText className="h-4 w-4 text-slate-500" />
+      {/* Control row */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-1">
+        <div className="flex items-center gap-1.5 text-xs text-[#7a8296]">
+          <FileText className="h-3.5 w-3.5" strokeWidth={1.5} />
           <span>
             {selectedFileName ? (
-              <span className="text-slate-200 font-medium">Selected: {selectedFileName}</span>
+              <span className="text-[#eef0f5] font-mono text-[11px]">{selectedFileName}</span>
             ) : (
-              'Expected columns: review_id, product, rating, date, review_text'
+              'Columns: review_id, product, rating, date, review_text'
             )}
           </span>
         </div>
@@ -161,16 +161,15 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
           type="button"
           onClick={handleLoadSample}
           disabled={isLoading}
-          className="inline-flex items-center gap-2 rounded-xl border border-indigo-500/40 bg-indigo-600/20 px-3.5 py-2 text-xs font-semibold text-indigo-300 shadow-sm hover:bg-indigo-600/30 hover:border-indigo-500/60 transition-all disabled:opacity-50"
+          className="inline-flex h-8 items-center gap-2 rounded-lg bg-[#eef0f5] px-3 text-xs font-medium text-[#0b0d14] hover:bg-white active:scale-[0.98] transition-all disabled:opacity-50"
         >
-          <Sparkles className="h-3.5 w-3.5 text-indigo-400" />
-          Load Official Benchmark (reviews.csv)
+          Load benchmark dataset (30 reviews)
         </button>
       </div>
 
       {error && (
-        <div className="mt-3 flex items-center gap-2 rounded-xl border border-rose-500/30 bg-rose-500/10 p-3 text-xs text-rose-300">
-          <AlertCircle className="h-4 w-4 shrink-0 text-rose-400" />
+        <div className="flex items-center gap-2 rounded-lg border border-[#e5484d]/30 bg-[#e5484d]/10 p-3 text-xs text-[#e5484d]">
+          <AlertCircle className="h-4 w-4 shrink-0" strokeWidth={1.5} />
           <span>{error}</span>
         </div>
       )}
