@@ -1,3 +1,15 @@
+commit 0a2e9f35341abef5b72f7cd2c9cf391b51c8e654
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 23:43:31 +0530
+
+    feat(gemini): integrate Google Gemini 2.5 Flash live API with key, pace skeleton loader across 4 stages, and add modern social links in footer
+
+commit 2ee5d3d1759b421cb86ac68861c2794568c8283a
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 23:31:34 +0530
+
+    docs(submission): update gitlog.txt with live Gemini AI configuration commits
+
 commit eaca54b7c1e1586149c1eb991bf158b5cbc4c81e
 Author: Amrit <amrit@reviewlens.local>
 Date:   2026-11-21 23:31:22 +0530
