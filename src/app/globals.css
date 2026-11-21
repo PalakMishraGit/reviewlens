@@ -169,3 +169,48 @@ body {
     rgba(0, 0, 0, 0) 100%
   );
 }
+
+
+/* Premium hover glow effect for dashboard cards */
+.card-glow:hover {
+  box-shadow: 0 0 0 1px var(--hairline-strong), 0 4px 24px -4px rgba(0, 0, 0, 0.12);
+}
+
+.dark .card-glow:hover,
+:root .card-glow:hover {
+  box-shadow: 0 0 0 1px var(--hairline-strong), 0 4px 24px -4px rgba(0, 0, 0, 0.5);
+}
+
+.light .card-glow:hover,
+[data-theme="light"] .card-glow:hover {
+  box-shadow: 0 0 0 1px var(--hairline-strong), 0 4px 24px -4px rgba(0, 0, 0, 0.08);
+}
+
+/* Smooth section entrance animations */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-section-in {
+  animation: fadeSlideUp 0.4s ease-out both;
+}
+
+/* Staggered section animation delays */
+.animate-delay-100 { animation-delay: 100ms; }
+.animate-delay-200 { animation-delay: 200ms; }
+.animate-delay-300 { animation-delay: 300ms; }
+.animate-delay-400 { animation-delay: 400ms; }
+.animate-delay-500 { animation-delay: 500ms; }
+
+/* Premium focus ring for interactive elements */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--hairline-focus);
+  outline-offset: 2px;
+}

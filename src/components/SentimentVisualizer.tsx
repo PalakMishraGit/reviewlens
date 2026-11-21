@@ -27,7 +27,7 @@ export const SentimentVisualizer: React.FC<SentimentVisualizerProps> = ({
   );
 
   return (
-    <div className="rounded-xl border border-hairline bg-surface-1 p-5 shadow-sm space-y-4">
+    <div className="rounded-xl border border-hairline bg-surface-1 p-6 shadow-sm space-y-5">
       {/* Header with NSS & CSAT telemetry */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-3.5">
         <div>
@@ -72,7 +72,7 @@ export const SentimentVisualizer: React.FC<SentimentVisualizerProps> = ({
 
       {/* Segmented Progress Bar */}
       <div className="space-y-3">
-        <div className="relative flex h-4 w-full overflow-hidden rounded-full bg-surface-3 p-0.5 gap-1 shadow-inner">
+        <div className="relative flex h-5 w-full overflow-hidden rounded-full bg-surface-3 p-0.5 gap-1 shadow-inner">
           {/* Positive segment */}
           <motion.button
             type="button"

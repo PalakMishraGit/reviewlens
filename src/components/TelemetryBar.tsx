@@ -25,7 +25,7 @@ export const TelemetryBar: React.FC<TelemetryBarProps> = ({ telemetry }) => {
       : 100;
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-hairline bg-surface-1 px-5 py-3 text-xs sm:text-sm text-ink-subtle shadow-sm">
+    <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-hairline bg-surface-1 px-6 py-4 text-xs sm:text-sm text-ink-subtle shadow-sm">
       <div className="flex items-center gap-2.5">
         <div className="flex items-center gap-2 font-bold text-ink text-sm">
           <Zap className="h-4 w-4 text-amber-500" />
@@ -37,7 +37,7 @@ export const TelemetryBar: React.FC<TelemetryBarProps> = ({ telemetry }) => {
         </span>
       </div>
 
-      <div className="flex flex-wrap items-center gap-5 text-xs sm:text-sm font-medium">
+      <div className="flex flex-wrap items-center gap-6 text-xs sm:text-sm font-medium">
         {/* Latency */}
         <div className="flex items-center gap-2">
           <Clock className="h-4 w-4 text-ink-tertiary" />

@@ -44,19 +44,19 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({
   } = summary;
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
       {/* 1. Total Reviews Ingested */}
       <motion.div
         whileHover={{ y: -1 }}
         transition={{ duration: 0.15 }}
-        className="relative flex flex-col justify-between rounded-xl border border-hairline bg-surface-1 p-4 sm:p-5 shadow-sm"
+        className="relative flex flex-col justify-between rounded-xl border border-hairline border-l-[3px] border-l-ink bg-surface-1 p-5 sm:p-6 shadow-sm"
       >
         <div className="flex items-center justify-between text-ink-subtle">
           <span className="text-xs font-mono font-bold uppercase tracking-wider text-ink-tertiary">01 / Ingested</span>
           <span className="kbd-cap font-mono text-xs">{total_raw_rows} raw</span>
         </div>
 
-        <div className="my-2.5 flex items-baseline gap-2">
+        <div className="my-3 flex items-baseline gap-2">
           <span className="font-mono text-3xl sm:text-4xl font-black tracking-tight text-ink tabular-nums">
             {total_analyzed}
           </span>
@@ -76,7 +76,7 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({
         whileTap={{ scale: 0.98 }}
         transition={{ duration: 0.15 }}
         onClick={() => onFilterSentiment(activeSentimentFilter === 'positive' ? 'all' : 'positive')}
-        className={`relative flex flex-col justify-between text-left rounded-xl border p-4 sm:p-5 transition-all shadow-sm cursor-pointer ${
+        className={`relative flex flex-col justify-between text-left rounded-xl border border-l-[3px] border-l-emerald-500 p-5 sm:p-6 transition-all shadow-sm cursor-pointer ${
           activeSentimentFilter === 'positive'
             ? 'border-emerald-500 bg-emerald-500/10 ring-1 ring-emerald-500'
             : 'border-hairline bg-surface-1 hover:border-emerald-500/40 hover:bg-surface-2'
@@ -94,7 +94,7 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({
           )}
         </div>
 
-        <div className="my-2.5 flex items-baseline gap-2">
+        <div className="my-3 flex items-baseline gap-2">
           <span className="font-mono text-3xl sm:text-4xl font-black tracking-tight text-emerald-500 tabular-nums">
             {sentiment_percentages.positive}%
           </span>
@@ -114,7 +114,7 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({
         whileTap={{ scale: 0.98 }}
         transition={{ duration: 0.15 }}
         onClick={() => onFilterSentiment(activeSentimentFilter === 'neutral' ? 'all' : 'neutral')}
-        className={`relative flex flex-col justify-between text-left rounded-xl border p-4 sm:p-5 transition-all shadow-sm cursor-pointer ${
+        className={`relative flex flex-col justify-between text-left rounded-xl border border-l-[3px] border-l-amber-500 p-5 sm:p-6 transition-all shadow-sm cursor-pointer ${
           activeSentimentFilter === 'neutral'
             ? 'border-amber-500 bg-amber-500/10 ring-1 ring-amber-500'
             : 'border-hairline bg-surface-1 hover:border-amber-500/40 hover:bg-surface-2'
@@ -132,7 +132,7 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({
           )}
         </div>
 
-        <div className="my-2.5 flex items-baseline gap-2">
+        <div className="my-3 flex items-baseline gap-2">
           <span className="font-mono text-3xl sm:text-4xl font-black tracking-tight text-amber-500 tabular-nums">
             {sentiment_percentages.neutral}%
           </span>
@@ -152,7 +152,7 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({
         whileTap={{ scale: 0.98 }}
         transition={{ duration: 0.15 }}
         onClick={() => onFilterSentiment(activeSentimentFilter === 'negative' ? 'all' : 'negative')}
-        className={`relative flex flex-col justify-between text-left rounded-xl border p-4 sm:p-5 transition-all shadow-sm cursor-pointer ${
+        className={`relative flex flex-col justify-between text-left rounded-xl border border-l-[3px] border-l-rose-500 p-5 sm:p-6 transition-all shadow-sm cursor-pointer ${
           activeSentimentFilter === 'negative'
             ? 'border-rose-500 bg-rose-500/10 ring-1 ring-rose-500'
             : 'border-hairline bg-surface-1 hover:border-rose-500/40 hover:bg-surface-2'
@@ -170,7 +170,7 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({
           )}
         </div>
 
-        <div className="my-2.5 flex items-baseline gap-2">
+        <div className="my-3 flex items-baseline gap-2">
           <span className="font-mono text-3xl sm:text-4xl font-black tracking-tight text-rose-500 tabular-nums">
             {sentiment_percentages.negative}%
           </span>
@@ -190,7 +190,7 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({
         whileTap={{ scale: 0.98 }}
         transition={{ duration: 0.15 }}
         onClick={onToggleNeedsReply}
-        className={`relative flex flex-col justify-between text-left rounded-xl border p-4 sm:p-5 transition-all shadow-sm cursor-pointer ${
+        className={`relative flex flex-col justify-between text-left rounded-xl border border-l-[3px] border-l-ink p-5 sm:p-6 transition-all shadow-sm cursor-pointer ${
           onlyNeedsReply
             ? 'border-ink bg-surface-3 ring-1 ring-ink'
             : 'border-hairline bg-surface-1 hover:border-hairline-strong hover:bg-surface-2'
@@ -210,7 +210,7 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({
           )}
         </div>
 
-        <div className="my-2.5 flex items-baseline gap-2">
+        <div className="my-3 flex items-baseline gap-2">
           <span className="font-mono text-3xl sm:text-4xl font-black tracking-tight text-ink tabular-nums">
             {needs_reply_count}
           </span>
@@ -230,7 +230,7 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({
         whileTap={{ scale: 0.98 }}
         transition={{ duration: 0.15 }}
         onClick={onToggleMismatches}
-        className={`relative flex flex-col justify-between text-left rounded-xl border p-4 sm:p-5 transition-all shadow-sm cursor-pointer ${
+        className={`relative flex flex-col justify-between text-left rounded-xl border border-l-[3px] border-l-amber-400 p-5 sm:p-6 transition-all shadow-sm cursor-pointer ${
           onlyMismatches
             ? 'border-amber-500 bg-amber-500/10 ring-1 ring-amber-500'
             : 'border-hairline bg-surface-1 hover:border-amber-500/40 hover:bg-surface-2'
@@ -248,7 +248,7 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({
           )}
         </div>
 
-        <div className="my-2.5 flex items-baseline gap-2">
+        <div className="my-3 flex items-baseline gap-2">
           <span className="font-mono text-3xl sm:text-4xl font-black tracking-tight text-ink tabular-nums">
             {rating_agreement_percentage}%
           </span>

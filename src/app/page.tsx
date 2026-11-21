@@ -245,9 +245,9 @@ export default function ReviewLensDashboard() {
         isLoading={isLoading}
       />
 
-      <main className="relative z-10 flex-1 mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-6">
+      <main className="relative z-10 flex-1 mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8 space-y-8">
         {/* Hero Header Section */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-hairline pb-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-hairline pb-8">
           <div>
             <div className="flex items-center gap-3">
               <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink font-sans">
@@ -303,7 +303,7 @@ export default function ReviewLensDashboard() {
 
         {/* Dashboard Content when Ready */}
         {!isLoading && summary && (
-          <div className="space-y-6 animate-in fade-in duration-200">
+          <div className="space-y-8 animate-in fade-in duration-200">
             {/* Telemetry Bar */}
             <TelemetryBar telemetry={summary.telemetry} />
 
@@ -343,7 +343,7 @@ export default function ReviewLensDashboard() {
             </section>
 
             {/* View Switcher Tabs (Reviews Table vs Product Analytics) */}
-            <div className="flex items-center gap-3 border-b border-hairline pb-3.5">
+            <div className="flex items-center gap-4 border-b border-hairline pb-4">
               <button
                 data-testid="tab-reviews"
                 onClick={() => setActiveTab('reviews')}
@@ -449,7 +449,7 @@ export default function ReviewLensDashboard() {
       <ToastContainer toasts={toasts} onDismiss={dismissToast} />
 
       {/* Enterprise Footer */}
-      <footer className="mt-auto border-t border-hairline bg-surface-1 py-5 text-xs text-ink-tertiary">
+      <footer className="mt-auto border-t border-hairline bg-surface-1 py-6 text-xs text-ink-tertiary">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <span className="font-semibold text-ink">ReviewLens</span>

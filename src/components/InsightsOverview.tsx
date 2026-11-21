@@ -17,9 +17,9 @@ export const InsightsOverview: React.FC<InsightsOverviewProps> = ({
   onSelectTopic,
 }) => {
   return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
       {/* Top Complaints Card */}
-      <div className="rounded-xl border border-hairline bg-surface-1 p-5 shadow-sm space-y-4">
+      <div className="rounded-xl border border-hairline bg-surface-1 p-6 shadow-sm space-y-5">
         <div className="flex items-center justify-between border-b border-hairline pb-3.5">
           <div className="flex items-center gap-2.5">
             <h3 className="text-base sm:text-lg font-bold text-ink flex items-center gap-2 font-sans">
@@ -32,7 +32,7 @@ export const InsightsOverview: React.FC<InsightsOverviewProps> = ({
           <span className="text-xs text-ink-subtle font-mono font-medium">Ranked by count</span>
         </div>
 
-        <div className="space-y-2.5">
+        <div className="space-y-3">
           {topComplaints.length === 0 ? (
             <div className="py-8 text-center text-sm text-ink-tertiary">No complaints detected in this dataset</div>
           ) : (
@@ -42,11 +42,11 @@ export const InsightsOverview: React.FC<InsightsOverviewProps> = ({
                 whileHover={{ y: -1 }}
                 transition={{ duration: 0.15 }}
                 onClick={() => onSelectTopic && onSelectTopic(item.topics[0])}
-                className="group flex flex-col gap-2 rounded-xl border border-hairline bg-surface-2 p-3.5 hover:border-hairline-strong hover:bg-surface-3 transition-all cursor-pointer shadow-sm"
+                className="group flex flex-col gap-2 rounded-xl border border-hairline bg-surface-2 p-4 hover:border-hairline-strong hover:bg-surface-3 transition-all cursor-pointer shadow-sm"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-2.5">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-surface-3 border border-hairline font-mono text-xs font-bold text-rose-400">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-surface-3 border border-hairline font-mono text-sm font-bold text-rose-400">
                       {index + 1}
                     </span>
                     <span className="text-sm font-semibold text-ink group-hover:text-ink transition-colors leading-snug">
@@ -86,7 +86,7 @@ export const InsightsOverview: React.FC<InsightsOverviewProps> = ({
       </div>
 
       {/* Top Praises Card */}
-      <div className="rounded-xl border border-hairline bg-surface-1 p-5 shadow-sm space-y-4">
+      <div className="rounded-xl border border-hairline bg-surface-1 p-6 shadow-sm space-y-5">
         <div className="flex items-center justify-between border-b border-hairline pb-3.5">
           <div className="flex items-center gap-2.5">
             <h3 className="text-base sm:text-lg font-bold text-ink flex items-center gap-2 font-sans">
@@ -99,7 +99,7 @@ export const InsightsOverview: React.FC<InsightsOverviewProps> = ({
           <span className="text-xs text-ink-subtle font-mono font-medium">Ranked by count</span>
         </div>
 
-        <div className="space-y-2.5">
+        <div className="space-y-3">
           {topPraises.length === 0 ? (
             <div className="py-8 text-center text-sm text-ink-tertiary">No praises detected in this dataset</div>
           ) : (
@@ -109,11 +109,11 @@ export const InsightsOverview: React.FC<InsightsOverviewProps> = ({
                 whileHover={{ y: -1 }}
                 transition={{ duration: 0.15 }}
                 onClick={() => onSelectTopic && onSelectTopic(item.topics[0])}
-                className="group flex flex-col gap-2 rounded-xl border border-hairline bg-surface-2 p-3.5 hover:border-hairline-strong hover:bg-surface-3 transition-all cursor-pointer shadow-sm"
+                className="group flex flex-col gap-2 rounded-xl border border-hairline bg-surface-2 p-4 hover:border-hairline-strong hover:bg-surface-3 transition-all cursor-pointer shadow-sm"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-2.5">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-surface-3 border border-hairline font-mono text-xs font-bold text-emerald-400">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-surface-3 border border-hairline font-mono text-sm font-bold text-emerald-400">
                       {index + 1}
                     </span>
                     <span className="text-sm font-semibold text-ink group-hover:text-ink transition-colors leading-snug">

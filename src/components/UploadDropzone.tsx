@@ -93,7 +93,7 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={() => !isLoading && fileInputRef.current?.click()}
-        className={`group relative flex flex-col items-center justify-center rounded-xl border border-dashed transition-all cursor-pointer py-8 px-6 ${
+        className={`group relative flex flex-col items-center justify-center rounded-xl border border-dashed transition-all cursor-pointer py-10 px-8 ${
           isDragOver
             ? 'border-ink bg-surface-2'
             : 'border-hairline-strong bg-surface-1/90 hover:border-ink/40 hover:bg-surface-2'
@@ -135,7 +135,7 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
         </div>
 
         {/* Hardware Status Chips */}
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs font-mono">
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-xs font-mono">
           <span className="inline-flex items-center gap-1.5 rounded-md bg-surface-2 border border-hairline px-3 py-1 text-xs font-medium text-ink">
             <Check className="h-3.5 w-3.5 text-emerald-500" />
             <span>Multiline RFC 4180</span>

@@ -270,9 +270,9 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
   };
 
   return (
-    <div className="rounded-xl border border-hairline bg-surface-1 p-4 sm:p-5 space-y-4 shadow-sm">
+    <div className="rounded-xl border border-hairline bg-surface-1 p-5 sm:p-6 space-y-5 shadow-sm">
       {/* Console Top Toolbar */}
-      <div className="space-y-4 border-b border-hairline pb-4">
+      <div className="space-y-5 border-b border-hairline pb-5">
         {/* Title & Export Actions */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
@@ -319,7 +319,7 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
         </div>
 
         {/* Quick Presets Bar (Monochrome & Precise) */}
-        <div className="flex flex-wrap items-center gap-1.5 text-xs sm:text-sm font-mono">
+        <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-mono">
           <span className="text-xs font-bold uppercase tracking-wider text-ink-tertiary mr-1">Filter:</span>
           
           <button
@@ -379,7 +379,7 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
         </div>
 
         {/* Search & Filter Dropdowns Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 pt-1 font-mono text-xs sm:text-sm">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-2 font-mono text-xs sm:text-sm">
           {/* Search Input */}
           <div className="relative sm:col-span-2">
             <Search className="absolute left-3 top-3 h-4 w-4 text-ink-tertiary" />
@@ -801,8 +801,8 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
 
       {/* Pagination Footer */}
       {filteredReviews.length > 0 && (
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 text-xs sm:text-sm text-ink font-mono">
-          <div className="flex items-center gap-2.5">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 text-xs sm:text-sm text-ink font-mono">
+          <div className="flex items-center gap-3">
             <span className="font-semibold text-ink-subtle">Rows:</span>
             <select
               value={pageSize}
@@ -822,11 +822,11 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
             </span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <button
               onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="rounded-lg border border-hairline bg-surface-2 px-3.5 py-1.5 text-xs sm:text-sm font-bold text-ink disabled:opacity-40 hover:bg-surface-3 transition-colors shadow-sm"
+              className="rounded-lg border border-hairline bg-surface-2 px-4 py-2 text-xs sm:text-sm font-bold text-ink disabled:opacity-40 hover:bg-surface-3 transition-colors shadow-sm"
             >
               Previous
             </button>
@@ -836,7 +836,7 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
             <button
               onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="rounded-lg border border-hairline bg-surface-2 px-3.5 py-1.5 text-xs sm:text-sm font-bold text-ink disabled:opacity-40 hover:bg-surface-3 transition-colors shadow-sm"
+              className="rounded-lg border border-hairline bg-surface-2 px-4 py-2 text-xs sm:text-sm font-bold text-ink disabled:opacity-40 hover:bg-surface-3 transition-colors shadow-sm"
             >
               Next
             </button>
