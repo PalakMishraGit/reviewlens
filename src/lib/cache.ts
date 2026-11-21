@@ -18,10 +18,17 @@ interface CacheStore {
 const CACHE_DIR = path.resolve(process.cwd(), '.cache');
 const CACHE_FILE = path.join(CACHE_DIR, 'review_cache.json');
 
+// In-memory cache for ultra-fast lookups and cross-test consistency
+let inMemoryStore: CacheStore | null = null;
+
 /**
- * Ensures the cache directory and file exist
+ * Ensures the cache directory and file exist, returning the store
  */
 function ensureCacheStore(): CacheStore {
+  if (inMemoryStore) {
+    return inMemoryStore;
+  }
+
   try {
     if (!fs.existsSync(CACHE_DIR)) {
       fs.mkdirSync(CACHE_DIR, { recursive: true });
@@ -29,33 +36,45 @@ function ensureCacheStore(): CacheStore {
     if (!fs.existsSync(CACHE_FILE)) {
       const initialStore: CacheStore = { version: '1.0', entries: {} };
       fs.writeFileSync(CACHE_FILE, JSON.stringify(initialStore, null, 2), 'utf8');
+      inMemoryStore = initialStore;
       return initialStore;
     }
     const content = fs.readFileSync(CACHE_FILE, 'utf8');
-    return JSON.parse(content) as CacheStore;
+    inMemoryStore = JSON.parse(content) as CacheStore;
+    return inMemoryStore;
   } catch (err) {
-    console.warn('[Cache] Warning: cache file read error, resetting cache store:', err);
     const fallbackStore: CacheStore = { version: '1.0', entries: {} };
     try {
+      if (!fs.existsSync(CACHE_DIR)) {
+        fs.mkdirSync(CACHE_DIR, { recursive: true });
+      }
       fs.writeFileSync(CACHE_FILE, JSON.stringify(fallbackStore, null, 2), 'utf8');
     } catch {}
+    inMemoryStore = fallbackStore;
     return fallbackStore;
   }
 }
 
 /**
- * Saves store atomically using a temporary file
+ * Saves store safely to disk
  */
 function saveCacheStore(store: CacheStore): void {
+  inMemoryStore = store;
   try {
     if (!fs.existsSync(CACHE_DIR)) {
       fs.mkdirSync(CACHE_DIR, { recursive: true });
     }
-    const tempFile = `${CACHE_FILE}.tmp.${Date.now()}`;
+    const rand = Math.random().toString(36).substring(2, 9);
+    const tempFile = path.join(CACHE_DIR, `.tmp_${process.pid}_${Date.now()}_${rand}`);
     fs.writeFileSync(tempFile, JSON.stringify(store, null, 2), 'utf8');
     fs.renameSync(tempFile, CACHE_FILE);
   } catch (err) {
-    console.error('[Cache] Error saving cache store:', err);
+    // Fallback: direct write if atomic rename is busy
+    try {
+      fs.writeFileSync(CACHE_FILE, JSON.stringify(store, null, 2), 'utf8');
+    } catch (directErr) {
+      console.error('[Cache] Failed to persist cache:', directErr);
+    }
   }
 }
 
@@ -129,9 +148,12 @@ export function getCacheStats(): { total_entries: number; file_size_bytes: numbe
  * Clears all cache entries
  */
 export function clearCache(): void {
+  inMemoryStore = { version: '1.0', entries: {} };
   try {
-    const cleanStore: CacheStore = { version: '1.0', entries: {} };
-    saveCacheStore(cleanStore);
+    if (!fs.existsSync(CACHE_DIR)) {
+      fs.mkdirSync(CACHE_DIR, { recursive: true });
+    }
+    fs.writeFileSync(CACHE_FILE, JSON.stringify(inMemoryStore, null, 2), 'utf8');
   } catch (err) {
     console.error('[Cache] Failed to clear cache:', err);
   }
