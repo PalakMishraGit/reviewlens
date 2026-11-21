@@ -1,3 +1,15 @@
+commit eaca54b7c1e1586149c1eb991bf158b5cbc4c81e
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 23:31:22 +0530
+
+    feat(ai): wire in-app Free Tier Gemini engine config and live API key forwarding
+
+commit f15d1358088285e7009d21b1624ae81a26278365
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 23:19:13 +0530
+
+    docs(submission): refresh gitlog.txt with responsive navbar and logo commits
+
 commit 08cfdbfa8a81c2f6cd051edaf89cb7752574df83
 Author: Amrit <amrit@reviewlens.local>
 Date:   2026-11-21 23:19:01 +0530
