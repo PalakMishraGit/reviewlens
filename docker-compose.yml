@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  reviewlens:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: reviewlens-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - GROQ_API_KEY=${GROQ_API_KEY:-}
+      - AI_MODEL=${AI_MODEL:-gemini-1.5-flash}
+      - BATCH_SIZE=${BATCH_SIZE:-5}
+      - MOCK_AI=${MOCK_AI:-false}
+    volumes:
+      - reviewlens-cache:/app/.cache
+
+volumes:
+  reviewlens-cache:
+    driver: local
