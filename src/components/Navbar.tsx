@@ -50,7 +50,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Store Capsule Pill */}
           <div className="flex items-center gap-2 rounded-full border border-hairline bg-surface-2 px-3.5 py-1.5 text-xs font-extrabold text-ink shadow-sm">
             <Store className="h-3.5 w-3.5 text-emerald-500" strokeWidth={2.4} />
-            <span className="hidden sm:inline">CEDCOSS Store</span>
+            <span className="hidden sm:inline">Enterprise Store</span>
             <span className="sm:hidden">Store</span>
           </div>
 

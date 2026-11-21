@@ -105,8 +105,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <div className="flex items-center gap-2 truncate">
             <Store className="h-4 w-4 text-ink shrink-0" strokeWidth={2.2} />
             <div className="truncate">
-              <div className="font-bold text-ink text-xs truncate">CEDCOSS Merchant</div>
-              <div className="text-[10px] text-ink font-mono font-semibold">Store ID: BATCH-2027</div>
+              <div className="font-bold text-ink text-xs truncate">Enterprise Store</div>
+              <div className="text-[10px] text-ink font-mono font-semibold">Store ID: PL-GLOBAL-01</div>
             </div>
           </div>
           <ChevronDown className="h-3.5 w-3.5 text-ink shrink-0" strokeWidth={2.2} />
