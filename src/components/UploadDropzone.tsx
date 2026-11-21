@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import {
-  Upload,
+  UploadCloud,
   FileSpreadsheet,
   Check,
   AlertCircle,
@@ -10,18 +10,21 @@ import {
   ShieldCheck,
   Sparkles,
   ArrowRight,
+  Upload,
 } from 'lucide-react';
 
 interface UploadDropzoneProps {
   onAnalyze: (csvText: string, filename: string) => Promise<void>;
   isLoading: boolean;
   loadingMessage?: string;
+  hasLoadedDataset?: boolean;
 }
 
 export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
   onAnalyze,
   isLoading,
   loadingMessage = 'Processing reviews in batches...',
+  hasLoadedDataset = false,
 }) => {
   const [isDragOver, setIsDragOver] = useState(false);
   const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
@@ -70,35 +73,16 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
     }
   };
 
-  const handleLoadSample = async () => {
-    setError(null);
-    setSelectedFileName('reviews.csv');
-    try {
-      const res = await fetch('/api/sample');
-      const data = await res.json();
-      if (!data.success || !data.csv) {
-        throw new Error(data.error || 'Failed to load sample dataset');
-      }
-      await onAnalyze(data.csv, 'reviews.csv');
-    } catch (err: any) {
-      setError(err.message || 'Failed to load sample dataset');
+  const handleTriggerUpload = () => {
+    if (!isLoading) {
+      fileInputRef.current?.click();
     }
   };
 
   return (
     <div className="w-full space-y-3">
-      {/* Precision Ingestion Panel */}
-      <div
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onDrop={handleDrop}
-        onClick={() => !isLoading && fileInputRef.current?.click()}
-        className={`group relative flex flex-col items-center justify-center rounded-xl border border-dashed transition-all cursor-pointer py-10 px-8 ${
-          isDragOver
-            ? 'border-ink bg-surface-2'
-            : 'border-hairline-strong bg-surface-1/90 hover:border-ink/40 hover:bg-surface-2'
-        } ${isLoading ? 'pointer-events-none opacity-80' : ''}`}
-      >
+      {/* Horizontal Split Ingestion Card (Inspired by Modern SaaS Reference) */}
+      <div className="rounded-2xl border border-hairline bg-surface-1 p-6 shadow-sm transition-all hover:border-hairline-strong">
         <input
           ref={fileInputRef}
           type="file"
@@ -108,76 +92,102 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({
           disabled={isLoading}
         />
 
-        {/* Console Upload Icon */}
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-surface-2 border border-hairline-strong text-ink shadow-sm transition-transform group-hover:scale-105">
-          {isLoading ? (
-            <Loader2 className="h-6 w-6 animate-spin text-ink" />
-          ) : (
-            <Upload className="h-6 w-6" />
-          )}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          {/* Left section: Title & Description */}
+          <div className="lg:col-span-5 flex items-start gap-4">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-surface-2 border border-hairline text-ink shadow-sm">
+              <UploadCloud className="h-6 w-6 text-ink" />
+            </div>
+            <div className="space-y-1">
+              <h2 className="text-base sm:text-lg font-bold text-ink tracking-tight font-sans">
+                Import customer reviews
+              </h2>
+              <p className="text-xs sm:text-sm text-ink-subtle leading-relaxed">
+                Upload a CSV file containing customer reviews from your store. RFC 4180 multiline &amp; quotes handled automatically.
+              </p>
+              <div className="flex items-center gap-2 pt-1 font-mono text-xs text-ink-tertiary">
+                <span className="flex h-2 w-2 rounded-full bg-emerald-500" />
+                <span className="text-emerald-500 font-semibold">Ready for ingestion</span>
+                <span>•</span>
+                <span>Max 10MB</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right section: Drop area & Upload button */}
+          <div className="lg:col-span-7 flex flex-col sm:flex-row items-center gap-4">
+            <div
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+              onClick={handleTriggerUpload}
+              className={`flex-1 w-full flex items-center justify-center gap-3 rounded-xl border border-dashed py-5 px-6 transition-all cursor-pointer text-center ${
+                isDragOver
+                  ? 'border-ink bg-surface-2'
+                  : 'border-hairline-strong bg-surface-2/40 hover:border-ink/60 hover:bg-surface-2'
+              } ${isLoading ? 'pointer-events-none opacity-80' : ''}`}
+            >
+              <Upload className="h-4 w-4 text-ink-tertiary shrink-0" />
+              <div className="text-xs sm:text-sm font-semibold text-ink">
+                {isLoading ? (
+                  <span className="font-mono text-ink animate-pulse">{loadingMessage}</span>
+                ) : (
+                  <span>
+                    Drop a CSV file here or <span className="underline text-ink">browse files</span>
+                  </span>
+                )}
+                <div className="text-[11px] text-ink-tertiary font-normal">Supports: .csv (RFC 4180 compliant)</div>
+              </div>
+            </div>
+
+            <button
+              onClick={handleTriggerUpload}
+              disabled={isLoading}
+              className="w-full sm:w-auto shrink-0 flex items-center justify-center gap-2 rounded-xl bg-ink text-canvas hover:opacity-90 active:scale-[0.98] px-6 py-4 text-xs sm:text-sm font-bold transition-all shadow-md"
+            >
+              {isLoading ? (
+                <Loader2 className="h-4 w-4 animate-spin text-canvas" />
+              ) : (
+                <UploadCloud className="h-4 w-4" />
+              )}
+              <span>Upload CSV</span>
+            </button>
+          </div>
         </div>
 
-        {/* Text Instructions */}
-        <div className="mt-3.5 text-center space-y-1.5">
-          <p className="text-sm sm:text-base font-semibold text-ink">
-            {isLoading ? (
-              <span className="text-ink font-mono">{loadingMessage}</span>
-            ) : (
-              <span>
-                Drop <code className="font-mono text-ink font-bold">reviews.csv</code> here or{' '}
-                <span className="underline underline-offset-4 text-ink hover:text-ink-muted">browse file</span>
-              </span>
-            )}
-          </p>
-          <p className="text-xs sm:text-sm text-ink-subtle">
-            Standard RFC 4180 parsing with quotes, multiline handling, and automatic deduplication
-          </p>
-        </div>
+        {/* Feature badges row */}
+        <div className="mt-5 pt-4 border-t border-hairline flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-lg bg-surface-2 border border-hairline px-3 py-1 font-medium text-ink">
+              <Check className="h-3 w-3 text-emerald-500" />
+              <span>Multiline RFC 4180</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-lg bg-surface-2 border border-hairline px-3 py-1 font-medium text-ink">
+              <Check className="h-3 w-3 text-emerald-500" />
+              <span>Multilingual / Hindi</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-lg bg-surface-2 border border-hairline px-3 py-1 font-medium text-ink">
+              <ShieldCheck className="h-3 w-3 text-emerald-500" />
+              <span>R012 Prompt Defense</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-lg bg-surface-2 border border-hairline px-3 py-1 font-medium text-ink">
+              <Check className="h-3 w-3 text-emerald-500" />
+              <span>Rating Mismatches</span>
+            </span>
+          </div>
 
-        {/* Hardware Status Chips */}
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-xs font-mono">
-          <span className="inline-flex items-center gap-1.5 rounded-md bg-surface-2 border border-hairline px-3 py-1 text-xs font-medium text-ink">
-            <Check className="h-3.5 w-3.5 text-emerald-500" />
-            <span>Multiline RFC 4180</span>
-          </span>
-          <span className="inline-flex items-center gap-1.5 rounded-md bg-surface-2 border border-hairline px-3 py-1 text-xs font-medium text-ink">
-            <Check className="h-3.5 w-3.5 text-emerald-500" />
-            <span>Multilingual / Hindi</span>
-          </span>
-          <span className="inline-flex items-center gap-1.5 rounded-md bg-surface-2 border border-hairline px-3 py-1 text-xs font-medium text-ink">
-            <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" />
-            <span>R012 Prompt Defense</span>
-          </span>
-          <span className="inline-flex items-center gap-1.5 rounded-md bg-surface-2 border border-hairline px-3 py-1 text-xs font-medium text-ink">
-            <Check className="h-3.5 w-3.5 text-emerald-500" />
-            <span>Rating Mismatches</span>
-          </span>
+          <div className="flex items-center gap-2 text-ink-subtle">
+            <FileSpreadsheet className="h-3.5 w-3.5 text-ink-tertiary" />
+            <span>Active file:</span>
+            <span className="text-ink font-semibold">
+              {selectedFileName || 'reviews.csv (default benchmark ready)'}
+            </span>
+          </div>
         </div>
-      </div>
-
-      {/* Dock Bar */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm">
-        <div className="flex items-center gap-2 text-ink-subtle font-mono text-xs sm:text-sm">
-          <FileSpreadsheet className="h-4 w-4 text-ink-tertiary" />
-          <span>Active file:</span>
-          <span className="text-ink font-semibold">
-            {selectedFileName || 'reviews.csv (default benchmark ready)'}
-          </span>
-        </div>
-
-        <button
-          onClick={handleLoadSample}
-          disabled={isLoading}
-          className="flex items-center gap-2 rounded-lg bg-surface-2 border border-hairline-strong px-4 py-2 font-semibold text-ink hover:bg-surface-3 active:scale-[0.98] transition-all shadow-sm text-xs sm:text-sm"
-        >
-          <Sparkles className="h-4 w-4 text-amber-400" />
-          <span>Load benchmark dataset (30 reviews)</span>
-          <ArrowRight className="h-3.5 w-3.5 text-ink-tertiary" />
-        </button>
       </div>
 
       {error && (
-        <div className="flex items-center gap-2 rounded-lg border border-rose-500/30 bg-rose-500/10 p-3 text-xs text-rose-500 animate-in fade-in">
+        <div className="flex items-center gap-2 rounded-xl border border-rose-500/30 bg-rose-500/10 p-3.5 text-xs text-rose-500 animate-in fade-in">
           <AlertCircle className="h-4 w-4 shrink-0" />
           <span>{error}</span>
         </div>

@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { MetricItem } from '@/types/review';
-import { ChevronRight } from 'lucide-react';
+import { AlertTriangle, Star, ArrowRight } from 'lucide-react';
 
 interface InsightsOverviewProps {
   topComplaints: MetricItem[];
@@ -17,134 +17,143 @@ export const InsightsOverview: React.FC<InsightsOverviewProps> = ({
   onSelectTopic,
 }) => {
   return (
-    <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-      {/* Top Complaints Card */}
-      <div className="rounded-xl border border-hairline bg-surface-1 p-6 shadow-sm space-y-5">
-        <div className="flex items-center justify-between border-b border-hairline pb-3.5">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      {/* 1. Top Customer Complaints Card */}
+      <div className="rounded-2xl border border-hairline bg-surface-1 p-6 shadow-sm space-y-4 transition-all hover:border-hairline-strong card-glow">
+        <div className="flex items-center justify-between border-b border-hairline pb-4">
           <div className="flex items-center gap-2.5">
-            <h3 className="text-base sm:text-lg font-bold text-ink flex items-center gap-2 font-sans">
-              Top Customer Complaints
-            </h3>
-            <span className="rounded bg-rose-500/10 px-2 py-0.5 text-xs font-mono font-bold text-rose-400 border border-rose-500/20">
-              Action Needed
-            </span>
+            <div className="p-1.5 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-500">
+              <AlertTriangle className="h-4 w-4" />
+            </div>
+            <div>
+              <h3 className="text-base sm:text-lg font-bold text-ink tracking-tight font-sans">
+                Top customer complaints
+              </h3>
+            </div>
           </div>
-          <span className="text-xs text-ink-subtle font-mono font-medium">Ranked by count</span>
+
+          <button
+            onClick={() => onSelectTopic && topComplaints[0] && onSelectTopic(topComplaints[0].topics[0])}
+            className="flex items-center gap-1 text-xs font-semibold text-ink-subtle hover:text-ink font-mono transition-colors"
+          >
+            <span>See all</span>
+            <ArrowRight className="h-3 w-3" />
+          </button>
         </div>
 
         <div className="space-y-3">
           {topComplaints.length === 0 ? (
-            <div className="py-8 text-center text-sm text-ink-tertiary">No complaints detected in this dataset</div>
+            <div className="py-8 text-center text-sm text-ink-tertiary">
+              No customer complaints identified
+            </div>
           ) : (
-            topComplaints.map((item, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ y: -1 }}
-                transition={{ duration: 0.15 }}
-                onClick={() => onSelectTopic && onSelectTopic(item.topics[0])}
-                className="group flex flex-col gap-2 rounded-xl border border-hairline bg-surface-2 p-4 hover:border-hairline-strong hover:bg-surface-3 transition-all cursor-pointer shadow-sm"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-start gap-2.5">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-surface-3 border border-hairline font-mono text-sm font-bold text-rose-400">
+            topComplaints.slice(0, 3).map((item, index) => {
+              const severity = index === 0 ? 'High' : 'Medium';
+              return (
+                <motion.div
+                  key={index}
+                  whileHover={{ y: -1 }}
+                  transition={{ duration: 0.15 }}
+                  onClick={() => onSelectTopic && onSelectTopic(item.topics[0])}
+                  className="group flex items-center justify-between gap-4 rounded-xl border border-hairline bg-surface-2/60 p-4 hover:border-hairline-strong hover:bg-surface-2 transition-all cursor-pointer shadow-sm"
+                >
+                  <div className="flex items-start gap-3.5 min-w-0">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-surface-3 border border-hairline font-mono text-xs font-bold text-ink">
                       {index + 1}
                     </span>
-                    <span className="text-sm font-semibold text-ink group-hover:text-ink transition-colors leading-snug">
-                      {item.text}
-                    </span>
+                    <div className="min-w-0">
+                      <h4 className="text-sm font-bold text-ink truncate group-hover:text-ink transition-colors">
+                        {item.text}
+                      </h4>
+                      <p className="text-xs text-ink-subtle truncate mt-0.5">
+                        {item.products.length > 0
+                          ? `Affecting: ${item.products.join(', ')}`
+                          : 'Detected across store items'}
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="flex items-center gap-1.5 shrink-0 font-mono">
-                    <span className="text-xs font-bold text-rose-400 bg-rose-500/10 border border-rose-500/20 px-2 py-0.5 rounded-md">
-                      {item.count} {item.count === 1 ? 'review' : 'reviews'}
-                    </span>
-                    <ChevronRight className="h-4 w-4 text-ink-tertiary group-hover:translate-x-0.5 transition-transform" />
-                  </div>
-                </div>
-
-                {/* Affected Products */}
-                <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-ink-subtle font-mono">
-                  <span className="text-ink-tertiary uppercase font-semibold text-[11px]">Products:</span>
-                  {item.products.slice(0, 3).map((prod, pIdx) => (
+                  <div className="flex items-center gap-3 shrink-0 font-mono">
                     <span
-                      key={pIdx}
-                      className="rounded bg-surface-1 px-2 py-0.5 text-xs text-ink font-medium border border-hairline"
+                      className={`rounded-lg px-2.5 py-1 text-xs font-bold ${
+                        severity === 'High'
+                          ? 'bg-rose-500/15 text-rose-500 border border-rose-500/30'
+                          : 'bg-amber-500/15 text-amber-500 border border-amber-500/30'
+                      }`}
                     >
-                      {prod}
+                      {severity}
                     </span>
-                  ))}
-                  {item.products.length > 3 && (
-                    <span className="text-ink-tertiary text-xs">
-                      +{item.products.length - 3} more
+                    <span className="text-sm font-bold text-ink w-8 text-right">
+                      {item.count}
                     </span>
-                  )}
-                </div>
-              </motion.div>
-            ))
+                  </div>
+                </motion.div>
+              );
+            })
           )}
         </div>
       </div>
 
-      {/* Top Praises Card */}
-      <div className="rounded-xl border border-hairline bg-surface-1 p-6 shadow-sm space-y-5">
-        <div className="flex items-center justify-between border-b border-hairline pb-3.5">
+      {/* 2. Top Customer Praises Card */}
+      <div className="rounded-2xl border border-hairline bg-surface-1 p-6 shadow-sm space-y-4 transition-all hover:border-hairline-strong card-glow">
+        <div className="flex items-center justify-between border-b border-hairline pb-4">
           <div className="flex items-center gap-2.5">
-            <h3 className="text-base sm:text-lg font-bold text-ink flex items-center gap-2 font-sans">
-              Top Customer Praises
-            </h3>
-            <span className="rounded bg-emerald-500/10 px-2 py-0.5 text-xs font-mono font-bold text-emerald-400 border border-emerald-500/20">
-              Core Strengths
-            </span>
+            <div className="p-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-500">
+              <Star className="h-4 w-4" />
+            </div>
+            <div>
+              <h3 className="text-base sm:text-lg font-bold text-ink tracking-tight font-sans">
+                Top customer praises
+              </h3>
+            </div>
           </div>
-          <span className="text-xs text-ink-subtle font-mono font-medium">Ranked by count</span>
+
+          <button
+            onClick={() => onSelectTopic && topPraises[0] && onSelectTopic(topPraises[0].topics[0])}
+            className="flex items-center gap-1 text-xs font-semibold text-ink-subtle hover:text-ink font-mono transition-colors"
+          >
+            <span>See all</span>
+            <ArrowRight className="h-3 w-3" />
+          </button>
         </div>
 
         <div className="space-y-3">
           {topPraises.length === 0 ? (
-            <div className="py-8 text-center text-sm text-ink-tertiary">No praises detected in this dataset</div>
+            <div className="py-8 text-center text-sm text-ink-tertiary">
+              No customer praises identified
+            </div>
           ) : (
-            topPraises.map((item, index) => (
+            topPraises.slice(0, 3).map((item, index) => (
               <motion.div
                 key={index}
                 whileHover={{ y: -1 }}
                 transition={{ duration: 0.15 }}
                 onClick={() => onSelectTopic && onSelectTopic(item.topics[0])}
-                className="group flex flex-col gap-2 rounded-xl border border-hairline bg-surface-2 p-4 hover:border-hairline-strong hover:bg-surface-3 transition-all cursor-pointer shadow-sm"
+                className="group flex items-center justify-between gap-4 rounded-xl border border-hairline bg-surface-2/60 p-4 hover:border-hairline-strong hover:bg-surface-2 transition-all cursor-pointer shadow-sm"
               >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-start gap-2.5">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-surface-3 border border-hairline font-mono text-sm font-bold text-emerald-400">
-                      {index + 1}
-                    </span>
-                    <span className="text-sm font-semibold text-ink group-hover:text-ink transition-colors leading-snug">
+                <div className="flex items-start gap-3.5 min-w-0">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-surface-3 border border-hairline font-mono text-xs font-bold text-ink">
+                    {index + 1}
+                  </span>
+                  <div className="min-w-0">
+                    <h4 className="text-sm font-bold text-ink truncate group-hover:text-ink transition-colors">
                       {item.text}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 shrink-0 font-mono">
-                    <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-md">
-                      {item.count} {item.count === 1 ? 'review' : 'reviews'}
-                    </span>
-                    <ChevronRight className="h-4 w-4 text-ink-tertiary group-hover:translate-x-0.5 transition-transform" />
+                    </h4>
+                    <p className="text-xs text-ink-subtle truncate mt-0.5">
+                      {item.products.length > 0
+                        ? `Highlights: ${item.products.join(', ')}`
+                        : 'Customer praise highlights'}
+                    </p>
                   </div>
                 </div>
 
-                {/* Affected Products */}
-                <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-ink-subtle font-mono">
-                  <span className="text-ink-tertiary uppercase font-semibold text-[11px]">Products:</span>
-                  {item.products.slice(0, 3).map((prod, pIdx) => (
-                    <span
-                      key={pIdx}
-                      className="rounded bg-surface-1 px-2 py-0.5 text-xs text-ink font-medium border border-hairline"
-                    >
-                      {prod}
-                    </span>
-                  ))}
-                  {item.products.length > 3 && (
-                    <span className="text-ink-tertiary text-xs">
-                      +{item.products.length - 3} more
-                    </span>
-                  )}
+                <div className="flex items-center gap-3 shrink-0 font-mono">
+                  <span className="rounded-lg bg-emerald-500/15 text-emerald-500 border border-emerald-500/30 px-2.5 py-1 text-xs font-bold">
+                    Positive
+                  </span>
+                  <span className="text-sm font-bold text-ink w-8 text-right">
+                    {item.count}
+                  </span>
                 </div>
               </motion.div>
             ))

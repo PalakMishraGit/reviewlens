@@ -21,7 +21,7 @@ async function capture() {
 
   // 1. Initial empty page or click "Load benchmark dataset"
   console.log('Clicking Load benchmark dataset button...');
-  const sampleBtn = await page.waitForSelector('button::-p-text("Load benchmark dataset")');
+  const sampleBtn = await page.waitForSelector('button::-p-text("Benchmark")');
   if (sampleBtn) {
     await sampleBtn.click();
   }
@@ -37,9 +37,9 @@ async function capture() {
     fullPage: false,
   });
 
-  // 2. Click "Draft reply" button on the first review requiring a reply
+  // 2. Click "View / Draft reply" button on the first review requiring a reply
   console.log('Opening Draft reply modal...');
-  const draftBtn = await page.waitForSelector('button::-p-text("Draft reply")');
+  const draftBtn = await page.waitForSelector('[data-testid="draft-reply-btn"]');
   if (draftBtn) {
     await draftBtn.click();
     // Wait for modal & textarea
@@ -74,14 +74,21 @@ async function capture() {
     });
   }
 
-  // 4. Switch back to Reviews table and expand R012 (Adversarial Prompt Injection)
+  // 4. Switch back to Reviews table and inspect adversarial defense
   console.log('Switching back to Reviews table and inspecting row R012...');
   const reviewsTab = await page.waitForSelector('[data-testid="tab-reviews"]');
   if (reviewsTab) {
     await reviewsTab.click();
     await new Promise(r => setTimeout(r, 600));
 
-    // Scroll table into view and click row R012
+    // Click Shield (R012) filter preset button
+    const shieldBtn = await page.waitForSelector('button::-p-text("Shield (R012)")');
+    if (shieldBtn) {
+      await shieldBtn.click();
+      await new Promise(r => setTimeout(r, 600));
+    }
+
+    // Scroll table into view and expand row R012
     const r012Row = await page.waitForSelector('[data-testid="review-row-R012"]');
     if (r012Row) {
       await page.evaluate(el => el.scrollIntoView({ block: 'center', behavior: 'instant' }), r012Row);
