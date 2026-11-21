@@ -632,7 +632,10 @@ export default function ReviewLensDashboard() {
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             {/* Left: Real Project Identity & Architecture */}
             <div className="space-y-1.5 max-w-lg">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
+                <div className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full overflow-hidden border border-white/20 bg-white shadow-sm">
+                  <img src="/logo-icon.png" alt="PulseLens.ai" className="h-full w-full object-cover scale-105" />
+                </div>
                 <span className="text-sm font-extrabold text-ink font-sans">
                   PulseLens<span className="text-emerald-500">.ai</span>
                 </span>

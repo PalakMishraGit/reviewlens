@@ -24,8 +24,8 @@ export const ShortcutsModal: React.FC<ShortcutsModalProps> = ({ isOpen, onClose 
           {/* Header */}
           <div className="flex items-center justify-between border-b border-hairline pb-4">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-surface-2 border border-hairline text-ink">
-                <Keyboard className="h-4 w-4" />
+              <div className="relative flex h-8 w-8 items-center justify-center rounded-full overflow-hidden border border-white/20 bg-white shadow-sm shrink-0">
+                <img src="/logo-icon.png" alt="PulseLens.ai" className="h-full w-full object-cover scale-105" />
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-ink">PulseLens Command &amp; Shortcuts</h3>
