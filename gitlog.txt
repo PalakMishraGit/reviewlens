@@ -1,4 +1,16 @@
-commit e8a60009d4d5ac85f3d386f9f82123cbc62d640d
+commit 4db28242bb70ac0425f79df60f9958277c7042d4
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 20:18:16 +0530
+
+    chore: update gitlog.txt with awesome-design-md commit
+
+commit 1cd8335b408ba98a696a4cd10e00370fa0ee7d75
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 20:18:11 +0530
+
+    style(design): integrate Linear design system from awesome-design-md with docs/DESIGN.md specification
+
+commit f2300fd15766f96b8d3d1f6d4613e35e3e46f84c
 Author: Amrit <amrit@reviewlens.local>
 Date:   2026-11-21 20:10:13 +0530
 
