@@ -28,7 +28,7 @@ export const ShortcutsModal: React.FC<ShortcutsModalProps> = ({ isOpen, onClose 
                 <Keyboard className="h-4 w-4" />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-ink">ReviewLens Command &amp; Shortcuts</h3>
+                <h3 className="text-sm font-semibold text-ink">PulseLens Command &amp; Shortcuts</h3>
                 <p className="text-xs text-ink-subtle">Keyboard efficiency &amp; architectural specifications</p>
               </div>
             </div>
