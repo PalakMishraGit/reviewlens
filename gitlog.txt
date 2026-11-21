@@ -1,3 +1,15 @@
+commit 93ab7ccd9a3610c38492108700bd9872936bec9b
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 21:25:58 +0530
+
+    feat(ux): enhance 4-stage pipeline skeleton loader with active stage highlights and reply text shimmer
+
+commit 6d65c08ca45a78abc7ff4af88fab177c75f623f0
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 21:09:22 +0530
+
+    docs(submission): update gitlog.txt with complete commit history
+
 commit 09195c8c4a0e9d071b2245d47d11e3c7e161cda2
 Author: Amrit <amrit@reviewlens.local>
 Date:   2026-11-21 21:09:16 +0530
