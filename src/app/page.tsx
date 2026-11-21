@@ -254,10 +254,6 @@ export default function ReviewLensDashboard() {
         onOpenShortcuts={() => setIsShortcutsOpen(true)}
         onLoadSample={handleAnalyzeSample}
         isLoading={isLoading}
-        activeTab={activeTab}
-        onSelectTab={setActiveTab}
-        hasData={Boolean(summary)}
-        reviewCount={reviews.length}
       />
 
       {/* 2. Main Content Container */}
@@ -322,6 +318,60 @@ export default function ReviewLensDashboard() {
         {/* Dashboard Content when Ready */}
         {!isLoading && summary && (
           <div className="space-y-8 animate-in fade-in duration-200">
+            {/* View Switcher Floating Segmented Tabs */}
+            <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-hairline bg-surface-1 p-1.5 shadow-sm">
+              <button
+                data-testid="tab-overview"
+                onClick={() => setActiveTab('overview')}
+                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs sm:text-sm font-extrabold transition-all ${
+                  activeTab === 'overview'
+                    ? 'bg-ink text-canvas shadow-md'
+                    : 'text-ink hover:bg-surface-2'
+                }`}
+              >
+                <Layers className="h-4 w-4" strokeWidth={2.2} />
+                <span>Executive Overview</span>
+              </button>
+
+              <button
+                data-testid="tab-reviews"
+                onClick={() => setActiveTab('reviews')}
+                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs sm:text-sm font-extrabold transition-all ${
+                  activeTab === 'reviews'
+                    ? 'bg-ink text-canvas shadow-md'
+                    : 'text-ink hover:bg-surface-2'
+                }`}
+              >
+                <ShieldCheck className="h-4 w-4" strokeWidth={2.2} />
+                <span>Reviews Explorer ({reviews.length})</span>
+              </button>
+
+              <button
+                data-testid="tab-products"
+                onClick={() => setActiveTab('products')}
+                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs sm:text-sm font-extrabold transition-all ${
+                  activeTab === 'products'
+                    ? 'bg-ink text-canvas shadow-md'
+                    : 'text-ink hover:bg-surface-2'
+                }`}
+              >
+                <Boxes className="h-4 w-4" strokeWidth={2.2} />
+                <span>Product Intelligence ({summary.product_insights.length})</span>
+              </button>
+
+              <button
+                data-testid="tab-telemetry"
+                onClick={() => setActiveTab('telemetry')}
+                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs sm:text-sm font-extrabold transition-all ${
+                  activeTab === 'telemetry'
+                    ? 'bg-ink text-canvas shadow-md'
+                    : 'text-ink hover:bg-surface-2'
+                }`}
+              >
+                <Activity className="h-4 w-4" strokeWidth={2.2} />
+                <span>System Telemetry</span>
+              </button>
+            </div>
             {/* Tab: Overview (Complete Executive Dashboard) */}
             {activeTab === 'overview' && (
               <>
