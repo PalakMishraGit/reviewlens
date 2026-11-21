@@ -1,3 +1,21 @@
+commit 3e048bfd18a2e66bfb50d50a409465b82144fc34
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 22:29:46 +0530
+
+    style(contrast): eliminate muted grey text and enable dynamic sidebar navigation
+    
+    - Contrast: dark theme text is now 100% crisp white (#ffffff / #f8fafc) and light theme text is 100% deep black (#090a0f / #0f172a) with zero muddy grey text or faded icons
+    - Icons: strokeWidth boosted to 2.2 for crisp, modern visibility
+    - Dynamic Sidebar: 'Reviews' and 'Products' tabs only appear once reviews are analyzed, presenting a clean 'Step 1 of 2: Ingest' onboarding state initially
+    - Ingestion Card & Empty State: overhauled with high-contrast text and crisp icons
+    - Tests & Screenshots: 10/10 tests pass, 6 screenshots refreshed
+
+commit f49739a02b55316c18d7958702cf749cdd4350a5
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 22:23:30 +0530
+
+    docs(submission): update gitlog.txt with layout transformation commit
+
 commit 7d1856bb78ce7107c9d47283ea627694652bfd7d
 Author: Amrit <amrit@reviewlens.local>
 Date:   2026-11-21 22:23:23 +0530
