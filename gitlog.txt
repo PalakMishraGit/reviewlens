@@ -1,3 +1,15 @@
+commit 962a23d17d4d3f2f80d220eec3db0cc5f09aac63
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 21:43:01 +0530
+
+    style(typography): overhaul font scale, contrast, and icon sizing for WCAG AAA readability on dark and light themes
+
+commit 2b961ba443119a3477d556805db10c88447417e6
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 21:25:58 +0530
+
+    docs(submission): update gitlog.txt with skeleton loader commit
+
 commit 93ab7ccd9a3610c38492108700bd9872936bec9b
 Author: Amrit <amrit@reviewlens.local>
 Date:   2026-11-21 21:25:58 +0530
