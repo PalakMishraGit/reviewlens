@@ -1,4 +1,10 @@
-commit 4db28242bb70ac0425f79df60f9958277c7042d4
+commit 14980710eeb467b9f357738d565da26b9f9e7bb4
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 20:34:50 +0530
+
+    feat(ui): add interactive sentiment visualizer, expandable review inspector, and toast notifications
+
+commit 71246f204cc5b751861305925e08b6afd39f8605
 Author: Amrit <amrit@reviewlens.local>
 Date:   2026-11-21 20:18:16 +0530
 
