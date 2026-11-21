@@ -3,7 +3,7 @@ import './globals.css';
 import { ThemeProvider } from '@/context/ThemeContext';
 
 export const metadata: Metadata = {
-  title: 'ReviewLens — AI Review Insights for E-Commerce',
+  title: 'PulseLens.ai — AI Review Intelligence for E-Commerce',
   description:
     'Turn messy product reviews into actionable merchant insights in one screen using intelligent sentiment analysis, topic extraction, and prompt injection defense.',
 };
