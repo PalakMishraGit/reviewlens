@@ -1,3 +1,22 @@
+commit f9ff027ee0a28291a89bbd29ba161e28eba5de28
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 22:39:49 +0530
+
+    feat(brand): rename app to PulseLens.ai and transition to floating island navbar architecture
+    
+    - Brand: modernized brand identity to PulseLens.ai (v2.5) with glowing sparkle logo
+    - Floating Island Navbar: removed sidebar entirely, introduced a floating dynamic pill navbar with top spacing, rounded-2xl corners, backdrop blur, centered brand name, left store pill & tabs, and right utilities
+    - Layout: full-width centered container with maximum whitespace and balanced breathing room
+    - Contrast: 100% bright white text on dark theme, deep obsidian black on light theme, zero muddy grey anywhere
+    - Micro-interactions: Framer Motion floating entrances, hover lifts, and scale springs on all buttons
+    - Tests: 10/10 passing, all screenshots refreshed
+
+commit 5b6175532264cd5da1702d46cf31d5d0803c9efe
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 22:29:53 +0530
+
+    docs(submission): update gitlog.txt with contrast overhaul commit
+
 commit 3e048bfd18a2e66bfb50d50a409465b82144fc34
 Author: Amrit <amrit@reviewlens.local>
 Date:   2026-11-21 22:29:46 +0530
