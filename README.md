@@ -26,6 +26,14 @@ ReviewLens is a resilient, production-grade merchant intelligence web applicatio
 *Click any review row to expand an interactive drilldown drawer showing raw vs sanitized input, SHA-256 hash copy button, date/rating metadata, and verified prompt injection defense shield.*
 ![Interactive Review Inspector Drawer](docs/screenshots/04-review-drawer-inspector.png)
 
+### 5. Seamless Light Theme & Dark Theme Support
+*Instant toggle via the Navbar sun/moon icon or the `T` keyboard shortcut, with high-contrast slate typography and clean borders.*
+![Light Theme Mode](docs/screenshots/06-dashboard-light-theme.png)
+
+### 6. Command Shortcuts & Architectural Protocol Guide
+*Modal triggered by pressing `?` or clicking the Help icon in the navbar, documenting keyboard shortcuts and adversarial XML boundary directives.*
+![Shortcuts & Architecture Guide Modal](docs/screenshots/05-shortcuts-modal.png)
+
 ---
 
 ## Features & Core Capabilities
@@ -50,9 +58,13 @@ ReviewLens is a resilient, production-grade merchant intelligence web applicatio
   - Caches analysis and suggested replies in `.cache/review_cache.json`.
   - Re-uploading `reviews.csv` completes in milliseconds with **100% cache hits and 0 API calls**.
 - **Interactive Single-Screen Merchant Dashboard:**
-  - **Summary Cards:** Total reviews analyzed, % positive / % neutral / % negative, reviews needing reply.
-  - **Top 3 Complaints & Top 3 Praises:** Aggregated dynamically across all products with impact counts.
-  - **Filterable Data Explorer:** Filter dynamically by Product, Sentiment, Topic, Needs Reply, and Rating Mismatch.
+  - **Summary Cards:** Total reviews analyzed, % positive / % neutral / % negative, reviews needing reply with filter triggers.
+  - **Sentiment Visualizer:** Animated continuous multi-segment progress bar with Net Sentiment Score (NSS) and CSAT Index.
+  - **Top 3 Complaints & Top 3 Praises:** Aggregated dynamically across all products with affected product badges and instant filter routing.
+  - **Filterable Data Explorer:** Filter dynamically with 5 Quick Presets (`Needs Reply`, `Rating Mismatches`, `Adversarial Injection`, `Hindi / Multilingual`), Product, Sentiment, Topic, and live search.
+  - **Shimmering Dashboard Skeleton:** Smooth multi-stage animated skeleton during data ingestion and batch analysis.
+  - **Theme Switcher:** Instant Dark & Light mode toggle with high-contrast slate typography and glassmorphism.
+  - **Command Shortcuts Modal (`?`):** Keyboard navigation shortcuts (`/`, `T`, `D`, `M`, `Esc`) and architectural notes.
   - **On-Demand Reply Generator:** Only calls the AI when the merchant clicks "Draft Reply" on an actionable complaint.
 - **Bonus Capabilities:**
   - **Rating Mismatch Check:** Identifies divergence between customer star ratings and textual sentiment (e.g. `R008`: 5 stars with scathing negative feedback) and computes an overall agreement score (e.g. 96%).

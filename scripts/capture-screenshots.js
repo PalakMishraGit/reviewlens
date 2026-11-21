@@ -30,7 +30,7 @@ async function capture() {
   await page.waitForSelector('section[aria-label="Executive KPI Summary"]', { timeout: 15000 });
   await new Promise(r => setTimeout(r, 1200));
 
-  // 1. Dashboard Overview Screenshot
+  // 1. Dashboard Overview Screenshot (Dark Theme)
   console.log('Capturing 01-dashboard-overview.png...');
   await page.screenshot({
     path: path.join(screenshotDir, '01-dashboard-overview.png'),
@@ -96,6 +96,33 @@ async function capture() {
       });
     }
   }
+
+  // 5. Open Shortcuts & Architectural Guide Modal
+  console.log('Opening Shortcuts modal (Pressing ?)...');
+  await page.keyboard.press('?');
+  await new Promise(r => setTimeout(r, 600));
+
+  console.log('Capturing 05-shortcuts-modal.png...');
+  await page.screenshot({
+    path: path.join(screenshotDir, '05-shortcuts-modal.png'),
+    fullPage: false,
+  });
+
+  // Close modal
+  await page.keyboard.press('Escape');
+  await new Promise(r => setTimeout(r, 500));
+
+  // 6. Toggle Light Theme Mode
+  console.log('Toggling Light Theme Mode (Pressing T)...');
+  await page.keyboard.press('t');
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await new Promise(r => setTimeout(r, 800));
+
+  console.log('Capturing 06-dashboard-light-theme.png...');
+  await page.screenshot({
+    path: path.join(screenshotDir, '06-dashboard-light-theme.png'),
+    fullPage: false,
+  });
 
   await browser.close();
   console.log('All screenshots captured successfully!');

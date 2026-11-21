@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { AnalysisSummary } from '@/types/review';
-import { TrendingUp, Smile, Meh, Frown, Check } from 'lucide-react';
+import { TrendingUp, Smile, Meh, Frown, Sparkles, RotateCcw, Award } from 'lucide-react';
 
 interface SentimentVisualizerProps {
   summary: AnalysisSummary;
@@ -18,42 +18,61 @@ export const SentimentVisualizer: React.FC<SentimentVisualizerProps> = ({
 }) => {
   const { sentiment_percentages, sentiment_counts, total_analyzed } = summary;
 
-  // Calculate Net Sentiment Score (NSS = % Positive - % Negative)
+  // Net Sentiment Score (NSS = % Positive - % Negative, range -100 to +100)
   const netSentimentScore = sentiment_percentages.positive - sentiment_percentages.negative;
 
+  // CSAT Estimation: (Positive + (Neutral * 0.5))
+  const csatScore = Math.round(
+    sentiment_percentages.positive + sentiment_percentages.neutral * 0.5
+  );
+
   return (
-    <div className="rounded-xl border border-[#23252a] bg-[#0f1011] p-5 space-y-4">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#23252a] pb-3.5">
+    <div className="rounded-xl border border-hairline bg-surface-1 p-5 shadow-sm space-y-4">
+      {/* Header with NSS & CSAT telemetry */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
         <div>
-          <h3 className="text-sm font-medium text-[#f7f8f8] flex items-center gap-2">
-            Sentiment telemetry &amp; distribution
-            <span className="font-mono text-[10px] text-[#8a8f98] bg-[#141516] px-1.5 py-0.5 rounded border border-[#23252a]">
-              Interactive
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-semibold text-ink">
+              Sentiment Telemetry &amp; Distribution
+            </h3>
+            <span className="rounded-full bg-indigo-500/10 px-2 py-0.5 text-[10px] font-medium text-indigo-400 border border-indigo-500/20 font-mono">
+              Live Aggregate
             </span>
-          </h3>
-          <p className="text-xs text-[#8a8f98] mt-0.5">
-            Click any segment or sentiment pill to filter reviews in real time
+          </div>
+          <p className="text-xs text-ink-subtle mt-0.5">
+            Click any segment or filter pill to filter customer reviews in real time
           </p>
         </div>
 
-        <div className="flex items-center gap-2 text-xs">
-          <span className="text-[#8a8f98]">Net sentiment index:</span>
-          <span
-            className={`font-mono font-medium px-2 py-0.5 rounded border ${
-              netSentimentScore >= 0
-                ? 'border-[#27a644]/30 bg-[#27a644]/10 text-[#27a644]'
-                : 'border-[#eb5757]/30 bg-[#eb5757]/10 text-[#eb5757]'
-            }`}
-          >
-            {netSentimentScore > 0 ? `+${netSentimentScore}` : netSentimentScore}
-          </span>
+        {/* Dual KPI Gauges (Net Sentiment Score & CSAT) */}
+        <div className="flex items-center gap-2.5 text-xs">
+          {/* CSAT Score */}
+          <div className="flex items-center gap-1.5 rounded-lg border border-hairline bg-surface-2 px-2.5 py-1 text-ink-subtle">
+            <Award className="h-3.5 w-3.5 text-indigo-400" />
+            <span>CSAT Index:</span>
+            <span className="font-mono font-semibold text-ink">{csatScore}%</span>
+          </div>
+
+          {/* NSS Score */}
+          <div className="flex items-center gap-1.5 rounded-lg border border-hairline bg-surface-2 px-2.5 py-1 text-ink-subtle">
+            <TrendingUp className="h-3.5 w-3.5 text-indigo-400" />
+            <span>Net Sentiment:</span>
+            <span
+              className={`font-mono font-semibold px-1.5 py-0.2 rounded ${
+                netSentimentScore >= 0
+                  ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/30'
+                  : 'bg-rose-500/10 text-rose-500 border border-rose-500/30'
+              }`}
+            >
+              {netSentimentScore > 0 ? `+${netSentimentScore}` : netSentimentScore}
+            </span>
+          </div>
         </div>
       </div>
 
-      {/* Interactive Segmented Progress Bar */}
+      {/* Segmented Progress Bar */}
       <div className="space-y-2">
-        <div className="relative flex h-3 w-full overflow-hidden rounded-full bg-[#18191a] p-0.5 gap-0.5">
+        <div className="relative flex h-3.5 w-full overflow-hidden rounded-full bg-surface-3 p-0.5 gap-1 shadow-inner">
           {/* Positive segment */}
           <motion.button
             type="button"
@@ -62,8 +81,10 @@ export const SentimentVisualizer: React.FC<SentimentVisualizerProps> = ({
             transition={{ duration: 0.8, ease: 'easeOut' }}
             onClick={() => onFilterSentiment(activeSentimentFilter === 'positive' ? 'all' : 'positive')}
             title={`Positive: ${sentiment_percentages.positive}% (${sentiment_counts.positive} reviews). Click to filter.`}
-            className={`relative h-full rounded-l-full bg-[#27a644] transition-all hover:brightness-125 focus:outline-none ${
-              activeSentimentFilter === 'positive' ? 'ring-2 ring-white ring-offset-1 ring-offset-[#010102]' : ''
+            className={`relative h-full rounded-l-full bg-emerald-500 transition-all hover:brightness-125 focus:outline-none shadow-sm shadow-emerald-500/30 ${
+              activeSentimentFilter === 'positive'
+                ? 'ring-2 ring-white dark:ring-white ring-offset-1 ring-offset-canvas'
+                : ''
             }`}
           />
 
@@ -75,8 +96,10 @@ export const SentimentVisualizer: React.FC<SentimentVisualizerProps> = ({
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
             onClick={() => onFilterSentiment(activeSentimentFilter === 'neutral' ? 'all' : 'neutral')}
             title={`Neutral: ${sentiment_percentages.neutral}% (${sentiment_counts.neutral} reviews). Click to filter.`}
-            className={`relative h-full bg-[#f59e0b] transition-all hover:brightness-125 focus:outline-none ${
-              activeSentimentFilter === 'neutral' ? 'ring-2 ring-white ring-offset-1 ring-offset-[#010102]' : ''
+            className={`relative h-full bg-amber-500 transition-all hover:brightness-125 focus:outline-none shadow-sm shadow-amber-500/30 ${
+              activeSentimentFilter === 'neutral'
+                ? 'ring-2 ring-white dark:ring-white ring-offset-1 ring-offset-canvas'
+                : ''
             }`}
           />
 
@@ -88,67 +111,70 @@ export const SentimentVisualizer: React.FC<SentimentVisualizerProps> = ({
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
             onClick={() => onFilterSentiment(activeSentimentFilter === 'negative' ? 'all' : 'negative')}
             title={`Negative: ${sentiment_percentages.negative}% (${sentiment_counts.negative} reviews). Click to filter.`}
-            className={`relative h-full rounded-r-full bg-[#eb5757] transition-all hover:brightness-125 focus:outline-none ${
-              activeSentimentFilter === 'negative' ? 'ring-2 ring-white ring-offset-1 ring-offset-[#010102]' : ''
+            className={`relative h-full rounded-r-full bg-rose-500 transition-all hover:brightness-125 focus:outline-none shadow-sm shadow-rose-500/30 ${
+              activeSentimentFilter === 'negative'
+                ? 'ring-2 ring-white dark:ring-white ring-offset-1 ring-offset-canvas'
+                : ''
             }`}
           />
         </div>
 
-        {/* Legend / Filter Pills */}
-        <div className="flex flex-wrap items-center justify-between gap-3 text-xs pt-1">
+        {/* Legend / Interactive Filter Pills */}
+        <div className="flex flex-wrap items-center justify-between gap-3 text-xs pt-1.5">
           <div className="flex flex-wrap items-center gap-2">
             {/* Positive button */}
             <button
               onClick={() => onFilterSentiment(activeSentimentFilter === 'positive' ? 'all' : 'positive')}
-              className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-all ${
+              className={`flex items-center gap-2 rounded-lg border px-3 py-1.5 font-medium transition-all shadow-sm ${
                 activeSentimentFilter === 'positive'
-                  ? 'border-[#27a644] bg-[#27a644]/10 text-[#27a644] shadow-sm'
-                  : 'border-[#23252a] bg-[#141516] text-[#8a8f98] hover:text-[#f7f8f8] hover:border-[#34343a]'
+                  ? 'border-emerald-500 bg-emerald-500/10 text-emerald-500 ring-1 ring-emerald-500'
+                  : 'border-hairline bg-surface-2 text-ink-subtle hover:text-ink hover:border-hairline-strong'
               }`}
             >
-              <Smile className="h-3.5 w-3.5 text-[#27a644]" strokeWidth={1.5} />
+              <Smile className="h-3.5 w-3.5 text-emerald-500" />
               <span>Positive</span>
-              <span className="font-mono font-medium text-[#f7f8f8] ml-1">{sentiment_percentages.positive}%</span>
-              <span className="text-[#62666d]">({sentiment_counts.positive})</span>
+              <span className="font-mono font-semibold text-ink">{sentiment_percentages.positive}%</span>
+              <span className="text-ink-tertiary font-mono">({sentiment_counts.positive})</span>
             </button>
 
             {/* Neutral button */}
             <button
               onClick={() => onFilterSentiment(activeSentimentFilter === 'neutral' ? 'all' : 'neutral')}
-              className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-all ${
+              className={`flex items-center gap-2 rounded-lg border px-3 py-1.5 font-medium transition-all shadow-sm ${
                 activeSentimentFilter === 'neutral'
-                  ? 'border-[#f59e0b] bg-[#f59e0b]/10 text-[#f59e0b] shadow-sm'
-                  : 'border-[#23252a] bg-[#141516] text-[#8a8f98] hover:text-[#f7f8f8] hover:border-[#34343a]'
+                  ? 'border-amber-500 bg-amber-500/10 text-amber-500 ring-1 ring-amber-500'
+                  : 'border-hairline bg-surface-2 text-ink-subtle hover:text-ink hover:border-hairline-strong'
               }`}
             >
-              <Meh className="h-3.5 w-3.5 text-[#f59e0b]" strokeWidth={1.5} />
+              <Meh className="h-3.5 w-3.5 text-amber-500" />
               <span>Neutral</span>
-              <span className="font-mono font-medium text-[#f7f8f8] ml-1">{sentiment_percentages.neutral}%</span>
-              <span className="text-[#62666d]">({sentiment_counts.neutral})</span>
+              <span className="font-mono font-semibold text-ink">{sentiment_percentages.neutral}%</span>
+              <span className="text-ink-tertiary font-mono">({sentiment_counts.neutral})</span>
             </button>
 
             {/* Negative button */}
             <button
               onClick={() => onFilterSentiment(activeSentimentFilter === 'negative' ? 'all' : 'negative')}
-              className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1 transition-all ${
+              className={`flex items-center gap-2 rounded-lg border px-3 py-1.5 font-medium transition-all shadow-sm ${
                 activeSentimentFilter === 'negative'
-                  ? 'border-[#eb5757] bg-[#eb5757]/10 text-[#eb5757] shadow-sm'
-                  : 'border-[#23252a] bg-[#141516] text-[#8a8f98] hover:text-[#f7f8f8] hover:border-[#34343a]'
+                  ? 'border-rose-500 bg-rose-500/10 text-rose-500 ring-1 ring-rose-500'
+                  : 'border-hairline bg-surface-2 text-ink-subtle hover:text-ink hover:border-hairline-strong'
               }`}
             >
-              <Frown className="h-3.5 w-3.5 text-[#eb5757]" strokeWidth={1.5} />
+              <Frown className="h-3.5 w-3.5 text-rose-500" />
               <span>Negative</span>
-              <span className="font-mono font-medium text-[#f7f8f8] ml-1">{sentiment_percentages.negative}%</span>
-              <span className="text-[#62666d]">({sentiment_counts.negative})</span>
+              <span className="font-mono font-semibold text-ink">{sentiment_percentages.negative}%</span>
+              <span className="text-ink-tertiary font-mono">({sentiment_counts.negative})</span>
             </button>
           </div>
 
           {activeSentimentFilter !== 'all' && (
             <button
               onClick={() => onFilterSentiment('all')}
-              className="text-xs text-[#5e6ad2] hover:underline"
+              className="flex items-center gap-1 text-xs text-indigo-400 hover:text-indigo-300 transition-colors"
             >
-              Clear sentiment filter
+              <RotateCcw className="h-3 w-3" />
+              <span>Reset sentiment filter</span>
             </button>
           )}
         </div>

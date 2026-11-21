@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { CleanedReview } from '@/types/review';
-import { X, Copy, Check, Loader2, MessageSquare } from 'lucide-react';
+import { X, Copy, Check, Loader2, MessageSquare, Sparkles, Send } from 'lucide-react';
 
 interface ReplyModalProps {
   review: CleanedReview | null;
@@ -70,84 +70,94 @@ export const ReplyModal: React.FC<ReplyModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#010102]/70 backdrop-blur-sm animate-in fade-in duration-150">
-      <div className="relative w-full max-w-xl rounded-lg border border-[#23252a] bg-[#0f1011] p-4 shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-in fade-in duration-150">
+      <div className="relative w-full max-w-xl rounded-2xl border border-hairline bg-surface-1 p-5 shadow-2xl space-y-4">
         {/* Header */}
-        <div className="flex items-center justify-between pb-3 border-b border-[#23252a]">
-          <div className="flex items-center gap-2">
-            <MessageSquare className="h-4 w-4 text-[#8a8f98]" strokeWidth={1.5} />
-            <span className="text-sm font-medium text-[#f7f8f8]">Draft store reply</span>
-            <span className="kbd-cap">{review.review_id}</span>
+        <div className="flex items-center justify-between pb-3.5 border-b border-hairline">
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">
+              <MessageSquare className="h-4 w-4" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-semibold text-ink">AI Merchant Reply Drafter</span>
+                <span className="kbd-cap">{review.review_id}</span>
+              </div>
+              <p className="text-xs text-ink-subtle">Strictly generated on-demand for customer satisfaction</p>
+            </div>
           </div>
 
           <button
             onClick={onClose}
-            className="rounded p-1 text-[#62666d] hover:text-[#f7f8f8] transition-colors"
+            className="rounded-lg p-1.5 text-ink-tertiary hover:text-ink hover:bg-surface-2 transition-colors"
           >
-            <X className="h-4 w-4" strokeWidth={1.5} />
+            <X className="h-4 w-4" />
           </button>
         </div>
 
         {/* Customer Review Summary Card */}
-        <div className="mt-3.5 rounded-md border border-[#23252a] bg-[#141516] p-3 space-y-1">
-          <div className="flex items-center justify-between text-xs">
-            <span className="font-medium text-[#f7f8f8]">{review.product}</span>
-            <span className="font-mono text-[11px] text-[#62666d]">{review.date}</span>
+        <div className="rounded-xl border border-hairline bg-surface-2 p-3.5 space-y-2 text-xs">
+          <div className="flex items-center justify-between">
+            <span className="font-semibold text-ink">{review.product}</span>
+            <span className="font-mono text-[11px] text-ink-tertiary">{review.date}</span>
           </div>
-          <p className="text-xs text-[#8a8f98] leading-relaxed">&quot;{review.cleaned_text}&quot;</p>
+          <p className="text-ink-subtle leading-relaxed">&quot;{review.cleaned_text}&quot;</p>
           {review.analysis?.summary && (
-            <div className="pt-0.5 text-[11px] text-[#62666d] flex items-center gap-1.5">
-              <span>Detected issue:</span>
-              <span className="text-[#f7f8f8]">{review.analysis.summary}</span>
+            <div className="pt-1 text-[11px] text-ink-tertiary flex items-center gap-1.5 border-t border-hairline/60">
+              <span className="text-indigo-400 font-bold">•</span>
+              <span>Identified customer issue:</span>
+              <strong className="text-ink">{review.analysis.summary}</strong>
             </div>
           )}
         </div>
 
-        {/* Reply Area */}
-        <div className="mt-3.5 space-y-1.5">
+        {/* Reply Editor Area */}
+        <div className="space-y-2">
           <div className="flex items-center justify-between text-xs">
-            <span className="text-xs text-[#8a8f98]">
-              Suggested response
+            <div className="flex items-center gap-2">
+              <span className="font-medium text-ink">Suggested Store Response</span>
               {isCached && (
-                <span className="ml-1.5 font-mono text-[10px] text-[#62666d] bg-[#141516] px-1 py-0.2 rounded border border-[#23252a]">
-                  cached
+                <span className="rounded bg-indigo-500/10 px-1.5 py-0.2 text-[10px] font-mono text-indigo-400 border border-indigo-500/20">
+                  cached response
                 </span>
               )}
+            </div>
+            <span className="text-[11px] text-ink-tertiary font-mono">
+              {replyText.length} characters
             </span>
-            <span className="text-[11px] text-[#62666d]">Editable draft</span>
           </div>
 
           {isLoading ? (
-            <div className="flex flex-col items-center justify-center py-10 rounded-md border border-[#23252a] bg-[#141516] gap-2">
-              <Loader2 className="h-4 w-4 text-[#8a8f98] animate-spin" strokeWidth={1.5} />
-              <p className="text-xs text-[#62666d]">Drafting reply...</p>
+            <div className="flex flex-col items-center justify-center py-12 rounded-xl border border-hairline bg-surface-2 gap-2.5">
+              <Loader2 className="h-5 w-5 text-indigo-500 animate-spin" />
+              <p className="text-xs font-medium text-ink-subtle">Drafting empathetic response...</p>
             </div>
           ) : error ? (
-            <div className="p-3 rounded-md border border-[#eb5757]/30 bg-[#eb5757]/10 text-xs text-[#eb5757]">
+            <div className="p-3.5 rounded-xl border border-rose-500/30 bg-rose-500/10 text-xs text-rose-500">
               {error}
             </div>
           ) : (
             <textarea
-              rows={4}
+              rows={5}
               value={replyText}
               onChange={e => setReplyText(e.target.value)}
-              className="w-full rounded-md border border-[#23252a] bg-[#141516] p-3 text-xs text-[#f7f8f8] focus:border-[#5e6ad2] focus:outline-none resize-none leading-relaxed"
+              className="w-full rounded-xl border border-hairline bg-surface-2 p-3.5 text-xs text-ink focus:border-indigo-500 focus:outline-none resize-none leading-relaxed shadow-inner"
               placeholder="Your reply will appear here..."
             />
           )}
         </div>
 
         {/* Footer Actions */}
-        <div className="mt-3.5 flex items-center justify-between pt-3 border-t border-[#23252a]">
-          <span className="text-[11px] text-[#62666d]">
-            Generated on-demand
+        <div className="flex items-center justify-between pt-3 border-t border-hairline text-xs">
+          <span className="text-[11px] text-ink-tertiary font-mono">
+            Empathetic • Professional • Actionable
           </span>
 
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={onClose}
-              className="rounded-md border border-[#23252a] bg-[#141516] px-3 py-1.5 text-xs text-[#8a8f98] hover:text-[#f7f8f8] transition-colors"
+              className="rounded-lg border border-hairline bg-surface-2 px-3 py-1.5 font-medium text-ink-subtle hover:text-ink transition-colors"
             >
               Close
             </button>
@@ -155,17 +165,17 @@ export const ReplyModal: React.FC<ReplyModalProps> = ({
               type="button"
               onClick={handleCopy}
               disabled={isLoading || !replyText}
-              className="inline-flex items-center gap-1.5 rounded-md bg-[#f7f8f8] px-3 py-1.5 text-xs font-medium text-[#010102] hover:bg-[#ffffff] active:scale-[0.98] transition-all disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-4 py-1.5 font-medium text-white hover:bg-indigo-500 active:scale-98 transition-all disabled:opacity-50 shadow-sm"
             >
               {copied ? (
                 <>
-                  <Check className="h-3.5 w-3.5" strokeWidth={1.5} />
-                  Copied
+                  <Check className="h-3.5 w-3.5" />
+                  <span>Copied</span>
                 </>
               ) : (
                 <>
-                  <Copy className="h-3.5 w-3.5" strokeWidth={1.5} />
-                  Copy reply
+                  <Copy className="h-3.5 w-3.5" />
+                  <span>Copy Reply</span>
                 </>
               )}
             </button>
