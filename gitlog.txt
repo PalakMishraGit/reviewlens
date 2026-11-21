@@ -1,0 +1,83 @@
+commit 5bb22131e40f7ac3d31cc91886c2dab05efdc951
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 19:55:01 +0530
+
+    chore: generate gitlog.txt commit history file
+
+commit 5628af4e2e6dd3a052b8f193a15c90b0e4111426
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 19:54:43 +0530
+
+    docs: add comprehensive README with architecture, prompt injection defense, and dashboard screenshots
+
+commit 62fa83fbd5ea0bad6421570399abdee70d1828b7
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 19:48:50 +0530
+
+    test: add comprehensive automated test suite for CSV cleaning, schema validation, retry logic, and R012 defense
+
+commit 86c4be523b7ae8d73d3cf97a39f9e6cdf879ab84
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 19:47:36 +0530
+
+    feat(docker): add multi-stage production Dockerfile and docker-compose.yml
+
+commit 110c4124ff91055b8ab1c6d71aa02599d9790b53
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 19:47:10 +0530
+
+    feat(ui): implement filterable reviews table, on-demand reply generator, and per-product analytics
+
+commit fb07e8b17d2d9a37c41ea0c43538be698e9ee493
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 19:47:04 +0530
+
+    feat(ui): build executive summary KPI cards, top praises/complaints panels, and telemetry
+
+commit f97a9f1f6f0585ed0e7b230fd16e5e1ee302a092
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 19:46:59 +0530
+
+    chore: configure TypeScript aliases, Next.js root layout, and Tailwind theme
+
+commit e6a02a6d0eb91dc1a9e50532479c50313dc30edc
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 19:41:28 +0530
+
+    feat(api): create /api/analyze, /api/suggest-reply, /api/cache, and /api/sample endpoints
+
+commit b2e500bf263d092c5b870f1bef24873f0455f6da
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 19:40:47 +0530
+
+    feat(engine): implement batch processor with rate limiting, exponential backoff, and metrics engine
+
+commit 1843cd0c6cac9f2011d4999c7c4ad4769516d681
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 19:40:41 +0530
+
+    feat(cache): implement persistent SHA-256 review cache with atomic disk storage
+
+commit 5445b2f0e317e3674648854f9976d4affb8f8c43
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 19:40:36 +0530
+
+    feat(ai): define Zod validation schemas and defensive prompt engineering with R012 injection guardrails
+
+commit 0ea01e53ff0cbc544bfd0dbd5af95b449e1e7aa7
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 19:37:49 +0530
+
+    feat(parser): implement RFC 4180 CSV parser and data sanitizer with comprehensive unit tests
+
+commit 7a7ae8033de7b7b525bf46607ece16306a3bb2b8
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 19:35:15 +0530
+
+    feat(data): add benchmark reviews.csv with multilingual, sarcastic, and adversarial rows
+
+commit 4972bd61b204f3101974cff23e995f1e908e5946
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 19:35:06 +0530
+
+    chore: initialize ReviewLens with Next.js 14, TypeScript, Tailwind CSS and Vitest
