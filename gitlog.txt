@@ -1,3 +1,15 @@
+commit bd71b54bd70ba1945a906662302666a8755f3414
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 20:53:25 +0530
+
+    feat(ui): overhaul UI with dark/light theme switch, shimmering skeleton loaders, shortcuts modal, and enriched analytics
+
+commit 0ae0e2ff51d5fbad15ba8ba78b355f11f3b2fa70
+Author: Amrit <amrit@reviewlens.local>
+Date:   2026-11-21 20:34:58 +0530
+
+    chore: update gitlog.txt for round 2 submission verification
+
 commit 14980710eeb467b9f357738d565da26b9f9e7bb4
 Author: Amrit <amrit@reviewlens.local>
 Date:   2026-11-21 20:34:50 +0530
